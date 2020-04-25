@@ -1,7 +1,6 @@
 module.exports = {
-  User: require("./user")
+  User: require("./user"),
+  Biz: require("./businesslist")
 };
 
-module.exports = {
-  User: require("./businesslist")
-};
+
