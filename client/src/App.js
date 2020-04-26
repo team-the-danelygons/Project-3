@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+//import logo from "./logo.svg";
 import "./App.css";
-<<<<<<< Updated upstream
-=======
-
-import logo from "./assets/images/ssfulllogo.png";
+import logo from "./assets/images/logo_side.png";
 import headerimg from "./assets/images/headerSMl.png";
 import {
   Col,
@@ -15,22 +12,11 @@ import {
   FormControl,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
->>>>>>> Stashed changes
 
 class App extends Component {
   render() {
     return (
-<<<<<<< Updated upstream
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-=======
+      
       <>
         <Navbar bg="light navbar-light">
           <Navbar.Brand href="/">
@@ -40,6 +26,7 @@ class App extends Component {
               height="30"
               className="d-inline-block align-top"
               alt="SAVESTANCE"
+              
             />
           </Navbar.Brand>
           <Navbar.Toggle />
@@ -86,7 +73,6 @@ class App extends Component {
           </Row>
         </Container>
       </>
->>>>>>> Stashed changes
     );
   }
 }
