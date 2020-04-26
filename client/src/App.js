@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 import logo from "./assets/images/logo_side.png";
 import headerimg from "./assets/images/headerSMl.png";
+
 import {
   Col,
   Row,
@@ -16,7 +17,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class App extends Component {
   render() {
     return (
-      
       <>
         <Navbar bg="light navbar-light">
           <Navbar.Brand href="/">
@@ -26,7 +26,6 @@ class App extends Component {
               height="30"
               className="d-inline-block align-top"
               alt="SAVESTANCE"
-              
             />
           </Navbar.Brand>
           <Navbar.Toggle />
@@ -50,7 +49,7 @@ class App extends Component {
 
         <Container>
           <Row>
-            <Col>
+            <Col border="success" style={{ backgroundColor: "#D3D3D3" }}>
               <div>
                 <br></br>
                 <h6>Search Stores</h6>
@@ -60,15 +59,39 @@ class App extends Component {
                     aria-describedby="inputGroup-sizing-sm"
                   />
                 </InputGroup>
+                <br />
+                <h6>Popular Stores</h6>
+                <hr />
+                <p>King Soopers</p>
+                <p>Walmart</p>
+                <p>Home Depot</p>
+                <p>Safeway</p>
               </div>
             </Col>
-            <Col xs={8} style={{backgroundColor: "#D3D3D3"}}>
-              <img src={headerimg} width="100%" alt="decoration"></img>
+            <Col xs={8} className="noPadding">
+              <img
+                src={headerimg}
+                className="noPadding"
+                width="100%"
+                alt="decoration"
+              ></img>
             </Col>
-            <Col>2 of 2</Col>
+            <Col style={{ backgroundColor: "#D3D3D3" }}>
+              <div>
+                <br></br>
+                <h6>Control Panel</h6>
+                <div className="controlPanel">
+                  <img></img>
+                  <img></img>
+                  <img></img>
+                </div>
+              </div>
+            </Col>
           </Row>
           <Row>
-            <Col>Footer</Col>
+            <Col style={{ backgroundColor: "white" }}>
+              The Danelygons - Copyright 2020
+            </Col>
           </Row>
         </Container>
       </>

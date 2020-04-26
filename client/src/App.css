@@ -12,7 +12,7 @@
   height: 150px;
   padding: 20px;
   color: white;
-}
+  }
 
 .App-intro {
   font-size: large;
@@ -25,4 +25,21 @@
 
 .navbar {
   box-shadow: 2px 2px 2px rgb(140, 165, 140);
+  margin-bottom: 3px;
+}
+
+.col {
+    box-shadow: inset 0 0 10px #a4b6a4;
+    text-align: center;
+        
+}
+
+div.noPadding {
+  padding-left: 0;
+  padding-right: 0;
+  
+}
+
+div.controlPanel {
+  box-shadow:         2px 2px 5px 3px rgb(192, 192, 192);
 }
