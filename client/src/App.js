@@ -83,6 +83,7 @@ class App extends Component {
                 alt="decoration"
                 border="secondary"
               ></img>
+              <p>Temporary Script. Search Results List (Map to select store?) or Business Stats Page will go here </p>
             </Col>
             <Col style={{ backgroundColor: "#D3D3D3" }}>
               <div>
