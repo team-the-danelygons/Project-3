@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 //import logo from "./logo.svg";
+//import ReactDOM from 'react-dom'
 import "./App.css";
 import logo from "./assets/images/logo_side.png";
 import headerimg from "./assets/images/headerSMl.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { coffee } from '@fortawesome/free-solid-svg-icons'
 
 import {
   Col,
@@ -81,7 +84,7 @@ class App extends Component {
                 <br></br>
                 <h6>Control Panel</h6>
                 <div className="controlPanel">
-                  <img></img>
+                <FontAwesomeIcon icon={coffee} />
                   <img></img>
                   <img></img>
                 </div>
