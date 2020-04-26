@@ -41,9 +41,10 @@ div.noPadding {
   
 }
 
-div.controlPanel {
+.controlPanel {
   box-shadow:         2px 2px 5px 3px rgb(192, 192, 192);
-  
+  margin: 3px;
+  padding: 3px;
 }
 
 .toTheRight {
