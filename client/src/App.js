@@ -69,7 +69,6 @@ class App extends Component {
           </Row>
           <Row>
             <Col>Footer</Col>
-            
           </Row>
         </Container>
       </>
