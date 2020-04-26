@@ -4,8 +4,8 @@ import React, { Component } from "react";
 import "./App.css";
 import logo from "./assets/images/logo_side.png";
 import headerimg from "./assets/images/headerSMl.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { coffee } from '@fortawesome/free-solid-svg-icons'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { coffee } from '@fortawesome/free-solid-svg-icons'
 
 import {
   Col,
@@ -14,6 +14,7 @@ import {
   Navbar,
   InputGroup,
   FormControl,
+  Button,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -84,9 +85,33 @@ class App extends Component {
                 <br></br>
                 <h6>Control Panel</h6>
                 <div className="controlPanel">
-                <FontAwesomeIcon icon={coffee} />
-                  <img></img>
-                  <img></img>
+                  <Col >
+                    <Row className="spacing">
+                      <Button className="toTheLeft" variant="success" >1</Button>
+                      <Button className="toTheRight" variant="danger">2</Button>
+                    </Row>
+                    <Row className="spacing">
+                      <Button className="toTheLeft" variant="success">1</Button>
+                      <Button className="toTheRight"variant="danger">2</Button>
+                    </Row>
+                    <Row className="spacing">
+                      <Button className="toTheLeft" variant="success">1</Button>
+                      <Button className="toTheRight"variant="danger">2</Button>
+                    </Row>
+                    <Row className="spacing">
+                      <Button className="toTheLeft" variant="success">1</Button>
+                      <Button className="toTheRight" variant="danger">2</Button>
+                    </Row>
+                    <Row className="spacing">
+                      <Button className="toTheLeft" variant="success">1</Button>
+                      <Button className="toTheRight" variant="danger">2</Button>
+                    </Row>
+                    <Row className="spacing">
+                      <Button className="toTheLeft" variant="success">1</Button>
+                      <Button className="toTheRight" variant="danger">2</Button>
+                    </Row>
+                  </Col>
+                  <Col ></Col>
                 </div>
               </div>
             </Col>
