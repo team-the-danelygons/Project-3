@@ -5,7 +5,7 @@ import "./App.css";
 import logo from "./assets/images/logo_side.png";
 import headerimg from "./assets/images/headerSMl.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCheck, faUserTimes, faHeadSideMask, faHeadSideCough, faUserFriends, faHandsWash, faTimesCircle, faThumbsDown, faThumbsUp, faFlag, faThumbtack, faShare, faSave, faSearch
+import { faUserCheck, faUserTimes, faHeadSideMask, faHeadSideCough, faHandsWash, faTimesCircle, faThumbsDown, faThumbsUp, faFlag, faThumbtack, faShare, faSave, faSearch
  } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -81,6 +81,7 @@ class App extends Component {
                 className="noPadding"
                 width="100%"
                 alt="decoration"
+                border="secondary"
               ></img>
             </Col>
             <Col style={{ backgroundColor: "#D3D3D3" }}>
