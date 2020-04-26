@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 //import logo from "./logo.svg";
 //import ReactDOM from 'react-dom'
 import "./App.css";
@@ -18,10 +19,15 @@ import {
   Button,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+=======
+import "./App.css";
+import logo from "./assets/images/ssfulllogo.png"
+
 
 class App extends Component {
   render() {
     return (
+
       <>
         <Navbar bg="light navbar-light">
           <Navbar.Brand href="/">
@@ -128,6 +134,14 @@ class App extends Component {
           </Row>
         </Container>
       </>
+
+      <nav className="navbar navbar-light bg-light">
+      <a className="navbar-brand" href="/">
+        <img src={logo} width="150" height="30" className="d-inline-block align-top" alt=""/>
+      </a>
+    </nav>
+     
+
     );
   }
 }
