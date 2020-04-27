@@ -1,0 +1,138 @@
+
+
+#jumbo {
+    background-image: url(../../assets/images/safeway.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 300px;
+    margin-bottom: 0px !important;
+    box-shadow: 2px 2px 2px gray;
+}
+
+
+#like-holder {
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+#voters1 {
+    background-color: white;
+    height: 150px;
+    border-radius: 5px;
+   
+
+}
+
+#voters2 {
+    background-color: white;
+    height: 150px
+}
+
+#voters3 {
+    background-color: white;
+    height: 150px
+}
+
+#voters4 {
+    background-color: white;
+    height: 150px;
+    border-radius: 5px;
+    
+}
+
+.btn {
+    background-color: greenyellow;
+    border: none;
+    color: black;
+    box-shadow: 2px 2px 2px gray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+   
+  
+}
+
+#btn-cont {
+    padding: 0px !important;
+}
+
+.img {
+    position: relative;
+    top: 100px;
+}
+
+/* #up {
+    margin-left: 70px !important;
+}
+
+#down {
+    margin-right: 70px !important;
+} */
+
+#hand {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+
+#distance {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#cash {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#mask {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#info-holder {
+    margin-top: 10px;
+    margin-right: 1px;
+}
+
+#hours-info {
+    background-color: white;
+    max-width: 100%;
+    border-radius: 5px; 
+}
+
+#map {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+#store-header {
+    margin-top: 1em
+}
+
+th, td {
+    padding: 7px;
+    text-align: left;
+  }
+
+#hours-table {
+
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+
+  table {
+    border: 1px solid gray;
+    display: inline-table;
+    box-shadow: 2px 2px 2px gray;
+
+ 
+  }
+
+  #store-title {
+      background-color: white;
+      border-radius: 4px;
+      height: 87px;
+   padding-top: 15px;
+  }
+  

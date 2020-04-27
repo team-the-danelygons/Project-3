@@ -7,7 +7,7 @@ class NavBar extends Component {
     return (
       <nav className="navbar navbar-light bg-light">
       <a className="navbar-brand" href="/">
-        <img src={logo} width="150" height="30" className="d-inline-block align-top" alt=""/>
+        <img src={logo} width="150" height="40" className="d-inline-block align-top" alt=""/>
       </a>
     </nav>
      
