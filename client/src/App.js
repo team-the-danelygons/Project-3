@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar"
-import Home from "./components/pages/Home";
-import Business from "./components/pages/Business";
-import Contact from "./components/pages/Contact";
+import Home from "./components/pages/Home/Home";
+import Business from "./components/pages/Business/Business";
+import Contact from "./components/pages/Contact/Contact";
 // This comment is so I can push up the changes.
 
 function App() {
