@@ -18,7 +18,7 @@ class Business extends Component {
     API.getBiz(this.props.match.params.id)
       .then((res) => this.setState({ business: res.data }))
       .catch((err) => console.log(err));
-    console.log(this.state.business.bizname);
+    console.log("this is working" , this.state.business.bizname);
   }
 
   render() {
