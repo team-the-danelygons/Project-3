@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
   // Gets all biz
-  getBiz: function() {
+  getBizAll: function() {
     return axios.get("/api/business");
   },
   // Gets the biz with the given id
