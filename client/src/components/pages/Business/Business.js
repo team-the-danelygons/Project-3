@@ -18,7 +18,7 @@ class Business extends Component {
     API.getBiz(this.props.match.params.id)
       .then((res) => this.setState({ business: res.data }))
       .catch((err) => console.log(err));
-    console.log("this is working" , this.state.business.bizname);
+   
   }
 
   render() {
@@ -177,13 +177,13 @@ class Business extends Component {
                   <div className="row">
                     <div className="col-lg-6 text-center traffic">
                       <h4>
-                        In-Store: <span>12</span>
+                        In-Store: <span>{this.state.business.instore}</span>
                       </h4>
                     </div>
 
                     <div className="col-lg-6 text-center traffic">
                       <h4>
-                        In-Line: <span>4</span>
+                        In-Line: <span>{this.state.business.inline}</span>
                       </h4>
                     </div>
                   </div>
@@ -202,27 +202,27 @@ class Business extends Component {
                           </tr>
                           <tr>
                             <th>Monday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Tuesday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Wednesday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Thursday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Friday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Saturday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                         </table>
                       </div>
