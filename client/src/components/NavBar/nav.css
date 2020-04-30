@@ -1,3 +1,15 @@
 .navbar {
     box-shadow: 2px 2px 2px green;
   }
+
+  a {
+    color: gray;
+    text-decoration: none;
+}
+
+a:hover 
+{
+     color: greenyellow; 
+     text-decoration:none; 
+     cursor:pointer;  
+}
