@@ -9,33 +9,77 @@ import dislike from "../../../assets/images/dislike.png";
 import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
 
+// Class Components
+
 class Business extends Component {
   state = {
     business: {},
+    inline: 0,
+    instore: 0,
+ 
   };
+
+  // Mount
 
   componentDidMount() {
     API.getBiz(this.props.match.params.id)
       .then((res) => this.setState({ business: res.data }))
       .catch((err) => console.log(err));
-    console.log("this is working" , this.state.business.bizname);
+   
   }
+
+//  Click event listener
+
+  handleBtnClick = event => {
+    event.preventDefault();
+    console.log("Clicked!")
+    this.updateBiz();
+    
+  };
+
+  // Create check-in click variable
+
+  updateBiz= () => {
+    let checkin = {
+      
+      inline: this.state.business.inline +1
+      
+    
+    };
+
+    // run update API
+
+    
+    API.updateBiz(this.props.match.params.id, checkin).then((res) => {
+this.setState({inline: res.data.inline})
+      console.log("Data saved!", res)
+    });
+  };
+
+  // Render page
 
   render() {
     return (
       <div>
         <div className="container">
+
+          {/* Jumbotron */}
           <div className="jumbotron" id="jumbo"></div>
 
+
+{/* Check-in button */}
           <div className="col-lg-12" id="btn-cont">
             <a
               className="btn btn-primary btn-lg btn-block"
-              href="/"
+              href="null"
               role="button"
+              onClick={this.handleBtnClick}
             >
               + CHECK-IN!
             </a>
           </div>
+
+          {/* Social Distance Thumbs */}
 
           <div className="row" id="like-holder">
             <div className="col-md-3 text-center" id="voters1">
@@ -155,6 +199,8 @@ class Business extends Component {
             </div>
           </div>
 
+          {/* Business Name and Map Holder */}
+
           <div className="row" id="info-holder">
             <div className="col-lg-8">
               <div className="col-lg-12" id="store-title">
@@ -163,8 +209,11 @@ class Business extends Component {
                 <hr />
               </div>
 
+
               <img src={map} alt="map" id="map"></img>
             </div>
+
+            {/* Business and Line Info */}
 
             <div className="col-lg-4" id="hours-info">
               <div className="row">
@@ -177,13 +226,13 @@ class Business extends Component {
                   <div className="row">
                     <div className="col-lg-6 text-center traffic">
                       <h4>
-                        In-Store: <span>12</span>
+                        In-Store: <span>{this.state.instore}</span>
                       </h4>
                     </div>
 
                     <div className="col-lg-6 text-center traffic">
                       <h4>
-                        In-Line: <span>4</span>
+                        In-Line: <span>{this.state.inline}</span>
                       </h4>
                     </div>
                   </div>
@@ -202,27 +251,27 @@ class Business extends Component {
                           </tr>
                           <tr>
                             <th>Monday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Tuesday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Wednesday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Thursday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Friday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                           <tr>
                             <th>Saturday: </th>
-                            <td>9am - 5pm</td>
+                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
                         </table>
                       </div>

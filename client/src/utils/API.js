@@ -9,6 +9,10 @@ export default {
   getBiz: function(id) {
     return axios.get("/api/business/" + id);
   },
+
+  updateBiz: function(id, update) {
+    return axios.put("/api/business/" + id, update);
+  },
   // Deletes the biz with the given id
   deleteBiz: function(id) {
     return axios.delete("/api/business/" + id);
