@@ -22,17 +22,22 @@ class Business extends Component {
   // Mount
 
   componentDidMount() {
-    API.getBiz(this.props.match.params.id)
-      .then((res) => this.setState({ business: res.data }))
-      .catch((err) => console.log(err));
+   this.loadPage();
    
+  }
+
+  loadPage = () => {
+    API.getBiz(this.props.match.params.id)
+    .then((res) => this.setState({ business: res.data }))
+    .catch((err) => console.log(err));
   }
 
 //  Click event listener
 
   handleBtnClick = event => {
     event.preventDefault();
-    console.log("Clicked!")
+    this.loadPage();
+
     this.updateBiz();
     
   };
@@ -41,10 +46,9 @@ class Business extends Component {
 
   updateBiz= () => {
     let checkin = {
-      
+  
       inline: this.state.business.inline +1
       
-    
     };
 
     console.log("Checkin value:", checkin)
