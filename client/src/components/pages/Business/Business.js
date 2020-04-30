@@ -16,49 +16,64 @@ class Business extends Component {
     business: {},
     inline: 0,
     instore: 0,
- 
   };
 
   // Mount
 
   componentDidMount() {
-   this.loadPage();
-   
+    this.loadPage();
   }
 
   loadPage = () => {
     API.getBiz(this.props.match.params.id)
-    .then((res) => this.setState({ business: res.data }))
-    .catch((err) => console.log(err));
-  }
+      .then((res) => this.setState({ business: res.data }))
+      .catch((err) => console.log(err));
+  };
 
-//  Click event listener
+  //  Click event listener
 
-  handleBtnClick = event => {
+  handleBtnClick = (event) => {
     event.preventDefault();
     this.loadPage();
 
-    this.updateBiz();
+    if (this.state.business.instore >= 12) {
+      this.updateLine();
+      console.log("Line Updated!")
+    } else {
+      this.updateStore();
+      console.log("In Store Updated!")
+    }
+
     
   };
 
   // Create check-in click variable
 
-  updateBiz= () => {
-    let checkin = {
-  
-      inline: this.state.business.inline +1
-      
+  updateLine = () => {
+    let checkinline = {
+      inline: this.state.business.inline + 1,
     };
 
-    console.log("Checkin value:", checkin)
     // run update API
 
-    
-    API.updateBiz(this.props.match.params.id, checkin).then((res) => {
-      console.log("Res Data:", res.data)
-this.setState({business: res.data})
-      console.log("Data saved!", res)
+    API.updateBiz(this.props.match.params.id, checkinline).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateStore = () => {
+    let checkinstore = {
+      instore: this.state.business.instore + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, checkinstore).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
     });
   };
 
@@ -68,12 +83,10 @@ this.setState({business: res.data})
     return (
       <div>
         <div className="container">
-
           {/* Jumbotron */}
           <div className="jumbotron" id="jumbo"></div>
 
-
-{/* Check-in button */}
+          {/* Check-in button */}
           <div className="col-lg-12" id="btn-cont">
             <a
               className="btn btn-primary btn-lg btn-block"
@@ -215,7 +228,6 @@ this.setState({business: res.data})
                 <hr />
               </div>
 
-
               <img src={map} alt="map" id="map"></img>
             </div>
 
@@ -232,7 +244,7 @@ this.setState({business: res.data})
                   <div className="row">
                     <div className="col-lg-6 text-center traffic">
                       <h4>
-                        In-Store: <span>{this.state.instore}</span>
+                        In-Store: <span>{this.state.business.instore}</span>
                       </h4>
                     </div>
 
@@ -252,34 +264,52 @@ this.setState({business: res.data})
                       <div className="text-center" id="hours-table">
                         <table>
                           <tbody>
-                          <tr>
-                            <th>Sunday: </th>
-                            <td>Closed</td>
-                          </tr>
-                          <tr>
-                            <th>Monday: </th>
-                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
-                          </tr>
-                          <tr>
-                            <th>Tuesday: </th>
-                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
-                          </tr>
-                          <tr>
-                            <th>Wednesday: </th>
-                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
-                          </tr>
-                          <tr>
-                            <th>Thursday: </th>
-                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
-                          </tr>
-                          <tr>
-                            <th>Friday: </th>
-                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
-                          </tr>
-                          <tr>
-                            <th>Saturday: </th>
-                            <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
-                          </tr>
+                            <tr>
+                              <th>Sunday: </th>
+                              <td>Closed</td>
+                            </tr>
+                            <tr>
+                              <th>Monday: </th>
+                              <td>
+                                {this.state.business.storeopen}am -{" "}
+                                {this.state.business.storeclose}pm
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Tuesday: </th>
+                              <td>
+                                {this.state.business.storeopen}am -{" "}
+                                {this.state.business.storeclose}pm
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Wednesday: </th>
+                              <td>
+                                {this.state.business.storeopen}am -{" "}
+                                {this.state.business.storeclose}pm
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Thursday: </th>
+                              <td>
+                                {this.state.business.storeopen}am -{" "}
+                                {this.state.business.storeclose}pm
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Friday: </th>
+                              <td>
+                                {this.state.business.storeopen}am -{" "}
+                                {this.state.business.storeclose}pm
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Saturday: </th>
+                              <td>
+                                {this.state.business.storeopen}am -{" "}
+                                {this.state.business.storeclose}pm
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
