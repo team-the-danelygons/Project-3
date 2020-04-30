@@ -47,11 +47,13 @@ class Business extends Component {
     
     };
 
+    console.log("Checkin value:", checkin)
     // run update API
 
     
     API.updateBiz(this.props.match.params.id, checkin).then((res) => {
-this.setState({inline: res.data.inline})
+      console.log("Res Data:", res.data)
+this.setState({business: res.data})
       console.log("Data saved!", res)
     });
   };
@@ -232,7 +234,7 @@ this.setState({inline: res.data.inline})
 
                     <div className="col-lg-6 text-center traffic">
                       <h4>
-                        In-Line: <span>{this.state.inline}</span>
+                        In-Line: <span>{this.state.business.inline}</span>
                       </h4>
                     </div>
                   </div>
@@ -245,6 +247,7 @@ this.setState({inline: res.data.inline})
 
                       <div className="text-center" id="hours-table">
                         <table>
+                          <tbody>
                           <tr>
                             <th>Sunday: </th>
                             <td>Closed</td>
@@ -273,6 +276,7 @@ this.setState({inline: res.data.inline})
                             <th>Saturday: </th>
                             <td>{this.state.business.storeopen}am - {this.state.business.storeclose}pm</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
