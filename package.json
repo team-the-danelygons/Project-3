@@ -21,6 +21,7 @@
     "nodemon": "^2.0.3"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^2.6.0",
     "axios": "^0.19.2",
     "bootstrap-horizon": "^1.0.1",
     "express": "^4.16.3",
