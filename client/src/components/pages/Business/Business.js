@@ -6,7 +6,7 @@ import distance from "../../../assets/images/distance.png";
 import cash from "../../../assets/images/cash.png";
 import like from "../../../assets/images/like.png";
 import dislike from "../../../assets/images/dislike.png";
-import map from "../../../assets/images/map.png";
+// import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
 
 // Class Components
@@ -529,7 +529,14 @@ class Business extends Component {
                 <hr />
               </div>
 
-              <img src={map} alt="map" id="map"></img>
+              {/* <iframe id="map"
+
+ 
+  frameborder={0}
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ&q=Space+Needle,Seattle+WA" allowfullscreen>
+</iframe> */}
+
+              {/* <img src={map} alt="map" id="map"></img> */}
             </div>
 
             {/* Business and Line Info */}
