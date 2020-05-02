@@ -16,6 +16,8 @@ class Business extends Component {
     business: {},
     inline: 0,
     instore: 0,
+    btnColor: "greenyellow",
+    checktext: "+ CHECK-IN",
   };
 
   // Mount
@@ -24,27 +26,242 @@ class Business extends Component {
     this.loadPage();
   }
 
+  // Load Page data
+
   loadPage = () => {
     API.getBiz(this.props.match.params.id)
       .then((res) => this.setState({ business: res.data }))
       .catch((err) => console.log(err));
   };
 
-  //  Click event listener
+  //  Mask Clicks
+
+  handleMaskThumbUpClick = (event) => {
+    event.preventDefault();
+    this.loadPage();
+
+    this.updateMaskThumbsUp();
+  };
+
+  handleMaskThumbDownClick = (event) => {
+    event.preventDefault();
+    this.loadPage();
+
+    this.updateMaskThumbsDown();
+  };
+
+  //  Sanitizer Clicks
+
+  handleSanThumbUpClick = (event) => {
+    event.preventDefault();
+    this.loadPage();
+
+    this.updateSanThumbsUp();
+  };
+
+  handleSanThumbDownClick = (event) => {
+    event.preventDefault();
+    this.loadPage();
+
+    this.updateSanThumbsDown();
+  };
+
+  //  Distance Clicks
+
+  handleDisThumbUpClick = (event) => {
+    event.preventDefault();
+    this.loadPage();
+
+    this.updateDisThumbsUp();
+  };
+
+  handleDisThumbDownClick = (event) => {
+    event.preventDefault();
+    this.loadPage();
+
+    this.updateDisThumbsDown();
+  };
+
+  //  Cash Clicks
+
+  handleCashThumbUpClick = (event) => {
+    event.preventDefault();
+    this.loadPage();
+
+    this.updateCashThumbsUp();
+  };
+
+  handleCashThumbDownClick = (event) => {
+    event.preventDefault();
+    this.loadPage();
+
+    this.updateCashThumbsDown();
+  };
+
+  //Mask db update
+
+  updateMaskThumbsUp = () => {
+    let maskUp = {
+      maskthumbsup: this.state.business.maskthumbsup + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, maskUp).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateMaskThumbsDown = () => {
+    let maskDown = {
+      maskthumbsdown: this.state.business.maskthumbsdown + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, maskDown).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  //Sanitizer db update
+
+  updateSanThumbsUp = () => {
+    let sanUp = {
+      santhumbsup: this.state.business.santhumbsup + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, sanUp).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateSanThumbsDown = () => {
+    let sanDown = {
+      santhumbsdown: this.state.business.santhumbsdown + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, sanDown).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  //Distance db update
+
+  updateDisThumbsDown = () => {
+    let disDown = {
+      disthumbsdown: this.state.business.disthumbsdown + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, disDown).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateDisThumbsUp = () => {
+    let disUp = {
+      disthumbsup: this.state.business.disthumbsup + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, disUp).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  //Cash db update
+
+  updateCashThumbsDown = () => {
+    let cashDown = {
+      cashthumbsdown: this.state.business.cashthumbsdown + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, cashDown).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateCashThumbsUp = () => {
+    let cashUp = {
+      cashthumbsup: this.state.business.cashthumbsup + 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, cashUp).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
 
   handleBtnClick = (event) => {
     event.preventDefault();
     this.loadPage();
 
-    if (this.state.business.instore >= 12) {
+    if (
+      this.state.business.instore >= 12 &&
+      this.state.btnColor === "greenyellow"
+    ) {
       this.updateLine();
-      console.log("Line Updated!")
+      console.log("Line Updated!");
+      this.setState({
+        btnColor: "red",
+        checktext: "- CHECK-OUT",
+      });
+      // if (this.state.btnColor === "greenyellow") {
+      //   this.setState({
+      //     btnColor: "red",
+      //     checktext: "- CHECK-OUT",
+      //   });
+      // } else {
+      //   this.setState({
+      //     btnColor: "greenyellow",
+      //     checktext: "+ CHECK-IN",
+      //   });
+      // }
     } else {
-      this.updateStore();
-      console.log("In Store Updated!")
+      if (this.state.btnColor === "red") {
+        this.setState({
+          btnColor: "greenyellow",
+          checktext: "+ CHECK-IN",
+        });
+        // this.updateStore();
+        this.checkoutStore();
+        console.log("In Store Updated!");
+      } else {
+        this.setState({
+          btnColor: "red",
+          checktext: "- CHECK-OUT",
+        });
+        // this.updateStore();
+        this.updateStore();
+        console.log("In Store Updated!");
+      }
     }
-
-    
   };
 
   // Create check-in click variable
@@ -77,6 +294,20 @@ class Business extends Component {
     });
   };
 
+  checkoutStore = () => {
+    let checkinstore = {
+      instore: this.state.business.instore - 1,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, checkinstore).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
   // Render page
 
   render() {
@@ -93,18 +324,19 @@ class Business extends Component {
               href="null"
               role="button"
               onClick={this.handleBtnClick}
+              style={{ backgroundColor: this.state.btnColor }}
             >
-              + CHECK-IN!
+              {this.state.checktext}
             </a>
           </div>
 
-          {/* Social Distance Thumbs */}
+          {/* Mask Distance Thumbs */}
 
           <div className="row" id="like-holder">
             <div className="col-md-3 text-center" id="voters1">
               <img src={mask} alt="mask" width="70" height="70" id="mask"></img>
               <div className="row">
-                <div className="col-md-3">{/* <small>1000</small> */}</div>
+                <div className="col-md-3"></div>
 
                 <div className="col-md-3">
                   <img
@@ -112,7 +344,8 @@ class Business extends Component {
                     alt="mask"
                     width="30"
                     height="30"
-                    id="up"
+                    id="maskup"
+                    onClick={this.handleMaskThumbUpClick}
                   ></img>
                 </div>
                 <div className="col-md-3">
@@ -121,17 +354,32 @@ class Business extends Component {
                     alt="mask"
                     width="30"
                     height="30"
-                    id="down"
+                    id="maskdown"
+                    onClick={this.handleMaskThumbDownClick}
                   ></img>
                 </div>
+              </div>
 
-                <div className="col-md-3">{/* <small>1000</small> */}</div>
+              <div className="row">
+                <div className="col-md-3 text-center"></div>
+                <div className="col-md-3 text-center">
+                  <small>{this.state.business.maskthumbsup}</small>
+                </div>
+                <div className="col-md-3 text-center">
+                  <small>{this.state.business.maskthumbsdown}</small>
+                </div>
+                <div className="col-md-3 text-center"></div>
               </div>
             </div>
+
+{/* Sanitizer render */}
+
             <div className="col-md-3 text-center" id="voters2">
               <img src={hand} alt="mask" width="60" height="60" id="hand"></img>
               <div className="row">
-                <div className="col-md-3">{/* <small>1000</small> */}</div>
+                <div className="col-md-3">
+                 
+                </div>
 
                 <div className="col-md-3">
                   <img
@@ -140,6 +388,7 @@ class Business extends Component {
                     width="30"
                     height="30"
                     id="up"
+                    onClick={this.handleSanThumbUpClick}
                   ></img>
                 </div>
                 <div className="col-md-3">
@@ -149,12 +398,30 @@ class Business extends Component {
                     width="30"
                     height="30"
                     id="down"
+                    onClick={this.handleSanThumbDownClick}
                   ></img>
                 </div>
 
-                <div className="col-md-3">{/* <small>1000</small> */}</div>
+                <div className="col-md-3">
+                  
+                </div>
               </div>
+              <div className="row">
+                <div className="col-md-3 text-center"></div>
+                <div className="col-md-3 text-center">
+                  <small>{this.state.business.santhumbsup}</small>
+                </div>
+                <div className="col-md-3 text-center">
+                  <small>{this.state.business.santhumbsdown}</small>
+                </div>
+                <div className="col-md-3 text-center"></div>
+              </div>
+              
             </div>
+
+
+{/* Distance render */}
+
             <div className="col-md-3 text-center" id="voters3">
               <img
                 src={distance}
@@ -164,7 +431,9 @@ class Business extends Component {
                 id="distance"
               ></img>
               <div className="row">
-                <div className="col-md-3">{/* <small>1000</small> */}</div>
+                <div className="col-md-3">
+                
+                </div>
 
                 <div className="col-md-3">
                   <img
@@ -173,6 +442,7 @@ class Business extends Component {
                     width="30"
                     height="30"
                     id="up"
+                    onClick={this.handleDisThumbUpClick}
                   ></img>
                 </div>
                 <div className="col-md-3">
@@ -182,17 +452,33 @@ class Business extends Component {
                     width="30"
                     height="30"
                     id="down"
+                    onClick={this.handleDisThumbDownClick}
                   ></img>
                 </div>
 
-                <div className="col-md-3">{/* <small>1000</small> */}</div>
+                <div className="col-md-3">
+                
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-3 text-center"></div>
+                <div className="col-md-3 text-center">
+                  <small>{this.state.business.disthumbsup}</small>
+                </div>
+                <div className="col-md-3 text-center">
+                  <small>{this.state.business.disthumbsdown}</small>
+                </div>
+                <div className="col-md-3 text-center"></div>
               </div>
             </div>
 
             <div className="col-md-3 text-center" id="voters4">
               <img src={cash} alt="mask" width="60" height="60" id="cash"></img>
               <div className="row">
-                <div className="col-md-3">{/* <small>1000</small> */}</div>
+                <div className="col-md-3">
+                
+                </div>
 
                 <div className="col-md-3">
                   <img
@@ -201,6 +487,7 @@ class Business extends Component {
                     width="30"
                     height="30"
                     id="up"
+                    onClick={this.handleCashThumbUpClick}
                   ></img>
                 </div>
                 <div className="col-md-3">
@@ -210,10 +497,24 @@ class Business extends Component {
                     width="30"
                     height="30"
                     id="down"
+                    onClick={this.handleCashThumbDownClick}
                   ></img>
                 </div>
 
-                <div className="col-md-3">{/* <small>1000</small> */}</div>
+                <div className="col-md-3">
+                 
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-3 text-center"></div>
+                <div className="col-md-3 text-center">
+                  <small>{this.state.business.cashthumbsup}</small>
+                </div>
+                <div className="col-md-3 text-center">
+                  <small>{this.state.business.cashthumbsdown}</small>
+                </div>
+                <div className="col-md-3 text-center"></div>
               </div>
             </div>
           </div>

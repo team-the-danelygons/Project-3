@@ -1,7 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 import "./home.css";
+// import API from "../../../utils/API";
 
-function Home() {
+class Home extends Component {
+  state = {
+
+    
+  };
+
+
+
+
+render() {
   return (
     <>
     {/* Jumbotron */}
@@ -84,6 +94,8 @@ function Home() {
 
         {/* Map API Holder */}
 
+        <div id="map"></div>
+
         <div className="row">
           <div className="col-lg-12" id="map-holder">
             <h1>Map API Holder</h1>
@@ -141,6 +153,8 @@ function Home() {
       </div>
     </>
   );
+}
+
 }
 
 export default Home;
