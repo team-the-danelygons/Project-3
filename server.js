@@ -4,6 +4,12 @@ const mongoose = require("mongoose");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const {Client, Status} = require("@googlemaps/google-maps-services-js");
+const env = require("env-variable");
+env({
+  GOOGLE_MAPS_API_KEY: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+});
+const client = new Client({});
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +27,8 @@ app.get("/api/test", function (request, response) {
   response.json("hello test")
 
 })
-app.use(routes);
+app.use("/", routes);
+
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/safestance");
 

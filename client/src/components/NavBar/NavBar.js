@@ -20,16 +20,16 @@ class NavBar extends Component {
 
       
         <div id="search">
-          <form class="form-inline">
-           <a class="nav-link" href="/login" id="login" text-decoration="none">Login</a>
+          <form className="form-inline">
+           <a className="nav-link" href="/login" id="login" textDecoration="none">Login</a>
             <input
-              class="form-control mr-sm-2"
+              className="form-control mr-sm-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
               size="30"
             ></input>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
               Search
             </button>
           </form>
