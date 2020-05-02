@@ -1,14 +1,24 @@
 import React, { Component } from "react";
 import "./home.css";
-// import API from "../../../utils/API";
+import API from "../../../utils/API";
 
 class Home extends Component {
   state = {
-
+    business: {},
     
   };
 
+  componentDidMount() {
+    this.loadPage();
+  }
 
+  // Load Page data
+
+  loadPage = () => {
+    API.getBizAll()
+      .then((res) => this.setState({ business: res.data }))
+      .catch((err) => console.log(err));
+  };
 
 
 render() {
