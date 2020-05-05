@@ -3,13 +3,34 @@ import "./signup.css";
 // import API from "../../../utils/API";
 
 class Signup extends Component {
-  state = {
-    business: [],
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+      errors: {}
+    };
+  }
+
+  onChange = event => {
+    this.setState({ [event.target.id]: event.target.value });
   };
 
-  componentDidMount() {}
+  onSubmit = event => {
+    event.preventDefault();
+    // const newUser = {
+    //   name: this.state.name,
+    //   email: this.state.email,
+    //   password: this.state.password,
+    //   password2: this.state.password2
+    // };
+    console.log("You clicked the submit button");
+  }
 
   render() {
+    const { errors } = this.state;
     return (
       <>
         <div className="container">
@@ -24,14 +45,20 @@ class Signup extends Component {
                 <div className="form-group row" id="signup-form">
                   <div className="col-sm-12">
                     <input
+                      onChange={this.onChange}
+                      value={this.state.name}
+                      error={errors.name}
                       type="text"
                       className="form-control"
-                      id="firstName"
+                      id="name"
                       placeholder="Your Name"
                     ></input>
                   </div>
                   <div className="col-sm-12">
                     <input
+                      onChange={this.onChange}
+                      value={this.state.email}
+                      error={errors.email}
                       type="text"
                       className="form-control"
                       id="Email"
@@ -40,6 +67,9 @@ class Signup extends Component {
                   </div>
                   <div className="col-sm-12">
                     <input
+                    onChange={this.onChange}
+                    value={this.state.password}
+                    error={errors.password}
                       type="text"
                       className="form-control"
                       id="password"
@@ -48,12 +78,15 @@ class Signup extends Component {
                   </div>
                   <div className="col-sm-12">
                     <input
+                      onChange={this.onChange}
+                      value={this.state.password2}
+                      error={errors.password2}
                       type="text"
                       className="form-control"
                       id="password2"
                       placeholder="Re-enter the password"
                     ></input>
-                    <button type="button" className="btn btn-primary btn-md btn-block" id="help-btn">Register</button>
+                    <button type="button" className="btn btn-primary btn-md btn-block" id="help-btn" onClick={this.onSubmit}>Register</button>
                   </div>
                 </div>
               </form>
