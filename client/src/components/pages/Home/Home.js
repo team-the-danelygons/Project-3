@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./home.css";
 import API from "../../../utils/API";
+import MapWithMark from "./MapWithMark"
 
 
 class Home extends Component {
@@ -63,7 +64,7 @@ class Home extends Component {
           
           </div>
 
-          {/* Map API Holder */}
+          {<MapWithMark />}
 
           <div id="map"></div>
 
