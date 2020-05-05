@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./home.css";
 import API from "../../../utils/API";
-import Map from "./Map"
 
 class Home extends Component {
   state = {
@@ -64,7 +63,20 @@ class Home extends Component {
 
           {/* Map API Holder */}
 
-          {<Map />}
+          <div id="map"></div>
+
+          <div className="row">
+            <div className="col-lg-12" id="map-holder">
+              <h1>Map API Holder</h1>
+            </div>
+          </div>
+
+          <div id="list-title">
+            <h3>Explore stores in your area</h3>
+            <hr></hr>
+          </div>
+
+          {/* Map Location List */}
 
           <div id="list-box">
             <div className="card" id="list">
