@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import { withRouter  } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser  } from "../../../actions/authAcations";
+import classnames from "classnames";
 import "./signup.css";
 // import API from "../../../utils/API";
 
@@ -14,6 +19,14 @@ class Signup extends Component {
     };
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
+
   onChange = event => {
     this.setState({ [event.target.id]: event.target.value });
   };
@@ -26,7 +39,7 @@ class Signup extends Component {
       password: this.state.password,
       password2: this.state.password2
     };
-    console.log(newUser);
+    this.props.registerUser(newUser, this.props.history);
   }
 
   render() {
@@ -49,10 +62,11 @@ class Signup extends Component {
                       value={this.state.name}
                       error={errors.name}
                       type="text"
-                      className="form-control"
+                      className={classnames("form-control", {invalid: errors.name})}
                       id="name"
                       placeholder="Your Name"
                     ></input>
+                    <span className="red-text">{errors.name}</span>
                   </div>
                   <div className="col-sm-12">
                     <input
@@ -60,10 +74,11 @@ class Signup extends Component {
                       value={this.state.email}
                       error={errors.email}
                       type="email"
-                      className="form-control"
+                      className={classnames("form-control", {invalid: errors.email})}
                       id="email"
                       placeholder="Email"
                     ></input>
+                    <span className="red-text">{errors.email}</span>
                   </div>
                   <div className="col-sm-12">
                     <input
@@ -71,10 +86,11 @@ class Signup extends Component {
                     value={this.state.password}
                     error={errors.password}
                       type="password"
-                      className="form-control"
+                      className={classnames("form-control", {invalid: errors.password})}
                       id="password"
                       placeholder="Enter a password"
                     ></input>
+                    <span className="red-text">{errors.password}</span>
                   </div>
                   <div className="col-sm-12">
                     <input
@@ -82,10 +98,11 @@ class Signup extends Component {
                       value={this.state.password2}
                       error={errors.password2}
                       type="password"
-                      className="form-control"
+                      className={classnames("form-control", {invalid: errors.password2})}
                       id="password2"
                       placeholder="Re-enter the password"
                     ></input>
+                    <span className="red-text">{errors.password2}</span>
                     <button type="button" className="btn btn-primary btn-md btn-block" id="help-btn" onClick={this.onSubmit}>Register</button>
                   </div>
                 </div>
@@ -98,4 +115,18 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+Signup.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Signup));
