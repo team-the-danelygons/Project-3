@@ -3,13 +3,31 @@ import "./login.css";
 // import API from "../../../utils/API";
 
 class Login extends Component {
-  state = {
-    business: [],
-  };
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      errors: {}
+    };
+  }
 
-  componentDidMount() {}
+  onChange = event => {
+    this.setState({ [event.target.id]: event.target.value });
+  }
+
+  onSubmit = event => {
+    event.preventDefault()
+    const userData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    console.log(userData);
+  }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <>
         <div className="container">
@@ -24,22 +42,28 @@ class Login extends Component {
                 <div className="form-group row" id="signup-form">
                   <div className="col-sm-12">
                     <input
-                      type="text"
+                      onChange={this.onChange}
+                      value={this.state.email}
+                      error={errors.email}
+                      type="email"
                       className="form-control"
-                      id="firstName"
-                      placeholder="Your Name"
+                      id="email"
+                      placeholder="Your Email"
                     ></input>
                   </div>
-              
-              
+
+
                   <div className="col-sm-12">
                     <input
-                      type="text"
+                      onChange={this.onChange}
+                      value={this.state.password}
+                      error={errors.password}
+                      type="password"
                       className="form-control"
                       id="password"
                       placeholder="Enter your password"
                     ></input>
-                    <button type="button" className="btn btn-primary btn-md btn-block" id="log-btn">Log In</button>
+                    <button type="button" className="btn btn-primary btn-md btn-block" id="log-btn" onClick={this.onSubmit}>Login</button>
                   </div>
                 </div>
               </form>
