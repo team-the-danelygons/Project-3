@@ -26,6 +26,7 @@ class Login extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/") // push user to the homepage
+      window.location.reload();
     }
     if (nextProps.errors) {
       this.setState({
