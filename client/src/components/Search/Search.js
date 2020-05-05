@@ -39,7 +39,7 @@ class Search extends Component {
         <div id="search">
           <form className="form-inline">
             <a 
-              classNmae="nav-link"
+              className="nav-link"
               href="/signup"
               id="signup"
               textDecoration="none"
