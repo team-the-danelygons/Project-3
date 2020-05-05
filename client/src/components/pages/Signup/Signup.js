@@ -20,13 +20,13 @@ class Signup extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    // const newUser = {
-    //   name: this.state.name,
-    //   email: this.state.email,
-    //   password: this.state.password,
-    //   password2: this.state.password2
-    // };
-    console.log("You clicked the submit button");
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2
+    };
+    console.log(newUser);
   }
 
   render() {
@@ -61,7 +61,7 @@ class Signup extends Component {
                       error={errors.email}
                       type="text"
                       className="form-control"
-                      id="Email"
+                      id="email"
                       placeholder="Email"
                     ></input>
                   </div>
@@ -70,7 +70,7 @@ class Signup extends Component {
                     onChange={this.onChange}
                     value={this.state.password}
                     error={errors.password}
-                      type="text"
+                      type="password"
                       className="form-control"
                       id="password"
                       placeholder="Enter a password"
@@ -81,7 +81,7 @@ class Signup extends Component {
                       onChange={this.onChange}
                       value={this.state.password2}
                       error={errors.password2}
-                      type="text"
+                      type="password"
                       className="form-control"
                       id="password2"
                       placeholder="Re-enter the password"
