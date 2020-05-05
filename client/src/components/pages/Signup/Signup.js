@@ -110,7 +110,7 @@ class Signup extends Component {
                       placeholder="Re-enter the password"
                     ></input>
                     <span className="red-text">{errors.password2}</span>
-                    <button type="button" className="btn btn-primary btn-md btn-block" id="help-btn" onClick={this.onSubmit}>Register</button>
+                    <button type="button" className="btn btn-md btn-block" id="help-btn" onClick={this.onSubmit}>Register</button>
                   </div>
                 </div>
               </form>

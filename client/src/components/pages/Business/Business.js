@@ -231,7 +231,7 @@ class Business extends Component {
       this.updateLine();
       console.log("Line Updated!");
       this.setState({
-        btnColor: "red",
+        btnColor: "red" ,
         checktext: "- CHECK-OUT",
       });
       // if (this.state.btnColor === "greenyellow") {
@@ -317,12 +317,12 @@ class Business extends Component {
       <div>
         <div className="container">
           {/* Jumbotron */}
-          <div className="jumbotron" id="jumbo"></div>
+          <div className="jumbotron" id="jumbo" style={{backgroundImage: "url(" + this.state.business.image + ")"}} ></div>
 
           {/* Check-in button */}
           <div className="col-lg-12" id="btn-cont">
             <a
-              className="btn btn-primary btn-lg btn-block"
+              className="btn  btn-lg btn-block"
               href="null"
               role="button"
               onClick={this.handleBtnClick}
@@ -340,7 +340,7 @@ class Business extends Component {
               <div className="row">
                 <div className="col-md-3"></div>
 
-                <div className="col-md-3">
+                <div className="col-md-3 view overlay zoom">
                   <img
                     src={like}
                     alt="mask"
@@ -348,16 +348,18 @@ class Business extends Component {
                     height="30"
                     id="maskup"
                     onClick={this.handleMaskThumbUpClick}
+                    className="img-fluid"
                   ></img>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 view overlay zoom">
                   <img
                     src={dislike}
                     alt="mask"
-                    width="30"
-                    height="30"
+                    width="29"
+                    height="0"
                     id="maskdown"
                     onClick={this.handleMaskThumbDownClick}
+                    className="img-fluid"
                   ></img>
                 </div>
               </div>
@@ -381,7 +383,7 @@ class Business extends Component {
               <div className="row">
                 <div className="col-md-3"></div>
 
-                <div className="col-md-3">
+                <div className="col-md-3 view overlay zoom">
                   <img
                     src={like}
                     alt="mask"
@@ -389,9 +391,10 @@ class Business extends Component {
                     height="30"
                     id="up"
                     onClick={this.handleSanThumbUpClick}
+                    className="img-fluid"
                   ></img>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 view overlay zoom">
                   <img
                     src={dislike}
                     alt="mask"
@@ -399,6 +402,7 @@ class Business extends Component {
                     height="30"
                     id="down"
                     onClick={this.handleSanThumbDownClick}
+                    className="img-fluid"
                   ></img>
                 </div>
 
@@ -429,7 +433,7 @@ class Business extends Component {
               <div className="row">
                 <div className="col-md-3"></div>
 
-                <div className="col-md-3">
+                <div className="col-md-3 view overlay zoom">
                   <img
                     src={like}
                     alt="mask"
@@ -437,9 +441,10 @@ class Business extends Component {
                     height="30"
                     id="up"
                     onClick={this.handleDisThumbUpClick}
+                    className="img-fluid"
                   ></img>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 view overlay zoom">
                   <img
                     src={dislike}
                     alt="mask"
@@ -447,6 +452,7 @@ class Business extends Component {
                     height="30"
                     id="down"
                     onClick={this.handleDisThumbDownClick}
+                    className="img-fluid"
                   ></img>
                 </div>
 
@@ -470,7 +476,7 @@ class Business extends Component {
               <div className="row">
                 <div className="col-md-3"></div>
 
-                <div className="col-md-3">
+                <div className="col-md-3 view overlay zoom">
                   <img
                     src={like}
                     alt="mask"
@@ -478,9 +484,10 @@ class Business extends Component {
                     height="30"
                     id="up"
                     onClick={this.handleCashThumbUpClick}
+                    className="img-fluid"
                   ></img>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 view overlay zoom">
                   <img
                     src={dislike}
                     alt="mask"
@@ -488,6 +495,7 @@ class Business extends Component {
                     height="30"
                     id="down"
                     onClick={this.handleCashThumbDownClick}
+                    className="img-fluid"
                   ></img>
                 </div>
 
@@ -522,9 +530,9 @@ class Business extends Component {
                 width={900}
                 height={600}
                 title="myFrame"
-                frameborder={0}
+                frameBorder={0}
                 src= {`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ&q=${this.state.business.address}`}
-                allowfullscreen
+                allowFullScreen
               ></iframe>
             </div>
 

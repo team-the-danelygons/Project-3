@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authAcations";
@@ -14,7 +14,7 @@ import Business from "./components/pages/Business/Business";
 import Contact from "./components/pages/Contact/Contact";
 import Signup from "./components/pages/Signup/Signup";
 import Login from "./components/pages/Login/Login";
-import PrivateRoute from "./components/private-route/PrivateRoutes"
+// import PrivateRoute from "./components/private-route/PrivateRoutes"
 // This comment is so I can push up the changes.
 
 // Check for token to keep user logged in
@@ -47,9 +47,7 @@ class App extends Component {
             <Route path="/contact" component={Contact} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <Switch>
-              <PrivateRoute exact path="/" component={Home} />
-            </Switch>
+           
           </div>
         </Router>
       </Provider>

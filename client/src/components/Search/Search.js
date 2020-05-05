@@ -3,50 +3,55 @@ import API from "../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authAcations";
-// import Suggestions from "../Suggestions/Suggestions";
+import Suggestions from "../Suggestions/Suggestions";
 
 class Search extends Component {
   state = {
     query: "",
     loggedIn: this.props.auth.isAuthenticated,
-    name: "Guest",
+    name: "",
     buttonName: "Login",
+    signOption: "Signup",
     results: []
   };
-
 
   componentDidMount() {
     const { user } = this.props.auth
     this.loadBiz();
     if (this.state.loggedIn) {
       this.setState({
-        name: user.name.split(" ")[0],
+        signOption: `Welcome ${user.name.split(" ")[0]}`,
         buttonName: "Logout"
       })
+      
     } else {
       console.log("No user is logged in.")
     }
+  
   }
 
-  // Load Page data
+  // Load Page data`
 
   loadBiz = () => {
-    API.getBizAll()
+    API.getBizSearch(this.state.query)
       .then((res) => this.setState({ results: res.data }))
       .catch((err) => console.log(err));
   };
 
   handleInputChange = () => {
-    this.setState({
-      query: this.search.value
-    }, () => {
-      if (this.state.query && this.state.query.length > 1) {
-        if (this.state.query.length % 2 === 0) {
-          this.loadBiz()
+    this.setState(
+      {
+        query: this.search.value,
+      },
+      () => {
+        console.log("Query Value", this.state.query);
+        if (this.state.query && this.state.query.length > 3) {
+          console.log("Loading Businesses");
+          this.loadBiz();
         }
-      } 
-    })
-  }
+      }
+    );
+  };
 
   logButtonHandler = event => {
     console.log("You clicked this button");
@@ -59,10 +64,10 @@ class Search extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <>
         <div id="search">
-          <p>Welcome {this.state.name}</p>
           <form className="form-inline">
             <a 
               className="nav-link"
@@ -70,7 +75,7 @@ class Search extends Component {
               id="signup"
               textDecoration="none"
             >
-              Signup
+              {this.state.signOption}
             </a>
             <a
               className="nav-link"
@@ -82,29 +87,43 @@ class Search extends Component {
               {this.state.buttonName}
             </a>
             <input
-              className="form-control mr-sm-2"
+              className="form-control mr-sm-2 hoverable"
               type="search"
               placeholder="Search for..."
               aria-label="Search"
               size="30"
               ref={(input) => (this.search = input)}
               onChange={this.handleInputChange}
+            
             ></input>
             <button
-              className="btn btn-outline-success my-2 my-sm-0"
+              className="btn my-2 my-sm-0"
               type="submit"
+              id="search-btn"
             >
               Search
             </button>
-           
           </form>
-          {/* <Suggestions results={this.state.results} /> */}
+
+          <div className="row">
+            <div className="col-lg-2 "></div>
+            <div className="col-lg-10 ">
+              {this.state.results.map((id) => (
+                <a href={`/business/${id._id}`}>
+                  <Suggestions results={this.state.results} />
+                </a>
+              ))}
+            </div>
+          </div>
+         
+
         </div>
       </>
 
       //  <form>
       //    <input
       //      placeholder="Search for..."
+      
       //      ref={input => this.search = input}
       //      onChange={this.handleInputChange}
       //    />
