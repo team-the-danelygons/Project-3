@@ -19,6 +19,13 @@ class Signup extends Component {
     };
   }
 
+  componentDidMount() {
+    // If logged in and user navigates to Signup page, should redirect them to home
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
