@@ -9,6 +9,8 @@ import dislike from "../../../assets/images/dislike.png";
 // import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
 
+
+
 // Class Components
 
 class Business extends Component {
@@ -372,14 +374,12 @@ class Business extends Component {
               </div>
             </div>
 
-{/* Sanitizer render */}
+            {/* Sanitizer render */}
 
             <div className="col-md-3 text-center" id="voters2">
               <img src={hand} alt="mask" width="60" height="60" id="hand"></img>
               <div className="row">
-                <div className="col-md-3">
-                 
-                </div>
+                <div className="col-md-3"></div>
 
                 <div className="col-md-3">
                   <img
@@ -402,9 +402,7 @@ class Business extends Component {
                   ></img>
                 </div>
 
-                <div className="col-md-3">
-                  
-                </div>
+                <div className="col-md-3"></div>
               </div>
               <div className="row">
                 <div className="col-md-3 text-center"></div>
@@ -416,11 +414,9 @@ class Business extends Component {
                 </div>
                 <div className="col-md-3 text-center"></div>
               </div>
-              
             </div>
 
-
-{/* Distance render */}
+            {/* Distance render */}
 
             <div className="col-md-3 text-center" id="voters3">
               <img
@@ -431,9 +427,7 @@ class Business extends Component {
                 id="distance"
               ></img>
               <div className="row">
-                <div className="col-md-3">
-                
-                </div>
+                <div className="col-md-3"></div>
 
                 <div className="col-md-3">
                   <img
@@ -456,9 +450,7 @@ class Business extends Component {
                   ></img>
                 </div>
 
-                <div className="col-md-3">
-                
-                </div>
+                <div className="col-md-3"></div>
               </div>
 
               <div className="row">
@@ -476,9 +468,7 @@ class Business extends Component {
             <div className="col-md-3 text-center" id="voters4">
               <img src={cash} alt="mask" width="60" height="60" id="cash"></img>
               <div className="row">
-                <div className="col-md-3">
-                
-                </div>
+                <div className="col-md-3"></div>
 
                 <div className="col-md-3">
                   <img
@@ -501,9 +491,7 @@ class Business extends Component {
                   ></img>
                 </div>
 
-                <div className="col-md-3">
-                 
-                </div>
+                <div className="col-md-3"></div>
               </div>
 
               <div className="row">
@@ -529,14 +517,15 @@ class Business extends Component {
                 <hr />
               </div>
 
-              {/* <iframe id="map"
-
- 
-  frameborder={0}
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ&q=Space+Needle,Seattle+WA" allowfullscreen>
-</iframe> */}
-
-              {/* <img src={map} alt="map" id="map"></img> */}
+              <iframe
+                id="map"
+                width={900}
+                height={600}
+                title="myFrame"
+                frameborder={0}
+                src= {`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ&q=${this.state.business.address}`}
+                allowfullscreen
+              ></iframe>
             </div>
 
             {/* Business and Line Info */}

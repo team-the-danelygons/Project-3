@@ -1,4 +1,6 @@
-
+body {
+    background-color: lightgray !important;
+}
 
 #jumbo {
     background-image: url(../../../assets/images/safeway.jpg);
@@ -101,7 +103,7 @@
 }
 
 #map {
-    max-width: 100%;
+    max-width: 100% !important;
     border-radius: 5px;
 }
 
