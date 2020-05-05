@@ -9,8 +9,9 @@ class Search extends Component {
   state = {
     query: "",
     loggedIn: this.props.auth.isAuthenticated,
-    name: "Guest",
+    name: "",
     buttonName: "Login",
+    signOption: "Signup",
     results: []
   };
 
@@ -19,15 +20,17 @@ class Search extends Component {
     this.loadBiz();
     if (this.state.loggedIn) {
       this.setState({
-        name: user.name.split(" ")[0],
+        signOption: `Welcome ${user.name.split(" ")[0]}`,
         buttonName: "Logout"
       })
+      
     } else {
       console.log("No user is logged in.")
     }
+  
   }
 
-  // Load Page data
+  // Load Page data`
 
   loadBiz = () => {
     API.getBizSearch(this.state.query)
@@ -61,10 +64,10 @@ class Search extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <>
         <div id="search">
-          <p>Welcome {this.state.name}</p>
           <form className="form-inline">
             <a 
               className="nav-link"
@@ -72,7 +75,7 @@ class Search extends Component {
               id="signup"
               textDecoration="none"
             >
-              Signup
+              {this.state.signOption}
             </a>
             <a
               className="nav-link"
@@ -120,6 +123,7 @@ class Search extends Component {
       //  <form>
       //    <input
       //      placeholder="Search for..."
+      
       //      ref={input => this.search = input}
       //      onChange={this.handleInputChange}
       //    />

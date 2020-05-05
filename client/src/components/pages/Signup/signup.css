@@ -15,3 +15,7 @@
 padding: 20px 20px 20px 20px;
     border-radius: 5px;
 }
+
+#help-btn {
+    background-color: greenyellow;
+}
