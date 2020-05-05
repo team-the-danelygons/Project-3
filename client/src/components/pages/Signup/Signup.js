@@ -59,7 +59,7 @@ class Signup extends Component {
                       onChange={this.onChange}
                       value={this.state.email}
                       error={errors.email}
-                      type="text"
+                      type="email"
                       className="form-control"
                       id="email"
                       placeholder="Email"
