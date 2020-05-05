@@ -10,6 +10,10 @@ export default {
     return axios.get("/api/business/" + id);
   },
 
+  getBizSearch: function(name) {
+    return axios.get("/api/business/name/" + name);
+  },
+
   updateBiz: function(id, update) {
     return axios.put("/api/business/" + id, update);
   },

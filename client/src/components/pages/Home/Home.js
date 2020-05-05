@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./home.css";
 import API from "../../../utils/API";
 
+
 class Home extends Component {
   state = {
     business: [],
@@ -37,15 +38,16 @@ class Home extends Component {
             <h3>Highest Safestance Rated Locations</h3>
           </div>
 
-          <div className="card-deck flex-nowrap" id="pop-cards">
+          <div className="card-deck flex-nowrap hoverable " id="pop-cards">
            
 {this.state.business.map(business => (
 
-              <div className="card" id="card" key={business._id}>
+              <div className="card view overlay zoom " id="card" key={business._id}>
                 <img
-                  className="card-img-top"
-                  src="..."
+                  className="card-img-top img-fluid"
+                  src={business.image}
                   alt="safestance-cards"
+                  id="card-image"
                 ></img>
                 <div className="card-body">
                   <a href={`/business/${business._id}`}>
@@ -78,7 +80,7 @@ class Home extends Component {
 
           {/* Map Location List */}
 
-          <div id="list-box">
+          <div id="list-box" className="hoverable">
             <div className="card" id="list">
               <h5 className="card-header">Featured</h5>
               <div className="card-body">
@@ -87,7 +89,20 @@ class Home extends Component {
                   With supporting text below as a natural lead-in to additional
                   content.
                 </p>
-                <a href="/business" className="btn btn-primary">
+                <a href="/business" className="btn ">
+                  Go somewhere
+                </a>
+              </div>
+            </div>
+            <div className="card " id="list">
+              <h5 className="card-header">Featured</h5>
+              <div className="card-body">
+                <h5 className="card-title">Special title treatment</h5>
+                <p className="card-text">
+                  With supporting text below as a natural lead-in to additional
+                  content.
+                </p>
+                <a href="/business" className="btn ">
                   Go somewhere
                 </a>
               </div>
@@ -100,20 +115,7 @@ class Home extends Component {
                   With supporting text below as a natural lead-in to additional
                   content.
                 </p>
-                <a href="/business" className="btn btn-primary">
-                  Go somewhere
-                </a>
-              </div>
-            </div>
-            <div className="card" id="list">
-              <h5 className="card-header">Featured</h5>
-              <div className="card-body">
-                <h5 className="card-title">Special title treatment</h5>
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="/business" className="btn btn-primary">
+                <a href="/business" className="btn ">
                   Go somewhere
                 </a>
               </div>

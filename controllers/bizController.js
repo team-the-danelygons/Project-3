@@ -16,6 +16,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findByName: function(req, res) {
+    console.log("findbyName")
+    db.Business
+      .find({ bizname: { $regex: req.params.name, $options: "si" } })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     db.Business
       .create(req.body)
