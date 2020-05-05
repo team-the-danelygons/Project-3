@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./nav.css";
 import logo from "../../assets/images/ssfulllogo.png";
+import Search from "../Search/Search";
 
 class NavBar extends Component {
   render() {
@@ -17,9 +18,9 @@ class NavBar extends Component {
         </a>
 
 
-
+<Search />
       
-        <div id="search">
+        {/* <div id="search">
           <form className="form-inline">
            <a className="nav-link" href="/login" id="login" textDecoration="none">Login</a>
             <input
@@ -33,7 +34,7 @@ class NavBar extends Component {
               Search
             </button>
           </form>
-        </div>
+        </div> */}
       </nav>
     );
   }
