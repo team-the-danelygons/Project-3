@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./home.css";
 import API from "../../../utils/API";
 import MapWithMark from "./MapWithMark"
+import { Route, BrowserRouter as Router } from 'react-router-dom';
+import App from "./App";
 
 class Home extends Component {
   state = {
@@ -39,8 +41,8 @@ class Home extends Component {
           </div>
 
           <div className="card-deck flex-nowrap" id="pop-cards">
-           
-{this.state.business.map(business => (
+
+            {this.state.business.map(business => (
 
               <div className="card" id="card" key={business._id}>
                 <img
@@ -51,33 +53,38 @@ class Home extends Component {
                 <div className="card-body">
                   <a href={`/business/${business._id}`}>
                     <h5 className="card-title">{business.bizname}</h5></a>
-                  
+
                   <p className="card-text">{business.address}</p>
                 </div>
                 <div className="card-footer">
                   <small className="text-muted">Currently in-store: {business.instore}</small>
                 </div>
               </div>
-              ))}
-          
-          </div>
+            ))}
 
-          {<MapWithMark />}
+          </div>
+          {/* Map API Holder */}
 
           <div id="map"></div>
 
           <div className="row">
-            <div className="col-lg-12" id="map-holder">
-              <h1>Map API Holder</h1>
+            <div className="col-lg-6" id="map-holder">
+              <Router>
+                <App>
+                  <Route exact path="/" component={MapWithMark} />
+                </App>
+              </Router>
             </div>
           </div>
+
+          {/* Map List Holder */}
+
 
           <div id="list-title">
             <h3>Explore stores in your area</h3>
             <hr></hr>
           </div>
 
-          {/* Map Location List */}
 
           <div id="list-box">
             <div className="card" id="list">
