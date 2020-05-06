@@ -70,7 +70,7 @@ class Home extends Component {
           <div id="map"></div>
 
           <div className="row">
-            <div className="col-lg-6" id="map-holder">
+            <div className="col-lg-12" id="maps-holder">
               <Router>
                 <App>
                   <Route exact path="/" component={MapWithMark} />
