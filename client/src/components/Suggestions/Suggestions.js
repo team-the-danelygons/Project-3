@@ -1,5 +1,5 @@
 import React from 'react'
-// import Search from "../Search/Search"
+
 
 const Suggestions = (props) => {
 // console.log(props.results)
@@ -7,13 +7,15 @@ const Suggestions = (props) => {
   const options = props.results.map(r => (
 
  
-    <li key={r._id}>
+    <span key={r._id}>
       {r.bizname}
-    </li>
+    
+      
+    </span>
  
 
   ))
-  return <ul>{options}</ul>
+  return <small>{options}</small>
 }
 
 export default Suggestions

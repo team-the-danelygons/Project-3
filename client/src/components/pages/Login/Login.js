@@ -94,7 +94,7 @@ class Login extends Component {
                       {errors.password}
                       {errors.passwordincorrect}
                     </span>
-                    <button type="button" className="btn btn-primary btn-md btn-block" id="log-btn" onClick={this.onSubmit}>Login</button>
+                    <button type="button" className="btn btn-md btn-block" id="log-btn" onClick={this.onSubmit}>Login</button>
                   </div>
                 </div>
               </form>

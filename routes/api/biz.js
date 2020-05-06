@@ -13,4 +13,8 @@ router
   .put(bizController.update)
   .delete(bizController.remove);
 
+  router 
+  .route("/name/:name")
+  .get(bizController.findByName)
+
 module.exports = router;
