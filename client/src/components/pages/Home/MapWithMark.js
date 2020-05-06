@@ -85,10 +85,10 @@ class MapWithMark extends Component {
     fetch('places.json')
       .then(response => response.json())
       .then((data) => {
-        data.results.forEach((result) => {
+        data.forEach((result) => {
           result.show = false; // eslint-disable-line no-param-reassign
         });
-        this.setState({ places: data.results });
+        this.setState({ places: data });
       });
   }
 
