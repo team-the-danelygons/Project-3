@@ -11,6 +11,9 @@ env({
 });
 const client = new Client({});
 
+const nocache = require('nocache')
+app.use(nocache())
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
