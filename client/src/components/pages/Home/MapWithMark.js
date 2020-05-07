@@ -105,13 +105,15 @@ class MapWithMark extends Component {
     const { places } = this.state;
 
     return (
-      <Fragment>
+      <>
+      <Fragment >
         {!isEmpty(places) && (
           <GoogleMap
             defaultZoom={10}
             defaultCenter={LOS_ANGELES_CENTER}
             bootstrapURLKeys={{ key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ" }}
             onChildClick={this.onChildClickCallback}
+            
           >
             {places.map(place =>
               (<Marker
@@ -120,10 +122,18 @@ class MapWithMark extends Component {
                 lng={place.geometry.location.lng}
                 show={place.show}
                 place={place}
+                
               />))}
           </GoogleMap>
         )}
       </Fragment>
+
+
+      
+
+
+</>
+
     );
   }
 }
