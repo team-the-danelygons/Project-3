@@ -61,6 +61,7 @@ body {
         overflow-y: scroll;
         white-space: nowrap;
        max-height: 300px !important;
+       margin-top: 30px;
        margin-bottom: 50px;
        border-radius: 5px !important;
         
@@ -77,6 +78,30 @@ body {
         }
 
         .jHNGjT {
-             width: inherit !important;
+           
+             width: 98% !important;
+             height: 500px !important;
+             text-align: center !important;
+             margin-left: 10px;
+         
+         
 
+        }
+
+        #list {
+            margin-bottom: 5px
+        }
+
+        #list-image {
+            max-height: 138px;
+            max-width: 245;
+        }
+
+        #maps-holder{
+            background-color: white;
+            padding: 15px 10px 15px 10px !important;
+            /* margin: 0px 15px 0px 15px; */
+            border-radius: 5px;
+       
+           
         }
