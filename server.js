@@ -18,11 +18,11 @@ app.use(nocache())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
 
   
-}
+// }
 
 const routes = require("./routes");
 app.get("/api/test", function (request, response) {
@@ -33,9 +33,12 @@ app.get("/api/test", function (request, response) {
 app.use("/", routes);
 
 // connect to MongoDB
-const db = require("./config/keys").mongoURI;
+//const db = require("./config/keys").mongoURI;
+var connectionString = process.ENV ? 
+  "mongodb://heroku_xnsfn7rh:ouv76pjgoihhkpsn0scpbh218g@ds027509.mlab.com:27509/heroku_xnsfn7rh" : 
+  "mongodb://localhost/safestance"
 mongoose.connect(
-  db,
+  connectionString,
   { useNewUrlParser: true }
 )
 .then(() => console.log("MongoDB sucessfully connected")
