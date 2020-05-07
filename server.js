@@ -34,9 +34,7 @@ app.use("/", routes);
 
 // connect to MongoDB
 //const db = require("./config/keys").mongoURI;
-var connectionString = process.ENV ? 
-  "mongodb://heroku_xnsfn7rh:ouv76pjgoihhkpsn0scpbh218g@ds027509.mlab.com:27509/heroku_xnsfn7rh" : 
-  "mongodb://localhost/safestance"
+var connectionString = process.ENV.MONGODB_URI || "mongodb://localhost/safestance"
 mongoose.connect(
   connectionString,
   { useNewUrlParser: true }
