@@ -33,7 +33,7 @@ app.get("/api/test", function (request, response) {
 
 // connect to MongoDB
 //const db = require("./config/keys").mongoURI;
-var connectionString = process.ENV.MONGODB_URI || "mongodb://localhost/safestance"
+var connectionString = process.env.MONGODB_URI || "mongodb://localhost/safestance"
 mongoose.connect(
   connectionString,
   { useNewUrlParser: true }
