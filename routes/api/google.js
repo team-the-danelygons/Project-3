@@ -11,7 +11,7 @@ router.get("/",  (req, res) => {
   client
   .placesNearby({
     params: {
-      location: { lat: 41.2, lng: -96 },
+      location: { lat: 39.7337, lng: -104.9799 },
       radius: 100000,
       type: "restaurant",
       key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
