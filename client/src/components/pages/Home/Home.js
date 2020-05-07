@@ -5,6 +5,7 @@ import MapWithMark from "./MapWithMark";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 
+
 class Home extends Component {
   state = {
     business: [],
@@ -121,6 +122,7 @@ class Home extends Component {
             ))}
           </div>
         </div>
+       
       </>
     );
   }
