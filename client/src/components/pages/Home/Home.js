@@ -4,6 +4,7 @@ import API from "../../../utils/API";
 import MapWithMark from "./MapWithMark";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
+import Logo from "../../../../src/assets/images/ssfulllogo.png"
 
 
 
@@ -112,7 +113,7 @@ class Home extends Component {
                     <img
                       className="card-img-top img-fluid"
                       
-                      src={business.image && business.image.length ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ` :  ''}
+                      src={business.image && business.image.length ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ` : {Logo}}
                       alt="safestance-cards"
                       id="list-image"
                     ></img>
