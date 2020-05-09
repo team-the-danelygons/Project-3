@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash.isempty';
+import API from "../../../utils/API";
 
 // examples:
 import GoogleMap from './GoogleMap';
@@ -46,7 +47,8 @@ const InfoWindow = (props) => {
         {'$'.repeat(place.price_level)}
       </div>
       <div style={{ fontSize: 14, color: 'green' }}>
-        {place.opening_hours.open_now ? 'Open' : 'Closed'}
+      
+        {place.opening_hours ? (place.opening_hours.open_now ? 'Open' : 'Closed') : 'Unknown'}
       </div>
     </div>
   );
@@ -81,16 +83,18 @@ class MapWithMark extends Component {
     };
   }
 
+  
   componentDidMount() {
-    fetch('places.json')
-      .then(response => response.json())
-      .then((data) => {
-        data.forEach((result) => {
-          result.show = false; // eslint-disable-line no-param-reassign
-        });
-        this.setState({ places: data });
-      });
-  }
+    console.log("mounting!")
+  API.getPlaces()
+  .then((data) => {
+    console.log(data.data)
+    data.data.forEach((result) => {
+      result.show = false; // eslint-disable-line no-param-reassign
+    });
+    this.setState({ places: data.data });
+  });
+}
 
   // onChildClick callback can take two arguments: key and childProps
   onChildClickCallback = (key) => {
@@ -102,7 +106,7 @@ class MapWithMark extends Component {
   };
 
   render() {
-    const { places } = this.state;
+    const places = this.state.places;
 
     return (
       <Fragment>

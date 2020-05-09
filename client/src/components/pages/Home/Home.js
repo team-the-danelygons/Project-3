@@ -13,7 +13,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.loadPage();
-  }
+   }
 
   // Load Page data
 
