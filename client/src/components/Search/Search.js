@@ -17,10 +17,11 @@ class Search extends Component {
 
   componentDidMount() {
     const { user } = this.props.auth
-    this.loadBiz();
-     if (this.state.loggedIn) {
+    // this.loadBiz();
+    if (this.state.loggedIn) {
       this.setState({
-        signOption: `Welcome ${user.name.split(" ")[0]}`,
+        signOption: 
+        `Welcome ${user.name.split(" ")[0]}`,
         buttonName: "Logout"
       })
       
@@ -108,8 +109,8 @@ class Search extends Component {
           </form>
 
           <div className="row">
-            <div className="col-lg-2 "></div>
-            <div className="col-lg-10 ">
+            <div className="col-lg-3 "></div>
+            <div className="col-lg-9 " id="suggestions">
               {this.state.results.map((id) => (
                 <a href={`/business/${id._id}`} key={id._id}>
                   <Suggestions results={this.state.results} />

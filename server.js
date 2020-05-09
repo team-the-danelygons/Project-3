@@ -17,25 +17,25 @@ app.use(nocache())
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-
-  
 }
-
 const routes = require("./routes");
-app.get("/api/test", function (request, response) {
-
-  response.json("hello test")
-
-})
 app.use("/", routes);
 
+app.get("/api/test", function (request, response) {
+  response.json("hello test")
+})
+
+
 // connect to MongoDB
-const db = require("./config/keys").mongoURI;
+//const db = require("./config/keys").mongoURI;
+var connectionString = process.env.MONGODB_URI || "mongodb://localhost/safestance"
 mongoose.connect(
-  db,
+  connectionString,
   { useNewUrlParser: true }
 )
 .then(() => console.log("MongoDB sucessfully connected")
