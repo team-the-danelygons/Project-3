@@ -27,7 +27,7 @@ const InfoWindow = (props) => {
   return (
     <div style={infoWindowStyle}>
       <div style={{ fontSize: 16 }}>
-        {place.name}
+        {place.bizname}
       </div>
       <div style={{ fontSize: 14 }}>
         <span style={{ color: 'grey' }}>
@@ -42,9 +42,6 @@ const InfoWindow = (props) => {
       </div>
       <div style={{ fontSize: 14, color: 'grey' }}>
         {place.types[0]}
-      </div>
-      <div style={{ fontSize: 14, color: 'grey' }}>
-        {'$'.repeat(place.price_level)}
       </div>
       <div style={{ fontSize: 14, color: 'green' }}>
       
@@ -85,21 +82,31 @@ class MapWithMark extends Component {
 
   
   componentDidMount() {
-    console.log("mounting!")
-  API.getPlaces()
-  .then((data) => {
-    console.log(data.data)
-    data.data.forEach((result) => {
-      result.show = false; // eslint-disable-line no-param-reassign
-    });
-    this.setState({ places: data.data });
-  });
-}
+  //   console.log("mounting!")
+  // API.getPlaces()
+  // .then((data) => {
+  //  // console.log(data)
+  //   data.forEach((result) => {
+  //     result.show = false; // eslint-disable-line no-param-reassign
+  //   });
+  //   this.setState({ places: data });
+  this.loadPage()
+  
+  };
+
+
+loadPage = () => {
+  API.getBizAll()
+    .then((res) => this.setState({ places: res.data }))
+    .catch((err) => console.log(err));
+};
+
+
 
   // onChildClick callback can take two arguments: key and childProps
   onChildClickCallback = (key) => {
     this.setState((state) => {
-      const index = state.places.findIndex(e => e.id === key);
+      const index = state.places.findIndex(e => e._id === key);
       state.places[index].show = !state.places[index].show; // eslint-disable-line no-param-reassign
       return { places: state.places };
     });
@@ -121,7 +128,7 @@ class MapWithMark extends Component {
           >
             {places.map(place =>
               (<Marker
-                key={place.id}
+                key={place._id}
                 lat={place.geometry.location.lat}
                 lng={place.geometry.location.lng}
                 show={place.show}
