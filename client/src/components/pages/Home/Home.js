@@ -6,24 +6,32 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 
 
+
 class Home extends Component {
   state = {
     business: [],
   };
 
+
   componentDidMount() {
     this.loadPage();
+    console.log("STATE", this.state.business)
    }
 
   // Load Page data
 
   loadPage = () => {
     API.getBizAll()
-      .then((res) => this.setState({ business: res.data }))
+      .then((res) => {
+        console.log("RESPONSE", res.data);
+        this.setState({ business: res.data })
+      })
       .catch((err) => console.log(err));
+      
   };
 
   render() {
+   
     return (
       <>
         {/* Jumbotron */}
@@ -93,15 +101,18 @@ class Home extends Component {
           {/* Map List Holder */}
 
           <div id="list-box" className="hoverable">
+            
             {this.state.business.map((business) => (
               <div className="card" id="list" key={business._id}>
                 <h5 className="card-header">{business.bizname}</h5>
+           
                 <div className="card-body">
                   <div className = "row">
                   <div className="col-lg-3">
                     <img
                       className="card-img-top img-fluid"
-                      src={business.image}
+                      
+                      src={business.image && business.image.length ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ` :  ''}
                       alt="safestance-cards"
                       id="list-image"
                     ></img>

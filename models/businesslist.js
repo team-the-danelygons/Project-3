@@ -6,7 +6,7 @@ const businessSchema = new Schema({
   email: { type: String, required: false },
   address: { type: String, required: true },
   zip: { type: String, required: false },
-  image: { type: String, required: false },
+  image: { type: Array, required: false },
   geometry: {type: Object, required: true},
   types: {type: Array, required: true},
   maskthumbsup: { type: Number, required: true, default: 0 },

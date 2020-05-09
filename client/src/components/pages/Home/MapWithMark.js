@@ -27,7 +27,7 @@ const InfoWindow = (props) => {
   return (
     <div style={infoWindowStyle}>
       <div style={{ fontSize: 16 }}>
-        {place.bizname}
+       <a href={`/business/${place._id}`}>{place.bizname}</a> 
       </div>
       <div style={{ fontSize: 14 }}>
         <span style={{ color: 'grey' }}>
@@ -82,14 +82,16 @@ class MapWithMark extends Component {
 
   
   componentDidMount() {
-  //   console.log("mounting!")
-  // API.getPlaces()
-  // .then((data) => {
-  //  // console.log(data)
-  //   data.forEach((result) => {
-  //     result.show = false; // eslint-disable-line no-param-reassign
-  //   });
-  //   this.setState({ places: data });
+      // if (navigator.geolocation) {
+        // navigator.geolocation.getCurrentPosition(showPosition);
+      // } else { 
+        // console.log("Geolocation is not supported by this browser.");
+    // }
+    // 
+    // function showPosition(position) {
+      // console.log("Latitude: " + position.coords.latitude + 
+      // "Longitude: " + position.coords.longitude);
+    // }
   this.loadPage()
   
   };

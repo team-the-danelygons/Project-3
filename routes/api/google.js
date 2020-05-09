@@ -33,6 +33,7 @@ router.get("/",  (req, res) => {
         return await db.Business.create({
           bizname: place.name,
           address: place.vicinity,
+          image: place.photos,
           geometry: place.geometry,
           types: place.types,
           rating: place.rating,
