@@ -17,7 +17,7 @@ class Search extends Component {
 
   componentDidMount() {
     const { user } = this.props.auth
-    this.loadBiz();
+    // this.loadBiz();
     if (this.state.loggedIn) {
       this.setState({
         signOption: 
