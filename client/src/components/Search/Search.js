@@ -17,7 +17,7 @@ class Search extends Component {
 
   componentDidMount() {
     const { user } = this.props.auth
-    this.loadBiz();
+    // this.loadBiz();
     if (this.state.loggedIn) {
       this.setState({
         signOption: 
@@ -33,10 +33,12 @@ class Search extends Component {
 
   // Load Page data`
 
-  loadBiz = () => {
+  loadBiz = (name) => {
+    if (name) {
     API.getBizSearch(this.state.query)
       .then((res) => this.setState({ results: res.data }))
       .catch((err) => console.log(err));
+    } 
   };
 
   handleInputChange = () => {
@@ -48,7 +50,7 @@ class Search extends Component {
         console.log("Query Value", this.state.query);
         if (this.state.query && this.state.query.length > 3) {
           console.log("Loading Businesses");
-          this.loadBiz();
+          this.loadBiz(this.state.query);
         }
       }
     );
@@ -110,7 +112,7 @@ class Search extends Component {
             <div className="col-lg-3 "></div>
             <div className="col-lg-9 " id="suggestions">
               {this.state.results.map((id) => (
-                <a href={`/business/${id._id}`}>
+                <a href={`/business/${id._id}`} key={id._id}>
                   <Suggestions results={this.state.results} />
                 </a>
               ))}

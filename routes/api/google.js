@@ -6,23 +6,49 @@ env({
 const router = require("express").Router();
 
 const client = new Client({});
+const db = require("../../models");
 
 router.get("/",  (req, res) => {
   client
   .placesNearby({
     params: {
       location: { lat: 39.7337, lng: -104.9799 },
-      radius: 100000,
-      type: "restaurant",
-      key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+      radius: 9000,
+       type: "store",
+       key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
     },
     timeout: 1000, // milliseconds
   })
   .then((result) => {
     console.log(result.data.results)
-    res.json(result.data.results)})
+    let dbPromises = result.data.results.map(place => {
+      
+// check to see if place exists in DB
+      return db.Business.findOne ({bizname: place.name, address: place.vicinity})
+      .then(async result =>  {
+        if (result) {
+          result.geometry = place.geometry;
+          return result
+        }
+        return await db.Business.create({
+          bizname: place.name,
+          address: place.vicinity,
+          geometry: place.geometry,
+          types: place.types,
+          rating: place.rating,
+          opening_hours: place.opening_hours
+        })
+       // dbModel.geometry = 
+      })
+      .catch(error => console.error(error));
+    })
+
+    Promise.all(dbPromises).then(dbModels => res.json(dbModels))
+    //return res.json("Okay so far")
+  })
   .catch(err => {
     console.error(err)
     res.status(422).json(err)});
 })
+
 module.exports = router;
