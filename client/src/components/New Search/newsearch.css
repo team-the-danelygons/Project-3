@@ -1,0 +1,55 @@
+#results {
+  background-color: white !important;
+  height: 100px !important;
+}
+
+#search-btn {
+  background-color: greenyellow !important;
+  border-radius: 5px !important;
+}
+
+#search-box {
+  background-color: white;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  /* margin: 50px 5px 50px 5px; */
+
+  padding: 10px 10px 10px 10px !important;
+  box-shadow: 1px 1px 1px 1px lightgray;
+  border-radius: 5px;
+}
+
+#search-bar {
+  width: 83%;
+  height: 45px;
+
+  box-shadow: 2px 2px 2px 2px lightgray;
+  border-color: white;
+}
+
+#search-row {
+  margin: 0 !important;
+}
+
+.suggestions {
+
+padding: 0px !important;
+
+
+}
+
+.suggestions > div {
+  border: 1px solid #999;
+font-size: 20px;
+padding-left: 5px !important;
+
+
+  
+  }
+
+  .suggestions > div:hover {
+   background-color: lightgrey;
+   cursor: pointer;
+    
+      
+      }
