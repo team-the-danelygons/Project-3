@@ -26,8 +26,8 @@ export default {
     return axios.post("/api/business", bizData);
   },
 
-  getPlaces: function () {
-    return axios.get("/api/places");
+  getPlaces: function (lat, lng) {
+    return axios.get(`/api/places/${lat}/${lng}`);
   }
 
 };

@@ -8,12 +8,13 @@ const router = require("express").Router();
 const client = new Client({});
 const db = require("../../models");
 
-router.get("/",  (req, res) => {
+router.get("/:lat/:lng",  (req, res) => {
+  console.log(req.body);
   client
   .placesNearby({
     params: {
-      location: { lat: 39.7337, lng: -104.9799 },
-      radius: 9000,
+      location: { lat: req.params.lat, lng: req.params.lng },
+      radius: 4000,
        type: "store",
        key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
     },

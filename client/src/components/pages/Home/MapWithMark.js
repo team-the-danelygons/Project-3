@@ -9,6 +9,10 @@ import GoogleMap from './GoogleMap';
 // consts: [34.0522, -118.2437]
 import LOS_ANGELES_CENTER from './LA';
 
+// variables for latitude and longitude 
+var lat;
+var lng;
+
 // InfoWindow component
 const InfoWindow = (props) => {
   const { place } = props;
@@ -71,6 +75,7 @@ const Marker = (props) => {
   );
 };
 
+
 class MapWithMark extends Component {
   constructor(props) {
     super(props);
@@ -82,16 +87,21 @@ class MapWithMark extends Component {
 
   
   componentDidMount() {
-      // if (navigator.geolocation) {
-        // navigator.geolocation.getCurrentPosition(showPosition);
-      // } else { 
-        // console.log("Geolocation is not supported by this browser.");
-    // }
-    // 
-    // function showPosition(position) {
-      // console.log("Latitude: " + position.coords.latitude + 
-      // "Longitude: " + position.coords.longitude);
-    // }
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        console.log("Geolocation is not supported by this browser.");
+    }
+    
+    function showPosition(position) {
+      lat = position.coords.latitude 
+       lng = position.coords.longitude
+       console.log ("lat and lng: ", lat, lng);
+       API.getPlaces(lat, lng);
+    //  .then((result))
+    }
+
+
   this.loadPage()
   
   };
@@ -123,7 +133,7 @@ loadPage = () => {
         {!isEmpty(places) && (
           <GoogleMap
             defaultZoom={10}
-            defaultCenter={LOS_ANGELES_CENTER}
+            defaultCenter={[lat, lng]}
             bootstrapURLKeys={{ key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ" }}
             onChildClick={this.onChildClickCallback}
             
