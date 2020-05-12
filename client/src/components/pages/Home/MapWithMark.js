@@ -6,9 +6,6 @@ import API from "../../../utils/API";
 // examples:
 import GoogleMap from './GoogleMap';
 
-// consts: [34.0522, -118.2437]
-import LOS_ANGELES_CENTER from './LA';
-
 // variables for latitude and longitude 
 var lat;
 var lng;
@@ -92,7 +89,7 @@ class MapWithMark extends Component {
       } else { 
         console.log("Geolocation is not supported by this browser.");
     }
-    
+    //gets geolocation from browser and passes lat and lng to placesAPI
     function showPosition(position) {
       lat = position.coords.latitude 
        lng = position.coords.longitude
@@ -132,7 +129,7 @@ loadPage = () => {
       <Fragment >
         {!isEmpty(places) && (
           <GoogleMap
-            defaultZoom={10}
+            defaultZoom={12}
             defaultCenter={[lat, lng]}
             bootstrapURLKeys={{ key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ" }}
             onChildClick={this.onChildClickCallback}

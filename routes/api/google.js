@@ -9,7 +9,6 @@ const client = new Client({});
 const db = require("../../models");
 
 router.get("/:lat/:lng",  (req, res) => {
-  console.log(req.body);
   client
   .placesNearby({
     params: {
@@ -21,7 +20,6 @@ router.get("/:lat/:lng",  (req, res) => {
     timeout: 1000, // milliseconds
   })
   .then((result) => {
-    console.log(result.data.results)
     let dbPromises = result.data.results.map(place => {
       
 // check to see if place exists in DB
