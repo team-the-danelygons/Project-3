@@ -89,23 +89,7 @@ class Search extends Component {
             >
               {this.state.buttonName}
             </a>
-            <input
-              className="form-control mr-sm-2 hoverable"
-              type="search"
-              placeholder="Search for..."
-              aria-label="Search"
-              size="30"
-              ref={(input) => (this.search = input)}
-              onChange={this.handleInputChange}
-            
-            ></input>
-            <button
-              className="btn my-2 my-sm-0"
-              type="submit"
-              id="search-btn"
-            >
-              Search
-            </button>
+          
           </form>
 
           <div className="row">

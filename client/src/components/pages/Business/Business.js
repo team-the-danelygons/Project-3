@@ -18,6 +18,7 @@ class Business extends Component {
     business: {},
     inline: 0,
     instore: 0,
+    image: "",
     btnColor: "greenyellow",
     checktext: "+ CHECK-IN",
   };
@@ -26,15 +27,19 @@ class Business extends Component {
 
   componentDidMount() {
     this.loadPage();
+    
   }
 
   // Load Page data
 
   loadPage = () => {
     API.getBiz(this.props.match.params.id)
-      .then((res) => this.setState({ business: res.data }))
+      .then((res) => this.setState({ business: res.data, image: res.data.image && res.data.image.length ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.data.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ` : 'https://i.ibb.co/6HygT0r/jumbohome.jpg'  }))
       .catch((err) => console.log(err));
+     
   };
+
+
 
   //  Mask Clicks
 
@@ -313,11 +318,18 @@ class Business extends Component {
   // Render page
 
   render() {
+
+  // let image = this.state.business.image[0].photo_reference
+  console.log("Image:", this.state.image)
+ 
+
     return (
+     
       <div>
+     
         <div className="container">
           {/* Jumbotron */}
-          <div className="jumbotron" id="jumbo" style={{backgroundImage: "url(" + this.state.business.image + ")"}} ></div>
+          <div className="jumbotron" id="jumbo" style={{backgroundImage: "url(" + this.state.image + ")"}} ></div>
 
           {/* Check-in button */}
           <div className="col-lg-12" id="btn-cont">
