@@ -7,9 +7,14 @@ import App from "./App";
 import NewSearch from "../../New Search/newSearch";
 
 class Home extends Component {
-  state = {
-    business: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      business: [],
+    };
+  }
+
+  
 
   componentDidMount() {
     this.loadPage();
@@ -41,7 +46,7 @@ class Home extends Component {
             </div>
           </div>
 
-          <NewSearch />
+          <NewSearch loadBiz = {this.props.loadBiz} updateSearchQuery = {this.props.updateSearchQuery} handleInputChange={this.props.handleInputChange} />
 
           {/* Jumbotron */}
           <div className="jumbotron" id="jumbohome">
@@ -50,7 +55,7 @@ class Home extends Component {
               <div className="col-lg-3 text-left" id="jumbo-box">
                 <h3>Own a business? Take control today </h3>
                 <h6>Flag inaccuraces and make sure your business data is accurate and up-to-date</h6>
-                <button className="btn" id="biz-btn">Claim Business</button>
+                <a href="/ownerdemo"><button  className="btn" id="biz-btn">Claim Business</button></a>
               </div>
               <div className="col-lg-8"></div>
             </div>

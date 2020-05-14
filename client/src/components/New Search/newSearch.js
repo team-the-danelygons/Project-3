@@ -1,19 +1,22 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import Suggestions from "../Suggestions/Suggestions";
+
 import "./newsearch.css";
 
 class newSearch extends Component {
-  state = {
-    query: "",
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: "",
 
-    name: "",
+      name: "",
 
-    results: [],
-  };
+      results: [],
+    };
+  }
 
   componentDidMount() {
-    this.loadBiz();
+    // this.props.loadBiz();
   }
 
   // Load Page data`
@@ -40,10 +43,13 @@ class newSearch extends Component {
           this.setState({
             results: [],
           });
+          this.updateSearchQuery(this.search.value);
         }
       }
     );
   };
+
+
 
   render() {
     console.log(this.state);
@@ -54,6 +60,7 @@ class newSearch extends Component {
             <div class="col-lg-12 hoverable" id="search-box">
               <form className="form-inline ">
                 <input
+                  list="biz-search"
                   id="search-bar"
                   className="form-control mr-sm-2 "
                   type="search"
@@ -61,25 +68,17 @@ class newSearch extends Component {
                   aria-label="Search"
                   // size="90"
                   ref={(input) => (this.search = input)}
-                  onChange={this.handleInputChange}
+                  onChange={this.props.handleInputChange}
                 ></input>
-                <button
-                  className="btn my-2 my-sm-0"
-                  type="submit"
-                  id="search-btn"
-                >
+                <a href="/results" className="btn my-2 my-sm-0">
                   Search
-                </button>
-                <div className="row"></div>
-                <div className="col-lg-10 suggestions ">
-                  {this.state.results.map((id) => (
-                    <div>
-                      <a href={`/business/${id._id}`} key={id._id}>
-                        <Suggestions results={this.state.results} />
-                      </a>
-                    </div>
+                </a>
+
+                <datalist id="biz-search">
+                  {this.state.results.map((results) => (
+                    <option value={results.bizname}></option>
                   ))}
-                </div>
+                </datalist>
               </form>
             </div>
           </div>
