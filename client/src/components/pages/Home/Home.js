@@ -64,7 +64,7 @@ class Home extends Component {
               <div className="col-lg-3 text-left" id="jumbo-box">
                 <h3>Own a business? Take control today </h3>
                 <h6>Flag inaccuraces and make sure your business data is accurate and up-to-date</h6>
-                <a href="/ownerdemo"><button className="btn" id="biz-btn">Claim Business</button></a>
+                <a href="/claim"><button className="btn" id="biz-btn">Claim Business</button></a>
               </div>
               <div className="col-lg-8"></div>
             </div>

@@ -23,7 +23,7 @@ transporter.verify((error, success) => {
   }
 });
 
-router.post('/send', (req, res, next) => {
+router.post('/claim', (req, res, next) => {
   var name = req.body.name
   var email = req.body.email
   var bizname = req.body.bizname

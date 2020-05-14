@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./owner.css";
+import "./claim.css";
 
 // import API from "../../../utils/API";
 
-class Owner extends Component {
+class Claim extends Component {
   constructor() {
     super();
     this.state = {
@@ -163,4 +163,4 @@ class Owner extends Component {
   }
 }
 
-export default Owner;
+export default Claim;

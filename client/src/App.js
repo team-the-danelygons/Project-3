@@ -12,7 +12,7 @@ import NavBar from "./components/NavBar/NavBar"
 import Footer from "./components/Footer/Footer";
 import Home from "./components/pages/Home/Home";
 import Business from "./components/pages/Business/Business";
-import OwnerDemo from "./components/pages/OwnerDemo/OwnerDemo";
+import Claim from "./components/pages/Claim/Claim";
 import Signup from "./components/pages/Signup/Signup";
 import Login from "./components/pages/Login/Login";
 import Results from "./components/pages/Results/Results";
@@ -96,7 +96,7 @@ class App extends Component {
             </Route>
             
             <Route exact path="/business/:id" component={Business} />
-            <Route path="/ownerdemo" component={OwnerDemo} />
+            <Route path="/claim" component={Claim} />
             <Route path="/results">
               <Results searchQuery={this.state.query} updateSearchQuery = {this.updateSearchQuery}  results={this.state.results} loadBiz={this.loadBiz} />
             </Route>
