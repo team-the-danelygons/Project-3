@@ -85,28 +85,29 @@ class MapWithMark extends Component {
   
   componentDidMount() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(this.showPosition);
       } else { 
         console.log("Geolocation is not supported by this browser.");
     }
-    //gets geolocation from browser and passes lat and lng to placesAPI
-    function showPosition(position) {
-      lat = position.coords.latitude 
-       lng = position.coords.longitude
-       console.log ("lat and lng: ", lat, lng);
-       API.getPlaces(lat, lng);
-    //  .then((result))
-    }
-
-
-  this.loadPage()
-  
+    //gets geolocation from browser and passes lat and lng to placesAPI  
   };
 
+  showPosition = (position) => {
+    lat = position.coords.latitude 
+     lng = position.coords.longitude
+     console.log ("lat and lng: ", lat, lng);
+     this.loadPage(lat, lng);
+  }
 
-loadPage = () => {
-  API.getBizAll()
-    .then((res) => this.setState({ places: res.data }))
+loadPage = (lat, lng) => {
+  console.log("LAT_LONG", lat, lng)
+  this.props.setLatLng(lat, lng);
+  this.props.loadPage();
+  API.getPlaces(lat, lng)
+    .then((res) => {
+      console.log("Look Here", res.data)
+      this.setState({ places: res.data })
+    })
     .catch((err) => console.log(err));
 };
 

@@ -23,6 +23,16 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findByLatLng: function(req, res) {
+    console.log("finding by radius")
+    // get lat lng from params
+    db.Business
+    .find({ "geometry.location.lat": {$lt: req.params.lat + .2, $gt: req.params.lat - .2}})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+    // where object lookig for { geometry:{location:{lat: {$gt: lat - .2}}}}
+    // and lat < lat +.2, and lng > ln -.2, and lng < lng + .2
+  },
   create: function(req, res) {
     db.Business
       .create(req.body)
