@@ -10,8 +10,8 @@ class NavBar extends Component {
         <a className="navbar-brand" href="/">
           <img
             src={logo}
-            width="150"
-            height="40"
+            width="190"
+            height="50"
             className="d-inline-block align-top"
             alt=""
           />

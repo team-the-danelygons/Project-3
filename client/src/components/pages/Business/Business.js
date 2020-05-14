@@ -9,8 +9,6 @@ import dislike from "../../../assets/images/dislike.png";
 // import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
 
-
-
 // Class Components
 
 class Business extends Component {
@@ -18,6 +16,7 @@ class Business extends Component {
     business: {},
     inline: 0,
     instore: 0,
+    image: "",
     btnColor: "greenyellow",
     checktext: "+ CHECK-IN",
   };
@@ -32,7 +31,15 @@ class Business extends Component {
 
   loadPage = () => {
     API.getBiz(this.props.match.params.id)
-      .then((res) => this.setState({ business: res.data }))
+      .then((res) =>
+        this.setState({
+          business: res.data,
+          image:
+            res.data.image && res.data.image.length
+              ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.data.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
+              : "https://i.ibb.co/6HygT0r/jumbohome.jpg",
+        })
+      )
       .catch((err) => console.log(err));
   };
 
@@ -231,7 +238,7 @@ class Business extends Component {
       this.updateLine();
       console.log("Line Updated!");
       this.setState({
-        btnColor: "red" ,
+        btnColor: "red",
         checktext: "- CHECK-OUT",
       });
       // if (this.state.btnColor === "greenyellow") {
@@ -313,11 +320,18 @@ class Business extends Component {
   // Render page
 
   render() {
+    // let image = this.state.business.image[0].photo_reference
+    console.log("Image:", this.state.image);
+
     return (
       <div>
         <div className="container">
           {/* Jumbotron */}
-          <div className="jumbotron" id="jumbo" style={{backgroundImage: "url(" + this.state.business.image + ")"}} ></div>
+          <div
+            className="jumbotron"
+            id="jumbo"
+            style={{ backgroundImage: "url(" + this.state.image + ")" }}
+          ></div>
 
           {/* Check-in button */}
           <div className="col-lg-12" id="btn-cont">
@@ -531,7 +545,7 @@ class Business extends Component {
                 height={600}
                 title="myFrame"
                 frameBorder={0}
-                src= {`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ&q=${this.state.business.address}`}
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ&q=${this.state.business.address}`}
                 allowFullScreen
               ></iframe>
             </div>
@@ -617,6 +631,18 @@ class Business extends Component {
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-lg-12" id="btn-claim">
+                      <div className="text-center">
+                        <a href="/owner">
+                          <button className="btn  btn-lg btn-block">
+                            Claim Business
+                          </button>
+                        </a>
                       </div>
                     </div>
                   </div>

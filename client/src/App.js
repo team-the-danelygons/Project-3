@@ -12,9 +12,11 @@ import NavBar from "./components/NavBar/NavBar"
 import Footer from "./components/Footer/Footer";
 import Home from "./components/pages/Home/Home";
 import Business from "./components/pages/Business/Business";
-import Contact from "./components/pages/Contact/Contact";
+import OwnerDemo from "./components/pages/OwnerDemo/OwnerDemo";
 import Signup from "./components/pages/Signup/Signup";
 import Login from "./components/pages/Login/Login";
+import Results from "./components/pages/Results/Results";
+import API from "./utils/API";
 // import PrivateRoute from "./components/private-route/PrivateRoutes"
 // This comment is so I can push up the changes.
 
@@ -36,16 +38,69 @@ if (localStorage.jwtToken) {
   }
 }
 
+
+
 class App extends Component {
+
+  state = {
+    query: "",
+    results: [],
+  }
+
+  updateSearchQuery = (value) => {
+    this.setState({query: value})
+  }
+
+  componentDidMount() {
+    this.loadBiz();
+  }
+
+  loadBiz = () => {
+    
+      API.getBizSearch(this.state.query)
+        .then((res) => this.setState({ results: res.data }))
+        .catch((err) => console.log(err));
+    
+  };
+
+  // handleInputChange = () => {
+  //   this.setState(
+  //     {
+  //       query: this.search.value,
+  //     },
+  //     () => {
+  //       console.log("Query Value", this.state.query);
+  //       if (this.state.query && this.state.query.length > 2) {
+  //         console.log("Loading Businesses");
+  //         this.loadBiz(this.state.query);
+  //       } else {
+  //         this.setState({
+  //           results: [],
+  //         });
+  //         // this.updateSearchQuery(this.search.value);
+  //       }
+  //     }
+  //   );
+  // };
+
+
   render() {
     return (
       <Provider store={store}>
         <Router>
           <div>
             <NavBar />
-            <Route exact path="/" component={Home} />
+            
+            <Route exact path="/">
+              <Home loadBiz = {this.loadBiz} updateSearchQuery = {this.updateSearchQuery} handleInputChange={this.props.handleInputChange}/>
+            </Route>
+            
             <Route exact path="/business/:id" component={Business} />
-            <Route path="/contact" component={Contact} />
+            <Route path="/ownerdemo" component={OwnerDemo} />
+            <Route path="/results">
+              <Results searchQuery={this.state.query} updateSearchQuery = {this.updateSearchQuery}  results={this.state.results} loadBiz={this.loadBiz} />
+            </Route>
+            
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Footer />

@@ -8,19 +8,18 @@ const router = require("express").Router();
 const client = new Client({});
 const db = require("../../models");
 
-router.get("/",  (req, res) => {
+router.get("/:lat/:lng",  (req, res) => {
   client
   .placesNearby({
     params: {
-      location: { lat: 39.7337, lng: -104.9799 },
-      radius: 9000,
+      location: { lat: req.params.lat, lng: req.params.lng },
+      radius: 4000,
        type: "store",
        key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
     },
     timeout: 1000, // milliseconds
   })
   .then((result) => {
-    console.log(result.data.results)
     let dbPromises = result.data.results.map(place => {
       
 // check to see if place exists in DB
@@ -33,6 +32,7 @@ router.get("/",  (req, res) => {
         return await db.Business.create({
           bizname: place.name,
           address: place.vicinity,
+          image: place.photos,
           geometry: place.geometry,
           types: place.types,
           rating: place.rating,

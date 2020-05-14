@@ -6,8 +6,9 @@ import API from "../../../utils/API";
 // examples:
 import GoogleMap from './GoogleMap';
 
-// consts: [34.0522, -118.2437]
-import LOS_ANGELES_CENTER from './LA';
+// variables for latitude and longitude 
+var lat;
+var lng;
 
 // InfoWindow component
 const InfoWindow = (props) => {
@@ -27,7 +28,7 @@ const InfoWindow = (props) => {
   return (
     <div style={infoWindowStyle}>
       <div style={{ fontSize: 16 }}>
-        {place.bizname}
+       <a href={`/business/${place._id}`}>{place.bizname}</a> 
       </div>
       <div style={{ fontSize: 14 }}>
         <span style={{ color: 'grey' }}>
@@ -71,6 +72,7 @@ const Marker = (props) => {
   );
 };
 
+
 class MapWithMark extends Component {
   constructor(props) {
     super(props);
@@ -82,22 +84,30 @@ class MapWithMark extends Component {
 
   
   componentDidMount() {
-  //   console.log("mounting!")
-  // API.getPlaces()
-  // .then((data) => {
-  //  // console.log(data)
-  //   data.forEach((result) => {
-  //     result.show = false; // eslint-disable-line no-param-reassign
-  //   });
-  //   this.setState({ places: data });
-  this.loadPage()
-  
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition);
+      } else { 
+        console.log("Geolocation is not supported by this browser.");
+    }
+    //gets geolocation from browser and passes lat and lng to placesAPI  
   };
 
+  showPosition = (position) => {
+    lat = position.coords.latitude 
+     lng = position.coords.longitude
+     console.log ("lat and lng: ", lat, lng);
+     this.loadPage(lat, lng);
+  }
 
-loadPage = () => {
-  API.getBizAll()
-    .then((res) => this.setState({ places: res.data }))
+loadPage = (lat, lng) => {
+  console.log("LAT_LONG", lat, lng)
+  this.props.setLatLng(lat, lng);
+  this.props.loadPage();
+  API.getPlaces(lat, lng)
+    .then((res) => {
+      console.log("Look Here", res.data)
+      this.setState({ places: res.data })
+    })
     .catch((err) => console.log(err));
 };
 
@@ -120,8 +130,8 @@ loadPage = () => {
       <Fragment >
         {!isEmpty(places) && (
           <GoogleMap
-            defaultZoom={10}
-            defaultCenter={LOS_ANGELES_CENTER}
+            defaultZoom={12}
+            defaultCenter={[lat, lng]}
             bootstrapURLKeys={{ key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ" }}
             onChildClick={this.onChildClickCallback}
             
