@@ -47,41 +47,41 @@ class App extends Component {
     results: [],
   }
 
-  // updateSearchQuery = (value) => {
-  //   this.setState({query: value})
-  // }
+  updateSearchQuery = (value) => {
+    this.setState({query: value})
+  }
 
   componentDidMount() {
     this.loadBiz();
   }
 
-  loadBiz = (name) => {
-    if (name) {
+  loadBiz = () => {
+    
       API.getBizSearch(this.state.query)
         .then((res) => this.setState({ results: res.data }))
         .catch((err) => console.log(err));
-    }
+    
   };
 
-  handleInputChange = () => {
-    this.setState(
-      {
-        query: this.search.value,
-      },
-      () => {
-        console.log("Query Value", this.state.query);
-        if (this.state.query && this.state.query.length > 2) {
-          console.log("Loading Businesses");
-          this.loadBiz(this.state.query);
-        } else {
-          this.setState({
-            results: [],
-          });
-          // this.updateSearchQuery(this.search.value);
-        }
-      }
-    );
-  };
+  // handleInputChange = () => {
+  //   this.setState(
+  //     {
+  //       query: this.search.value,
+  //     },
+  //     () => {
+  //       console.log("Query Value", this.state.query);
+  //       if (this.state.query && this.state.query.length > 2) {
+  //         console.log("Loading Businesses");
+  //         this.loadBiz(this.state.query);
+  //       } else {
+  //         this.setState({
+  //           results: [],
+  //         });
+  //         // this.updateSearchQuery(this.search.value);
+  //       }
+  //     }
+  //   );
+  // };
 
 
   render() {
@@ -98,7 +98,7 @@ class App extends Component {
             <Route exact path="/business/:id" component={Business} />
             <Route path="/ownerdemo" component={OwnerDemo} />
             <Route path="/results">
-              <Results searchQuery={this.state.query} />
+              <Results searchQuery={this.state.query} updateSearchQuery = {this.updateSearchQuery}  results={this.state.results} loadBiz={this.loadBiz} />
             </Route>
             
             <Route path="/signup" component={Signup} />

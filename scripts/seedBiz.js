@@ -11,7 +11,8 @@ const bizProfile = [
     email: "joesmith@safeway.com",
     address: "1601 Coalton Rd, Superior, CO",
     zip: "80027",
-    image: "https://lh5.googleusercontent.com/p/AF1QipNHF0IUOK3yFeKKdHE_JxtRya1nWgP9ICIKWH2R=w426-h240-k-no",
+    image:
+      "https://lh5.googleusercontent.com/p/AF1QipNHF0IUOK3yFeKKdHE_JxtRya1nWgP9ICIKWH2R=w426-h240-k-no",
     geometry: {},
     types: [],
     maskthumbsup: 0,
@@ -25,12 +26,12 @@ const bizProfile = [
     instore: 0,
     inline: 0,
     rating: 0,
-  opening_hours: {},
+    opening_hours: {},
     storeopen: 9,
     storeclose: 5,
     creationdate: new Date(Date.now()),
+    saferating: "gold",
   },
-  
 ];
 
 db.Business.remove({})
@@ -43,4 +44,3 @@ db.Business.remove({})
     console.error(err);
     process.exit(1);
   });
- 

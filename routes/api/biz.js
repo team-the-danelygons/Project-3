@@ -17,5 +17,11 @@ router
   .route("/name/:name")
   .get(bizController.findByName)
 
+  router.route("/send")
+  .get(bizController.findAll)
+  .post(bizController.create);
+
+
+
 
 module.exports = router;

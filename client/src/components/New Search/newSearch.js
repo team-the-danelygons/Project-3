@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-
+import {Link} from 'react-router-dom';
 import "./newsearch.css";
 
 class newSearch extends Component {
@@ -43,8 +43,9 @@ class newSearch extends Component {
           this.setState({
             results: [],
           });
-          this.updateSearchQuery(this.search.value);
+       
         }
+        this.props.updateSearchQuery(this.search.value);
       }
     );
   };
@@ -57,7 +58,7 @@ class newSearch extends Component {
       <>
         <div id="search">
           <div className="row" id="search-row">
-            <div class="col-lg-12 hoverable" id="search-box">
+            <div className="col-lg-12 hoverable" id="search-box">
               <form className="form-inline ">
                 <input
                   list="biz-search"
@@ -68,11 +69,11 @@ class newSearch extends Component {
                   aria-label="Search"
                   // size="90"
                   ref={(input) => (this.search = input)}
-                  onChange={this.props.handleInputChange}
+                  onChange={this.handleInputChange}
                 ></input>
-                <a href="/results" className="btn my-2 my-sm-0">
+                <Link to="/results" className="btn my-2 my-sm-0">
                   Search
-                </a>
+                </Link>
 
                 <datalist id="biz-search">
                   {this.state.results.map((results) => (
