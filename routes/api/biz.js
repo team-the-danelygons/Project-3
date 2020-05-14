@@ -17,5 +17,8 @@ router
   .route("/name/:name")
   .get(bizController.findByName)
 
+  router
+  .route("/:lat/:lng")
+  .get(bizController.findByLatLng)
 
 module.exports = router;

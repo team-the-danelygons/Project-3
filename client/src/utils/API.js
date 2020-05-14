@@ -13,7 +13,9 @@ export default {
   getBizSearch: function (name) {
     return axios.get("/api/business/name/" + name);
   },
-
+  getLocalBiz: function (lat, lng) {
+    return axios.get(`/api/business/${lat}/${lng}`);
+  },
   updateBiz: function (id, update) {
     return axios.put("/api/business/" + id, update);
   },

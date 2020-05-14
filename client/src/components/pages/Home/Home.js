@@ -5,16 +5,20 @@ import MapWithMark from "./MapWithMark";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import NewSearch from "../../New Search/newSearch";
+var lat;
+var lng;
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       business: [],
+      lat: 0,
+      lng: 0
     };
   }
 
-  
+
 
   componentDidMount() {
     this.loadPage();
@@ -24,13 +28,18 @@ class Home extends Component {
   // Load Page data
 
   loadPage = () => {
-    API.getBizAll()
+    API.getPlaces(this.state.lat, this.state.lng)
       .then((res) => {
         console.log("RESPONSE", res.data);
         this.setState({ business: res.data });
       })
       .catch((err) => console.log(err));
+
   };
+  
+  setLatLng = (lat,lng) => {
+    this.setState({lat,lng})
+  }
 
   render() {
     return (
@@ -46,16 +55,16 @@ class Home extends Component {
             </div>
           </div>
 
-          <NewSearch loadBiz = {this.props.loadBiz} updateSearchQuery = {this.props.updateSearchQuery} handleInputChange={this.props.handleInputChange} />
+          <NewSearch loadBiz={this.props.loadBiz} updateSearchQuery={this.props.updateSearchQuery} handleInputChange={this.props.handleInputChange} />
 
           {/* Jumbotron */}
           <div className="jumbotron" id="jumbohome">
             <div className="row">
-            <div className="col-lg-1"></div>
+              <div className="col-lg-1"></div>
               <div className="col-lg-3 text-left" id="jumbo-box">
                 <h3>Own a business? Take control today </h3>
                 <h6>Flag inaccuraces and make sure your business data is accurate and up-to-date</h6>
-                <a href="/ownerdemo"><button  className="btn" id="biz-btn">Claim Business</button></a>
+                <a href="/ownerdemo"><button className="btn" id="biz-btn">Claim Business</button></a>
               </div>
               <div className="col-lg-8"></div>
             </div>
@@ -112,11 +121,11 @@ class Home extends Component {
           <div className="container">
             <div className="row">
               <div className="col-lg-12 hoverable " id="maps-holder">
-                <Router>
+                
                   <App>
-                    <Route exact path="/" component={MapWithMark} />
+                    <MapWithMark setLatLng={this.setLatLng} loadPage={this.loadPage} />
                   </App>
-                </Router>
+                
               </div>
             </div>
           </div>
