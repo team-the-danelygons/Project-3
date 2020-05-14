@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./claim.css";
+import axios from 'axios';
 
 // import API from "../../../utils/API";
 
@@ -18,31 +19,31 @@ class Claim extends Component {
 
   componentDidMount() {}
 
-  resetForm(){
-    
-    this.setState({name: "", email: "", bizname:"", address: "", tin: "", message: ""})
- }
+  resetForm() {
+    this.setState({
+      name: "",
+      email: "",
+      bizname: "",
+      address: "",
+      tin: "",
+      message: "",
+    });
+  }
 
-  handleSubmit(event) {
-    event.preventDefault();
-
-    fetch("http://localhost:3002/send", {
-      method: "POST",
-      body: JSON.stringify(this.state),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+  handleSubmit(e){
+    e.preventDefault();
+    axios({
+      method: "POST", 
+      url:"http://localhost:3001/send", 
+      data:  this.state
+    }).then((response)=>{
+      if (response.data.status === 'success'){
+        alert("Message Sent."); 
+        this.resetForm()
+      }else if(response.data.status === 'fail'){
+        alert("Message failed to send.")
+      }
     })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.status === "success") {
-          alert("Message Sent.");
-          this.resetForm();
-        } else if (response.status === "fail") {
-          alert("Message failed to send.");
-        }
-      });
   }
 
   onNameChange(event) {
@@ -79,9 +80,8 @@ class Claim extends Component {
                 className="form-example"
                 action=""
                 id="form-title"
-                onSubmit={this.handleSubmit.bind(this)} 
+                onSubmit={this.handleSubmit.bind(this)}
                 method="POST"
-
               >
                 <h1>Take control of your business</h1>
                 <hr></hr>
@@ -93,25 +93,24 @@ class Claim extends Component {
                     <input
                       type="text"
                       id="name"
-                      value={this.state.name} 
+                      value={this.state.name}
                       onChange={this.onNameChange.bind(this)}
                       placeholder="Your Name"
                     ></input>
                   </div>
                   <div className="col-sm-12">
-                    <input 
-                    type="email" 
-                    value={this.state.email} 
-                    onChange={this.onEmailChange.bind(this)}
-                    id="email" 
-                    placeholder="Email"
-                    
+                    <input
+                      type="email"
+                      value={this.state.email}
+                      onChange={this.onEmailChange.bind(this)}
+                      id="email"
+                      placeholder="Email"
                     ></input>
                   </div>
                   <div className="col-sm-12">
                     <input
                       type="text"
-                      value={this.state.bizname} 
+                      value={this.state.bizname}
                       onChange={this.onBizNameChange.bind(this)}
                       id="bizname"
                       placeholder="Enter you business name"
@@ -120,7 +119,7 @@ class Claim extends Component {
                   <div className="col-sm-12">
                     <input
                       type="text"
-                      value={this.state.address} 
+                      value={this.state.address}
                       onChange={this.onAddressChange.bind(this)}
                       id="address"
                       placeholder="Enter your business address"
@@ -129,7 +128,7 @@ class Claim extends Component {
                   <div className="col-sm-12">
                     <input
                       type="text"
-                      value={this.state.tin} 
+                      value={this.state.tin}
                       onChange={this.onTinChange.bind(this)}
                       id="tin"
                       placeholder="Enter your tax identification number"
@@ -137,18 +136,18 @@ class Claim extends Component {
                   </div>
                   <div className="col-sm-12">
                     <textarea
-                     value={this.state.message} 
-                     onChange={this.onMessageChange.bind(this)}
+                      value={this.state.message}
+                      onChange={this.onMessageChange.bind(this)}
                       id="TITLE"
                       placeholder="Describe the data discrepency you'd like to flag for review..."
                       row="15"
                     ></textarea>
 
                     <button
-                      type="button"
+                      type="submit"
                       className="btn btn-md btn-block"
                       id="help-btn"
-                      onClick={this.onSubmit}
+                      // onClick={this.handleSubmit}
                     >
                       Submit for review
                     </button>

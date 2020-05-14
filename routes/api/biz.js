@@ -17,7 +17,7 @@ router
   .route("/name/:name")
   .get(bizController.findByName)
 
-  router.route("/claim")
+  router.route("/send")
   .post();
 
 

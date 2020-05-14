@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import "./home.css";
 import API from "../../../utils/API";
 import MapWithMark from "./MapWithMark";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+// import { Route, BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import NewSearch from "../../New Search/newSearch";
-var lat;
-var lng;
+// var lat;
+// var lng;
 
 class Home extends Component {
   constructor(props) {
