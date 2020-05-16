@@ -17,6 +17,7 @@ import { logoutUser } from "../../../actions/authAcations";
 class Business extends Component {
   state = {
     business: {},
+    loggedIn: this.props.auth.isAuthenticated,
     inline: 0,
     instore: 0,
     image: "",
@@ -36,7 +37,7 @@ class Business extends Component {
 
   loadPage = () => {
     API.getBiz(this.props.match.params.id)
-      .then((res) =>{
+      .then((res) => {
         this.setState({
           business: res.data,
           image:
@@ -62,7 +63,7 @@ class Business extends Component {
         // Get the grade
         let grade = Math.floor((totalThumbsUp / totalThumbs) * 100);
         console.log("The grade for this business is", grade);
-        
+
         // grading system
         if (grade >= 90 && grade <= 100) {
           console.log("The grade is an A")
@@ -75,7 +76,7 @@ class Business extends Component {
         } else {
           console.log("This business has not yet been graded.")
         }
-  })
+      })
       .catch((err) => console.log(err));
   };
 
@@ -83,64 +84,95 @@ class Business extends Component {
 
   handleMaskThumbUpClick = (event) => {
     event.preventDefault();
-    this.loadPage();
-
-    this.updateMaskThumbsUp();
+    if (this.state.loggedIn) {
+      this.loadPage();
+      this.updateMaskThumbsUp();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.")
+    }
   };
 
   handleMaskThumbDownClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateMaskThumbsDown();
+      this.updateMaskThumbsDown();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.")
+    }
   };
 
   //  Sanitizer Clicks
 
   handleSanThumbUpClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateSanThumbsUp();
+      this.updateSanThumbsUp()
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.")
+    };
   };
 
   handleSanThumbDownClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateSanThumbsDown();
+      this.updateSanThumbsDown()
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.")
+    };
   };
 
   //  Distance Clicks
 
   handleDisThumbUpClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateDisThumbsUp();
+      this.updateDisThumbsUp()
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.")
+    };
   };
 
   handleDisThumbDownClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateDisThumbsDown();
+      this.updateDisThumbsDown()
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.")
+    };
   };
 
   //  Cash Clicks
 
   handleCashThumbUpClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateCashThumbsUp();
+      this.updateCashThumbsUp()
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.")
+    };
   };
 
   handleCashThumbDownClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateCashThumbsDown();
+      this.updateCashThumbsDown()
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.")
+    };
   };
 
   //Mask db update
