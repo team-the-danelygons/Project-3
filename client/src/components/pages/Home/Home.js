@@ -5,18 +5,15 @@ import MapWithMark from "./MapWithMark";
 import App from "./App";
 import NewSearch from "../../New Search/newSearch";
 
-
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       business: [],
       lat: 0,
-      lng: 0
+      lng: 0,
     };
   }
-
-
 
   componentDidMount() {
     this.loadPage();
@@ -32,12 +29,11 @@ class Home extends Component {
         this.setState({ business: res.data });
       })
       .catch((err) => console.log(err));
-
   };
-  
-  setLatLng = (lat,lng) => {
-    this.setState({lat,lng})
-  }
+
+  setLatLng = (lat, lng) => {
+    this.setState({ lat, lng });
+  };
 
   render() {
     return (
@@ -53,24 +49,82 @@ class Home extends Component {
             </div>
           </div>
 
-          <NewSearch loadBiz={this.props.loadBiz} updateSearchQuery={this.props.updateSearchQuery} handleInputChange={this.props.handleInputChange} />
+          <NewSearch
+            loadBiz={this.props.loadBiz}
+            updateSearchQuery={this.props.updateSearchQuery}
+            handleInputChange={this.props.handleInputChange}
+          />
 
-          {/* Jumbotron */}
-          <div className="jumbotron" id="jumbohome">
-            <div className="row">
-              <div className="col-lg-1"></div>
-              <div className="col-lg-3 text-left" id="jumbo-box">
-                <h3>Own a business? Take control today </h3>
-                <h6>Flag inaccuraces and make sure your business data is accurate and up-to-date</h6>
-                <a href="/claim"><button className="btn" id="biz-btn">Claim Business</button></a>
-              </div>
-              <div className="col-lg-8"></div>
-            </div>
+           {/* Map API Holder */}
+
+           <div id="list-title">
+            <h3>Explore stores in your area</h3>
+            <hr></hr>
           </div>
 
-          {/* Rated Card Section */}
+           <div className ="row">
+             <div className = "col-lg-6">
 
-          <div id="pop-title">
+         
+
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12 hoverable " id="maps-holder">
+                <App>
+                  <MapWithMark
+                    setLatLng={this.setLatLng}
+                    loadPage={this.loadPage}
+                  />
+                </App>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          {/* Map List Holder */}
+          <div className = "col-lg-6">
+
+          <div id="list-box" className="hoverable">
+            {this.state.business.map((business) => (
+              <div className="card" id="list" key={business._id}>
+                <h5 className="card-header">{business.bizname}</h5>
+
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-lg-3">
+                      <img
+                        className="card-img-top img-fluid"
+                        src={
+                          business.image && business.image.length
+                            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
+                            : "https://i.ibb.co/LJT0XW5/placeholder-001.jpg"
+                        }
+                        alt="safestance-cards"
+                        id="list-image"
+                      ></img>
+                    </div>
+
+                    <div className="col-lg-9">
+                      <h5 className="card-title">
+                        Current Customers In-Store: {business.instore}
+                      </h5>
+                      <p className="card-text">{business.address}</p>
+                      <a href={`/business/${business._id}`} className="btn ">
+                        Check it out
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          </div>
+
+          </div>
+
+           {/* Rated Card Section */}
+
+           <div id="pop-title">
             <h3>Highest Safestance Rated Locations</h3>
             <hr></hr>
           </div>
@@ -109,61 +163,31 @@ class Home extends Component {
               ))}
             </div>
           </div>
-          {/* Map API Holder */}
+          
 
-          <div id="list-title">
-            <h3>Explore stores in your area</h3>
-            <hr></hr>
-          </div>
-
-          <div className="container">
+          {/* Jumbotron */}
+          <div className="jumbotron" id="jumbohome">
             <div className="row">
-              <div className="col-lg-12 hoverable " id="maps-holder">
-                
-                  <App>
-                    <MapWithMark setLatLng={this.setLatLng} loadPage={this.loadPage} />
-                  </App>
-                
+              <div className="col-lg-1"></div>
+              <div className="col-lg-3 text-left" id="jumbo-box">
+                <h3>Own a business? Take control today </h3>
+                <h6>
+                  Flag inaccuraces and make sure your business data is accurate
+                  and up-to-date
+                </h6>
+                <a href="/claim">
+                  <button className="btn" id="biz-btn">
+                    Claim Business
+                  </button>
+                </a>
               </div>
+              <div className="col-lg-8"></div>
             </div>
           </div>
 
-          {/* Map List Holder */}
+         
 
-          <div id="list-box" className="hoverable">
-            {this.state.business.map((business) => (
-              <div className="card" id="list" key={business._id}>
-                <h5 className="card-header">{business.bizname}</h5>
-
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-lg-3">
-                      <img
-                        className="card-img-top img-fluid"
-                        src={
-                          business.image && business.image.length
-                            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
-                            : "https://i.ibb.co/LJT0XW5/placeholder-001.jpg"
-                        }
-                        alt="safestance-cards"
-                        id="list-image"
-                      ></img>
-                    </div>
-
-                    <div className="col-lg-9">
-                      <h5 className="card-title">
-                        Current Customers In-Store: {business.instore}
-                      </h5>
-                      <p className="card-text">{business.address}</p>
-                      <a href={`/business/${business._id}`} className="btn ">
-                        Check it out
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          
         </div>
       </>
     );
