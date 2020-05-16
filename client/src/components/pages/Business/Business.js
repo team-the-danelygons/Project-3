@@ -638,7 +638,7 @@ class Business extends Component {
                   <div className="row">
                     <div className="col-lg-12" id="btn-claim">
                       <div className="text-center">
-                        <a href="/owner">
+                        <a href="/claim">
                           <button className="btn  btn-lg btn-block">
                             Claim Business
                           </button>
