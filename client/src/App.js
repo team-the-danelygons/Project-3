@@ -12,12 +12,12 @@ import NavBar from "./components/NavBar/NavBar"
 import Footer from "./components/Footer/Footer";
 import Home from "./components/pages/Home/Home";
 import Business from "./components/pages/Business/Business";
-import Claim from "./components/pages/Claim/Claim";
+// import Claim from "./components/pages/Claim/Claim";
 import Signup from "./components/pages/Signup/Signup";
 import Login from "./components/pages/Login/Login";
 import Results from "./components/pages/Results/Results";
 import API from "./utils/API";
-import { userAgent } from "@googlemaps/google-maps-services-js";
+
 // import PrivateRoute from "./components/private-route/PrivateRoutes"
 // This comment is so I can push up the changes.
 
@@ -111,7 +111,7 @@ class App extends Component {
             </Route>
             
             <Route exact path="/business/:id" component={Business} />
-            <Route path="/claim" component={Claim} />
+            {/* <Route path="/claim" component={Claim} /> */}
             <Route path="/results">
               <Results searchQuery={this.state.query} updateSearchQuery = {this.updateSearchQuery}  results={this.state.results} loadBiz={this.loadBiz} />
             </Route>

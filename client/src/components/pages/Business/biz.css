@@ -159,3 +159,19 @@ cursor: pointer !important;
 #map {
     border-radius: 5px;
 }
+
+input {
+    width: 100%
+    }
+    
+    textarea {
+        width: 100%;
+        border: 1px solid lightgray
+    }
+    
+    #form-title {
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px gray;
+        margin-top: 10px !important;
+    }   

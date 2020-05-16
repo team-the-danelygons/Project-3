@@ -11,13 +11,12 @@ import API from "../../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../actions/authAcations";
-import axios from 'axios';
+import axios from "axios";
 
 // Class Components
 
 class Business extends Component {
-  
-constructor() {
+  constructor() {
     super();
     this.state = {
       name: "",
@@ -32,6 +31,7 @@ constructor() {
       image: "",
       btnColor: "greenyellow",
       checktext: "+ CHECK-IN",
+     
     };
   }
 
@@ -42,6 +42,10 @@ constructor() {
     console.log(user);
     this.loadPage();
     // this.props.updateOwnerID(user.id)
+  }
+
+  handleCloseModal () {
+    this.setState({ showModal: false });
   }
 
   resetForm() {
@@ -55,20 +59,22 @@ constructor() {
     });
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault();
     axios({
-      method: "POST", 
-      url:"/send", 
-      data:  this.state
-    }).then((response)=>{
-      if (response.data.status === 'success'){
-        alert("Message Sent."); 
-        this.resetForm()
-      }else if(response.data.status === 'fail'){
-        alert("Message failed to send.")
+      method: "POST",
+      url: "/send",
+      data: this.state
+    }).then((response) => {
+      if (response.data.status === "success") {
+        this.updateBizValidation();
+        alert("Message Sent.");
+     
+        this.resetForm();
+      } else if (response.data.status === "fail") {
+        alert("Message failed to send.");
       }
-    })
+    });
   }
 
   onNameChange(event) {
@@ -94,7 +100,6 @@ constructor() {
   onMessageChange(event) {
     this.setState({ message: event.target.value });
   }
-
 
   // Load Page data
 
@@ -156,7 +161,7 @@ constructor() {
       this.loadPage();
       this.updateMaskThumbsUp();
     } else {
-      alert("You must be logged in order to use the thumbs up or down button.")
+      alert("You must be logged in order to use the thumbs up or down button.");
     }
   };
 
@@ -167,7 +172,7 @@ constructor() {
 
       this.updateMaskThumbsDown();
     } else {
-      alert("You must be logged in order to use the thumbs up or down button.")
+      alert("You must be logged in order to use the thumbs up or down button.");
     }
   };
 
@@ -178,10 +183,10 @@ constructor() {
     if (this.state.loggedIn) {
       this.loadPage();
 
-      this.updateSanThumbsUp()
+      this.updateSanThumbsUp();
     } else {
-      alert("You must be logged in order to use the thumbs up or down button.")
-    };
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   handleSanThumbDownClick = (event) => {
@@ -189,10 +194,10 @@ constructor() {
     if (this.state.loggedIn) {
       this.loadPage();
 
-      this.updateSanThumbsDown()
+      this.updateSanThumbsDown();
     } else {
-      alert("You must be logged in order to use the thumbs up or down button.")
-    };
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   //  Distance Clicks
@@ -202,10 +207,10 @@ constructor() {
     if (this.state.loggedIn) {
       this.loadPage();
 
-      this.updateDisThumbsUp()
+      this.updateDisThumbsUp();
     } else {
-      alert("You must be logged in order to use the thumbs up or down button.")
-    };
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   handleDisThumbDownClick = (event) => {
@@ -213,10 +218,10 @@ constructor() {
     if (this.state.loggedIn) {
       this.loadPage();
 
-      this.updateDisThumbsDown()
+      this.updateDisThumbsDown();
     } else {
-      alert("You must be logged in order to use the thumbs up or down button.")
-    };
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   //  Cash Clicks
@@ -226,10 +231,10 @@ constructor() {
     if (this.state.loggedIn) {
       this.loadPage();
 
-      this.updateCashThumbsUp()
+      this.updateCashThumbsUp();
     } else {
-      alert("You must be logged in order to use the thumbs up or down button.")
-    };
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   handleCashThumbDownClick = (event) => {
@@ -237,10 +242,10 @@ constructor() {
     if (this.state.loggedIn) {
       this.loadPage();
 
-      this.updateCashThumbsDown()
+      this.updateCashThumbsDown();
     } else {
-      alert("You must be logged in order to use the thumbs up or down button.")
-    };
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   //Mask db update
@@ -410,6 +415,20 @@ constructor() {
   };
 
   // Create check-in click variable
+
+  updateBizValidation = () => {
+    let bizClaim = {
+      bizverified: true,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, bizClaim).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
 
   updateLine = () => {
     let checkinline = {
@@ -785,34 +804,38 @@ constructor() {
                     </div>
                   </div>
 
+
+                  {/* Claim Form Modal */}
+
                   <div
-                    class="modal fade"
+                    className="modal fade"
                     id="formModal"
-                    tabindex="-1"
+                    tabIndex="-1"
                     role="dialog"
                     aria-labelledby="exampleModalCenterTitle"
                     aria-hidden="true"
                   >
                     <div
-                      class="modal-dialog modal-dialog-centered"
+                      className="modal-dialog modal-dialog-centered"
                       role="document"
                     >
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h3 class="modal-title" id="exampleModalLongTitle">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h3 className="modal-title" id="exampleModalLongTitle">
                             Take control of your business
-                          </h3><br></br>
-                         
+                          </h3>
+                          <br></br>
+
                           <button
                             type="button"
-                            class="close"
+                            className="close"
                             data-dismiss="modal"
                             aria-label="Close"
                           >
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                           <form
                             className="form-example"
                             action=""
@@ -820,8 +843,6 @@ constructor() {
                             onSubmit={this.handleSubmit.bind(this)}
                             method="POST"
                           >
-                           
-                           
                             <div className="form-group row" id="signup-form">
                               <div className="col-sm-12">
                                 <input
@@ -880,11 +901,13 @@ constructor() {
                             </div>
                           </form>
                         </div>
-                        <div class="modal-footer">
+                        <div className="modal-footer">
                           <button
                             type="submit"
                             className="btn btn-md btn-block"
                             id="help-btn"
+                            form="form-title"
+                         
                             //  onClick={this.handleSubmit}
                           >
                             Submit for review
