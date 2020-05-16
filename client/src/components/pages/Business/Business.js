@@ -31,7 +31,7 @@ class Business extends Component {
 
   loadPage = () => {
     API.getBiz(this.props.match.params.id)
-      .then((res) =>
+      .then((res) =>{
         this.setState({
           business: res.data,
           image:
@@ -39,7 +39,38 @@ class Business extends Component {
               ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.data.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
               : "https://i.ibb.co/6HygT0r/jumbohome.jpg",
         })
-      )
+
+        // Getting the total number of thumbs
+        let thumbs = res.data;
+        console.log(thumbs)
+        let totalMaskThumbs = thumbs.maskthumbsup + thumbs.maskthumbsdown;
+        let totalSanThumbs = thumbs.santhumbsup + thumbs.santhumbsdown;
+        let totalDisThumbs = thumbs.disthumbsup + thumbs.disthumbsdown;
+        let totalCashThumbs = thumbs.cashthumbsup + thumbs.cashthumbsdown;
+        let totalThumbs = totalMaskThumbs + totalSanThumbs + totalDisThumbs + totalCashThumbs;
+        console.log("The total number of thumbs is", totalThumbs);
+
+        // Get the total number of thumbs up
+        let totalThumbsUp = thumbs.maskthumbsup + thumbs.santhumbsup + thumbs.disthumbsup + thumbs.cashthumbsup;
+        console.log("The total number of thumbs up is", totalThumbsUp);
+
+        // Get the grade
+        let grade = Math.floor((totalThumbsUp / totalThumbs) * 100);
+        console.log("The grade for this business is", grade);
+        
+        // grading system
+        if (grade >= 90 && grade <= 100) {
+          console.log("The grade is an A")
+        } else if (grade >= 80 && grade <= 89) {
+          console.log("The grade is a B")
+        } else if (grade >= 70 && grade <= 79) {
+          console.log("The grade is C")
+        } else if (grade >= 60 && grade <= 69) {
+          console.log("The grade is a D")
+        } else {
+          console.log("This business has not yet been graded.")
+        }
+  })
       .catch((err) => console.log(err));
   };
 
