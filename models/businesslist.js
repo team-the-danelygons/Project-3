@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const businessSchema = new Schema({
+  bizownerID: {type: String, required: false},
   bizname: { type: String, required: true },
   email: { type: String, required: false },
   address: { type: String, required: true },
@@ -25,6 +26,7 @@ const businessSchema = new Schema({
   storeclose: { type: Number, required: true, default: 9 },
   creationdate: { type: Date, default: Date.now },
   saferating: { type: String, required: false },
+  bizverified: { type: Boolean, required: true, default: false },
 });
 
 const Business = mongoose.model("Business", businessSchema);

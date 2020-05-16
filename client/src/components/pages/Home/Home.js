@@ -23,12 +23,15 @@ class Home extends Component {
   // Load Page data
 
   loadPage = () => {
+
+    if (this.state.lat && this.state.lng) {
     API.getPlaces(this.state.lat, this.state.lng)
       .then((res) => {
         console.log("RESPONSE", res.data);
         this.setState({ business: res.data });
       })
       .catch((err) => console.log(err));
+    }
   };
 
   setLatLng = (lat, lng) => {
