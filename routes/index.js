@@ -9,10 +9,7 @@ const creds = require('./config');
 router.use("/api", apiRoutes);
 
 
-// If no API routes are hit, send the React app
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+
 
 var transport = {
   host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
@@ -61,5 +58,10 @@ transporter.sendMail(mail, (err, data) => {
   }
 })
 })
+
+// If no API routes are hit, send the React app
+router.use(function(req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 module.exports = router;
