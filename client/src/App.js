@@ -57,9 +57,12 @@ class App extends Component {
 
   loadBiz = () => {
     
+    if (this.state.query) {
       API.getBizSearch(this.state.query)
+    
         .then((res) => this.setState({ results: res.data }))
         .catch((err) => console.log(err));
+    }
     
   };
 

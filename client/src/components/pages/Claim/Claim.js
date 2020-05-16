@@ -34,7 +34,7 @@ class Claim extends Component {
     e.preventDefault();
     axios({
       method: "POST", 
-      url:"http://localhost:3001/send", 
+      url:"/send", 
       data:  this.state
     }).then((response)=>{
       if (response.data.status === 'success'){
