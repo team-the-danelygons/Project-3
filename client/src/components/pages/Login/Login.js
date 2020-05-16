@@ -1,25 +1,27 @@
 import React, { Component } from "react";
+import {Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../../../actions/authAcations";
+// import { loginUser } from "../../../actions/authAcations";
 import classnames from "classnames"; 
 import "./login.css";
 // import API from "../../../utils/API";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
+      redirect: false
     };
   }
 
   componentDidMount() {
     // If logged in and user nagivates to Login page, should redirect them to home
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.setState({redirect: true});
     }
   }
 
@@ -41,6 +43,7 @@ class Login extends Component {
 
   onSubmit = event => {
     event.preventDefault()
+    console.log("Trying to login")
     const userData = {
       email: this.state.email,
       password: this.state.password
@@ -49,6 +52,13 @@ class Login extends Component {
   }
 
   render() {
+
+    if (this.props.redirect || this.state.redirect){
+      this.setState({redirect:false});
+      this.props.resetRedirect();
+      return <Redirect to="/" />
+    }
+    
     const { errors } = this.state;
 
     return (
@@ -118,6 +128,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-  mapStateToProps,
-  { loginUser }
+  mapStateToProps
+  // { loginUser }
 )(Login);

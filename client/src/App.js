@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import axios from "axios";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authAcations";
@@ -17,6 +18,11 @@ import Signup from "./components/pages/Signup/Signup";
 import Login from "./components/pages/Login/Login";
 import Results from "./components/pages/Results/Results";
 import API from "./utils/API";
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  USER_LOADING
+} from "./actions/types"
 // import PrivateRoute from "./components/private-route/PrivateRoutes"
 // This comment is so I can push up the changes.
 
@@ -45,6 +51,8 @@ class App extends Component {
   state = {
     query: "",
     results: [],
+    redirect: false,
+    userId: null
   }
 
   updateSearchQuery = (value) => {
@@ -66,6 +74,30 @@ class App extends Component {
     
   };
 
+  loginUser = userData => {
+    console.log("sending login", userData);
+    axios
+        .post("/api/users/login", userData)
+        .then(res => {
+            // Set token to localStorage
+            const { token } = res.data;
+            localStorage.setItem("jwtToken", token);
+            // Set token to Auth header
+            setAuthToken(token);
+            // Decode token to get user data
+            const decoded = jwt_decode(token);
+            // Set current user
+            // dispatch(setCurrentUser(decoded))
+            this.setState({redirect: true, userId: "SET"});
+        })
+        .catch(//err => 
+            //dispatch({
+            //    type: GET_ERRORS,
+            //    payload: err.response.data
+            //})    
+        );
+}
+
   // handleInputChange = () => {
   //   this.setState(
   //     {
@@ -85,7 +117,9 @@ class App extends Component {
   //     }
   //   );
   // };
-
+  resetRedirect = () => {
+    this.setState({redirect: false});
+  }
 
   render() {
     return (
@@ -105,7 +139,9 @@ class App extends Component {
             </Route>
             
             <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" >
+              <Login loginUser={this.loginUser} redirect={this.state.redirect} resetRedirect={this.resetRedirect} />
+            </Route>
             <Footer />
 
            
