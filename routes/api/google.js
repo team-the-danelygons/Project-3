@@ -125,7 +125,7 @@ router.get("/:lat/:lng", (req, res) => {
 
 
   syncPlacesWithDb = (places) => {
-    console.log("PLacesIDs:", places.map(place => place.id))
+   // console.log("PLacesIDs:", places.map(place => place.id))
     let dbPromises = places.map(place => {
 
       // check to see if place exists in DB
