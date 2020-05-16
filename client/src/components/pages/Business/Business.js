@@ -8,6 +8,9 @@ import like from "../../../assets/images/like.png";
 import dislike from "../../../assets/images/dislike.png";
 // import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../../actions/authAcations";
 
 // Class Components
 
@@ -24,6 +27,8 @@ class Business extends Component {
   // Mount
 
   componentDidMount() {
+    const { user } = this.props.auth
+    console.log(user)
     this.loadPage();
   }
 
@@ -39,7 +44,7 @@ class Business extends Component {
               ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.data.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
               : "https://i.ibb.co/6HygT0r/jumbohome.jpg",
         })
-
+        console.log(this.state.loggedIn)
         // Getting the total number of thumbs
         let thumbs = res.data;
         console.log(thumbs)
@@ -687,4 +692,16 @@ class Business extends Component {
   }
 }
 
-export default Business;
+Business.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Business);
