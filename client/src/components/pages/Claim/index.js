@@ -1,1 +1,1 @@
-export { default } from "./OwnerDemo";
+export { default } from "./Claim";
