@@ -80,50 +80,78 @@ router.get("/:lat/:lng", (req, res) => {
                       },
                       timeout: 1000, // milliseconds
                     })
-                .then((resultFive) => {
-                  console.log("Five")
-                  places = places.concat(resultFive.data.results);
+                    .then((resultFive) => {
+                      console.log("Four")
+                      places = places.concat(resultFive.data.results);
+                      client
+                        .placesNearby({
+                          params: {
+                            location: { lat: lat, lng: lng },
+                            radius: 4000,
+                            type: "restaurant",
+                            key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+                          },
+                          timeout: 1000, // milliseconds
+                        })
+                        .then((resultSix) => {
+                          console.log("Four")
+                          places = places.concat(resultSix.data.results);
+                          client
+                            .placesNearby({
+                              params: {
+                                location: { lat: lat, lng: lng },
+                                radius: 4000,
+                                type: "clothing_store",
+                                key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+                              },
+                              timeout: 1000, // milliseconds
+                            })
+                        .then((resultSeven) => {
+                          console.log("Five")
+                          places = places.concat(resultSeven.data.results);
 
-                  syncPlacesWithDb(places)
+                          syncPlacesWithDb(places)
+                        })
+                    })
                 })
-              })
             })
           })
-              })
-                .catch(err => {
-                  console.error(err)
-                  res.status(422).json(err)
-                });
+        })
+    })
+    .catch(err => {
+      console.error(err)
+      res.status(422).json(err)
+    });
 
 
-              syncPlacesWithDb = (places) => {
-                console.log("PLacesIDs:", places.map(place => place.id))
-                let dbPromises = places.map(place => {
+  syncPlacesWithDb = (places) => {
+   // console.log("PLacesIDs:", places.map(place => place.id))
+    let dbPromises = places.map(place => {
 
-                  // check to see if place exists in DB
-                  return db.Business.findOne({ bizname: place.name, address: place.vicinity })
-                    .then(async result => {
-                      if (result) {
-                        result.geometry = place.geometry;
-                        return result
-                      }
-                      return await db.Business.create({
-                        bizname: place.name,
-                        address: place.vicinity,
-                        image: place.photos,
-                        geometry: place.geometry,
-                        types: place.types,
-                        rating: place.rating,
-                        opening_hours: place.opening_hours
-                      })
-                      // dbModel.geometry = 
-                    })
-                    .catch(error => console.error(error));
-                })
+      // check to see if place exists in DB
+      return db.Business.findOne({ bizname: place.name, address: place.vicinity })
+        .then(async result => {
+          if (result) {
+            result.geometry = place.geometry;
+            return result
+          }
+          return await db.Business.create({
+            bizname: place.name,
+            address: place.vicinity,
+            image: place.photos,
+            geometry: place.geometry,
+            types: place.types,
+            rating: place.rating,
+            opening_hours: place.opening_hours
+          })
+          // dbModel.geometry = 
+        })
+        .catch(error => console.error(error));
+    })
 
-                Promise.all(dbPromises).then(dbModels => res.json(dbModels))
-                //return res.json("Okay so far")
-              }
-            })
+    Promise.all(dbPromises).then(dbModels => res.json(dbModels))
+    //return res.json("Okay so far")
+  }
+})
 
-          module.exports = router;
+module.exports = router;

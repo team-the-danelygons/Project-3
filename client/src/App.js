@@ -18,11 +18,7 @@ import Signup from "./components/pages/Signup/Signup";
 import Login from "./components/pages/Login/Login";
 import Results from "./components/pages/Results/Results";
 import API from "./utils/API";
-import {
-  GET_ERRORS,
-  SET_CURRENT_USER,
-  USER_LOADING
-} from "./actions/types"
+import { userAgent } from "@googlemaps/google-maps-services-js";
 // import PrivateRoute from "./components/private-route/PrivateRoutes"
 // This comment is so I can push up the changes.
 
@@ -51,16 +47,25 @@ class App extends Component {
   state = {
     query: "",
     results: [],
-    redirect: false,
-    userId: null
+    ownerID: "",
+    bizID: "",
   }
 
   updateSearchQuery = (value) => {
     this.setState({query: value})
   }
 
+  updateOwnerID = (value) => {
+    this.setState({ownerID: value})
+  }
+
+  updateBizID = (value) => {
+    this.setState({bizID: value})
+  }
+
   componentDidMount() {
     this.loadBiz();
+    // this.setState({ownerID: user.id})
   }
 
   loadBiz = () => {

@@ -11,27 +11,90 @@ import API from "../../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../actions/authAcations";
+import axios from 'axios';
 
 // Class Components
 
 class Business extends Component {
-  state = {
-    business: {},
-    loggedIn: this.props.auth.isAuthenticated,
-    inline: 0,
-    instore: 0,
-    image: "",
-    btnColor: "greenyellow",
-    checktext: "+ CHECK-IN",
-  };
+  
+constructor() {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      bizname: "",
+      address: "",
+      tin: "",
+      message: "",
+      business: {},
+      inline: 0,
+      instore: 0,
+      image: "",
+      btnColor: "greenyellow",
+      checktext: "+ CHECK-IN",
+    };
+  }
 
   // Mount
 
   componentDidMount() {
-    const { user } = this.props.auth
-    console.log(user)
+    const { user } = this.props.auth;
+    console.log(user);
     this.loadPage();
+    // this.props.updateOwnerID(user.id)
   }
+
+  resetForm() {
+    this.setState({
+      name: "",
+      email: "",
+      bizname: "",
+      address: "",
+      tin: "",
+      message: "",
+    });
+  }
+
+  handleSubmit(e){
+    e.preventDefault();
+    axios({
+      method: "POST", 
+      url:"/send", 
+      data:  this.state
+    }).then((response)=>{
+      if (response.data.status === 'success'){
+        alert("Message Sent."); 
+        this.resetForm()
+      }else if(response.data.status === 'fail'){
+        alert("Message failed to send.")
+      }
+    })
+  }
+
+  onNameChange(event) {
+    this.setState({ name: event.target.value });
+  }
+
+  onEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  onBizNameChange(event) {
+    this.setState({ bizname: event.target.value });
+  }
+
+  onAddressChange(event) {
+    this.setState({ address: event.target.value });
+  }
+
+  onTinChange(event) {
+    this.setState({ tin: event.target.value });
+  }
+
+  onMessageChange(event) {
+    this.setState({ message: event.target.value });
+  }
+
 
   // Load Page data
 
@@ -44,20 +107,25 @@ class Business extends Component {
             res.data.image && res.data.image.length
               ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.data.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
               : "https://i.ibb.co/6HygT0r/jumbohome.jpg",
-        })
-        console.log(this.state.loggedIn)
+        });
+        console.log(this.state.loggedIn);
         // Getting the total number of thumbs
         let thumbs = res.data;
-        console.log(thumbs)
+        console.log(thumbs);
         let totalMaskThumbs = thumbs.maskthumbsup + thumbs.maskthumbsdown;
         let totalSanThumbs = thumbs.santhumbsup + thumbs.santhumbsdown;
         let totalDisThumbs = thumbs.disthumbsup + thumbs.disthumbsdown;
         let totalCashThumbs = thumbs.cashthumbsup + thumbs.cashthumbsdown;
-        let totalThumbs = totalMaskThumbs + totalSanThumbs + totalDisThumbs + totalCashThumbs;
+        let totalThumbs =
+          totalMaskThumbs + totalSanThumbs + totalDisThumbs + totalCashThumbs;
         console.log("The total number of thumbs is", totalThumbs);
 
         // Get the total number of thumbs up
-        let totalThumbsUp = thumbs.maskthumbsup + thumbs.santhumbsup + thumbs.disthumbsup + thumbs.cashthumbsup;
+        let totalThumbsUp =
+          thumbs.maskthumbsup +
+          thumbs.santhumbsup +
+          thumbs.disthumbsup +
+          thumbs.cashthumbsup;
         console.log("The total number of thumbs up is", totalThumbsUp);
 
         // Get the grade
@@ -66,15 +134,15 @@ class Business extends Component {
 
         // grading system
         if (grade >= 90 && grade <= 100) {
-          console.log("The grade is an A")
+          console.log("The grade is an A");
         } else if (grade >= 80 && grade <= 89) {
-          console.log("The grade is a B")
+          console.log("The grade is a B");
         } else if (grade >= 70 && grade <= 79) {
-          console.log("The grade is C")
+          console.log("The grade is C");
         } else if (grade >= 60 && grade <= 69) {
-          console.log("The grade is a D")
+          console.log("The grade is a D");
         } else {
-          console.log("This business has not yet been graded.")
+          console.log("This business has not yet been graded.");
         }
       })
       .catch((err) => console.log(err));
@@ -706,11 +774,122 @@ class Business extends Component {
                   <div className="row">
                     <div className="col-lg-12" id="btn-claim">
                       <div className="text-center">
-                        <a href="/claim">
-                          <button className="btn  btn-lg btn-block">
-                            Claim Business
+                        <button
+                          className="btn  btn-lg btn-block"
+                          data-toggle="modal"
+                          data-target="#formModal"
+                        >
+                          Claim Business
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="modal fade"
+                    id="formModal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="exampleModalLongTitle">
+                            Take control of your business
+                          </h3><br></br>
+                         
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
                           </button>
-                        </a>
+                        </div>
+                        <div class="modal-body">
+                          <form
+                            className="form-example"
+                            action=""
+                            id="form-title"
+                            onSubmit={this.handleSubmit.bind(this)}
+                            method="POST"
+                          >
+                           
+                           
+                            <div className="form-group row" id="signup-form">
+                              <div className="col-sm-12">
+                                <input
+                                  type="text"
+                                  id="name"
+                                  value={this.state.name}
+                                  onChange={this.onNameChange.bind(this)}
+                                  placeholder="Your Name"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <input
+                                  type="email"
+                                  value={this.state.email}
+                                  onChange={this.onEmailChange.bind(this)}
+                                  id="email"
+                                  placeholder="Email"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <input
+                                  type="text"
+                                  value={this.state.bizname}
+                                  onChange={this.onBizNameChange.bind(this)}
+                                  id="bizname"
+                                  placeholder="Enter you business name"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <input
+                                  type="text"
+                                  value={this.state.address}
+                                  onChange={this.onAddressChange.bind(this)}
+                                  id="address"
+                                  placeholder="Enter your business address"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <input
+                                  type="text"
+                                  value={this.state.tin}
+                                  onChange={this.onTinChange.bind(this)}
+                                  id="tin"
+                                  placeholder="Enter your tax identification number"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <textarea
+                                  value={this.state.message}
+                                  onChange={this.onMessageChange.bind(this)}
+                                  id="TITLE"
+                                  placeholder="Describe the data discrepency you'd like to flag for review..."
+                                  row="15"
+                                ></textarea>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="submit"
+                            className="btn btn-md btn-block"
+                            id="help-btn"
+                            //  onClick={this.handleSubmit}
+                          >
+                            Submit for review
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -726,14 +905,11 @@ class Business extends Component {
 
 Business.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-}
+  auth: PropTypes.object.isRequired,
+};
 
-const mapStateToProps = state => ({
-  auth: state.auth
-})
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Business);
+export default connect(mapStateToProps, { logoutUser })(Business);
