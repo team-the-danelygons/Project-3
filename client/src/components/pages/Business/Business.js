@@ -33,6 +33,7 @@ class Business extends Component {
       image: "",
       btnColor: "greenyellow",
       checktext: "+ CHECK-IN",
+      loggedin: false,
     };
   }
 
@@ -43,6 +44,9 @@ class Business extends Component {
     console.log(user);
     console.log("The userID is", user.id);
     this.loadPage();
+    if (user.id) {
+      this.setState({loggedin: true})
+    }
     // this.props.updateOwnerID(user.id)
   }
 
@@ -159,7 +163,7 @@ class Business extends Component {
 
   handleMaskThumbUpClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
       this.updateMaskThumbsUp();
     } else {
@@ -169,7 +173,7 @@ class Business extends Component {
 
   handleMaskThumbDownClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateMaskThumbsDown();
@@ -182,7 +186,7 @@ class Business extends Component {
 
   handleSanThumbUpClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateSanThumbsUp();
@@ -193,7 +197,7 @@ class Business extends Component {
 
   handleSanThumbDownClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateSanThumbsDown();
@@ -206,7 +210,7 @@ class Business extends Component {
 
   handleDisThumbUpClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateDisThumbsUp();
@@ -217,7 +221,7 @@ class Business extends Component {
 
   handleDisThumbDownClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateDisThumbsDown();
@@ -230,7 +234,7 @@ class Business extends Component {
 
   handleCashThumbUpClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateCashThumbsUp();
@@ -241,7 +245,7 @@ class Business extends Component {
 
   handleCashThumbDownClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateCashThumbsDown();
