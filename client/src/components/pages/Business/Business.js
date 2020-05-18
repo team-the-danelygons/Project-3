@@ -40,7 +40,7 @@ class Business extends Component {
   componentDidMount() {
     const { user } = this.props.auth;
     console.log(user);
-    console.log(this.props.userID);
+    console.log("The userID is", user.id);
     this.loadPage();
     // this.props.updateOwnerID(user.id)
   }

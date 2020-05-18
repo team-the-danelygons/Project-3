@@ -139,9 +139,7 @@ class App extends Component {
               <Home loadBiz = {this.loadBiz} updateSearchQuery = {this.updateSearchQuery} handleInputChange={this.props.handleInputChange}/>
             </Route>
             
-            <Route exact path="/business/:id">
-              <Business userID={this.state.userID}/>
-            </Route>
+            <Route exact path="/business/:id" component={Business}/>
             {/* <Route path="/claim" component={Claim} /> */}
             <Route path="/results">
               <Results searchQuery={this.state.query} updateSearchQuery = {this.updateSearchQuery}  results={this.state.results} loadBiz={this.loadBiz} />
