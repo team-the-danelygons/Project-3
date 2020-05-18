@@ -49,6 +49,7 @@ class App extends Component {
     results: [],
     ownerID: "",
     bizID: "",
+    userID: ""
   }
 
   updateSearchQuery = (value) => {
@@ -84,6 +85,7 @@ class App extends Component {
     axios
         .post("/api/users/login", userData)
         .then(res => {
+            console.log("The user information:", res.data);
             // Set token to localStorage
             const { token } = res.data;
             localStorage.setItem("jwtToken", token);
@@ -93,7 +95,7 @@ class App extends Component {
             const decoded = jwt_decode(token);
             // Set current user
             // dispatch(setCurrentUser(decoded))
-            this.setState({redirect: true, userId: "SET"});
+            this.setState({redirect: true, userId: res.data.id});
         })
         .catch(//err => 
             //dispatch({
@@ -137,7 +139,9 @@ class App extends Component {
               <Home loadBiz = {this.loadBiz} updateSearchQuery = {this.updateSearchQuery} handleInputChange={this.props.handleInputChange}/>
             </Route>
             
-            <Route exact path="/business/:id" component={Business} />
+            <Route exact path="/business/:id">
+              <Business userID={this.state.userID}/>
+            </Route>
             {/* <Route path="/claim" component={Claim} /> */}
             <Route path="/results">
               <Results searchQuery={this.state.query} updateSearchQuery = {this.updateSearchQuery}  results={this.state.results} loadBiz={this.loadBiz} />
