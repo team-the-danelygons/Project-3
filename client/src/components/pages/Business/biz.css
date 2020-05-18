@@ -11,6 +11,7 @@ body {
     height: 400px;
     margin-bottom: 0px !important;
     box-shadow: 2px 2px 2px gray;
+    padding-top: 30px !important;
 }
 
 
@@ -175,3 +176,23 @@ input {
         box-shadow: 2px 2px 2px gray;
         margin-top: 10px !important;
     }   
+
+    #biz-view {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: lightgray;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px gray;
+        padding: 3px 3px 3px 10px
+    }
+
+
+    #owner-title {
+        margin-left: 2px !important;
+        margin-right: 2px !important;
+
+    }
+
+    #star {
+        float: right !important
+    }

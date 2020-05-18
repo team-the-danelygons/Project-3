@@ -6,8 +6,10 @@ import distance from "../../../assets/images/distance.png";
 import cash from "../../../assets/images/cash.png";
 import like from "../../../assets/images/like.png";
 import dislike from "../../../assets/images/dislike.png";
-import owner from "../../../assets/images/claimed.png";
-import claimed from "../../../assets/images/owned.png"
+import gold from "../../../assets/images/gold.png";
+import silver from "../../../assets/images/silver.png";
+import bronze from "../../../assets/images/bronze.png";
+import claimed from "../../../assets/images/owned.png";
 // import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
 import PropTypes from "prop-types";
@@ -45,7 +47,7 @@ class Business extends Component {
     console.log("The userID is", user.id);
     this.loadPage();
     if (user.id) {
-      this.setState({loggedin: true})
+      this.setState({ loggedin: true });
     }
     // this.props.updateOwnerID(user.id)
   }
@@ -145,10 +147,13 @@ class Business extends Component {
 
         // grading system
         if (grade >= 90 && grade <= 100) {
+          this.updateGoldRating();
           console.log("The grade is an A");
         } else if (grade >= 80 && grade <= 89) {
+          this.updateSilverRating();
           console.log("The grade is a B");
         } else if (grade >= 70 && grade <= 79) {
+          this.updateBronzeRating();
           console.log("The grade is C");
         } else if (grade >= 60 && grade <= 69) {
           console.log("The grade is a D");
@@ -157,6 +162,48 @@ class Business extends Component {
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  updateGoldRating = () => {
+    let rating = {
+      saferating: "gold",
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, rating).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateSilverRating = () => {
+    let rating = {
+      saferating: "silver",
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, rating).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateBronzeRating = () => {
+    let rating = {
+      saferating: "bronze",
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, rating).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
   };
 
   //  Mask Clicks
@@ -488,22 +535,47 @@ class Business extends Component {
     const { user } = this.props.auth;
     let ownerID = this.state.business.bizownerID;
     let verified;
+    let star;
     if (ownerID === user.id) {
-      verified = <img src={owner} alt="claimed"></img>;
+      // verified = <img src={owner} alt="claimed"></img>;
+      verified = (
+        <div className="row" id="owner-title">
+          <div className="col-lg-12 text center" id="biz-view">
+            <h3>Business Management View</h3>
+          </div>
+        </div>
+      );
     } else {
       verified = null;
+    }
+
+    if (this.state.business.saferating === "gold") {
+      star = <img src={gold} alt="claimed" id="star"></img>;
+    }
+
+    if (this.state.business.saferating === "silver") {
+      star = <img src={silver} alt="claimed" id="star"></img>;
+    }
+
+    if (this.state.business.saferating === "bronze") {
+      star = <img src={bronze} alt="claimed" id="star"></img>;
     }
 
     return (
       <div>
         <div className="container">
+          {verified}
           {/* Jumbotron */}
           <div
             className="jumbotron"
             id="jumbo"
             style={{ backgroundImage: "url(" + this.state.image + ")" }}
           >
-            {verified}
+            <div className="row">
+              <div className="col-lg-4"></div>
+              <div className="col-lg-4"></div>
+              <div className="col-lg-4">{star}</div>
+            </div>
           </div>
 
           {/* Check-in button */}
@@ -809,36 +881,30 @@ class Business extends Component {
                   </div>
 
                   {this.state.business.bizverified === false ? (
-
-                  <div className="row">
-                    <div className="col-lg-12" id="btn-claim">
-                      <div className="text-center">
-                        <button
-                          className="btn  btn-lg btn-block"
-                          data-toggle="modal"
-                          data-target="#formModal"
-                        >
-                          Claim Business
-                        </button>
+                    <div className="row">
+                      <div className="col-lg-12" id="btn-claim">
+                        <div className="text-center">
+                          <button
+                            className="btn  btn-lg btn-block"
+                            data-toggle="modal"
+                            data-target="#formModal"
+                          >
+                            Claim Business
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  ): (
+                  ) : (
                     <div className="row text-center">
-                       <div className="col-lg-12" id="claimed">
-<h5><img src={claimed} alt="owned"></img> Business Claimed</h5>
-</div>
-
+                      <div className="col-lg-12" id="claimed">
+                        <h5>
+                          <img src={claimed} alt="owned"></img> Business Claimed
+                        </h5>
+                      </div>
                     </div>
-                  )
-                
-                
-                }
+                  )}
 
                   {/* Claim Form Modal */}
-
-                 
 
                   <div
                     className="modal fade"
@@ -952,8 +1018,6 @@ class Business extends Component {
                       </div>
                     </div>
                   </div>
-
-             
                 </div>
               </div>
             </div>

@@ -3,6 +3,9 @@ import "./home.css";
 import API from "../../../utils/API";
 import MapWithMark from "./MapWithMark";
 import App from "./App";
+// import gold from "../../../assets/images/gold.png";
+// import silver from "../../../assets/images/silver.png";
+// import bronze from "../../../assets/images/bronze.png";
 import NewSearch from "../../New Search/newSearch";
 
 class Home extends Component {
@@ -23,14 +26,13 @@ class Home extends Component {
   // Load Page data
 
   loadPage = () => {
-
     if (this.state.lat && this.state.lng) {
-    API.getPlaces(this.state.lat, this.state.lng)
-      .then((res) => {
-        console.log("RESPONSE", res.data);
-        this.setState({ business: res.data });
-      })
-      .catch((err) => console.log(err));
+      API.getPlaces(this.state.lat, this.state.lng)
+        .then((res) => {
+          console.log("RESPONSE", res.data);
+          this.setState({ business: res.data });
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -39,6 +41,20 @@ class Home extends Component {
   };
 
   render() {
+    // let star;
+
+    // if (this.state.business.saferating === "gold") {
+    //   star = <img src={gold} alt="claimed" id="star"></img>;
+    // }
+
+    // if (this.state.business.saferating === "silver") {
+    //   star = <img src={silver} alt="claimed" id="star"></img>;
+    // }
+
+    // if (this.state.business.saferating === "bronze") {
+    //   star = <img src={bronze} alt="claimed" id="star"></img>;
+    // }
+
     return (
       <>
         <div className="container">
@@ -58,98 +74,106 @@ class Home extends Component {
             handleInputChange={this.props.handleInputChange}
           />
 
-           {/* Map API Holder */}
+          {/* Map API Holder */}
 
-           <div id="list-title">
+          <div id="list-title">
             <h3>Explore stores in your area</h3>
             <hr></hr>
           </div>
 
-           <div className ="row">
-             <div className = "col-lg-6">
-
-         
-
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12 hoverable " id="maps-holder">
-                <App>
-                  <MapWithMark
-                    setLatLng={this.setLatLng}
-                    loadPage={this.loadPage}
-                  />
-                </App>
-              </div>
-            </div>
-          </div>
-          </div>
-
-          {/* Map List Holder */}
-          <div className = "col-lg-6">
-
-          <div id="list-box" className="hoverable">
-            {this.state.business.map((business) => (
-              <div className="card" id="list" key={business._id}>
-                <h5 className="card-header">{business.bizname}</h5>
-
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-lg-3">
-                      <img
-                        className="card-img-top img-fluid"
-                        src={
-                          business.image && business.image.length
-                            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
-                            : "https://i.ibb.co/LJT0XW5/placeholder-001.jpg"
-                        }
-                        alt="safestance-cards"
-                        id="list-image"
-                      ></img>
-                    </div>
-
-                    <div className="col-lg-9">
-                      <h5 className="card-title">
-                        Current Customers In-Store: {business.instore}
-                      </h5>
-                      <p className="card-text">{business.address}</p>
-                      <a href={`/business/${business._id}`} className="btn ">
-                        Check it out
-                      </a>
-                    </div>
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-12 hoverable " id="maps-holder">
+                    <App>
+                      <MapWithMark
+                        setLatLng={this.setLatLng}
+                        loadPage={this.loadPage}
+                      />
+                    </App>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+
+            {/* Map List Holder */}
+            <div className="col-lg-6">
+              <div id="list-box" className="hoverable">
+                {this.state.business.map((business) => (
+                  <div className="card" id="list" key={business._id}>
+                    <h5 className="card-header">{business.bizname}</h5>
+
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col-lg-3">
+                          <div>
+                            <img
+                              className="card-img-top img-fluid"
+                              src={
+                                business.image && business.image.length
+                                  ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
+                                  : "https://i.ibb.co/LJT0XW5/placeholder-001.jpg"
+                              }
+                              alt="safestance-cards"
+                              id="list-image"
+                            ></img>
+                            {/* {this.state.business.saferating === "gold" ? (
+                              { gold }
+                            ) : (
+                              <small></small>
+                            )} */}
+                          </div>
+                        </div>
+
+                        <div className="col-lg-9">
+                          <h5 className="card-title">
+                            Current Customers In-Store: {business.instore}
+                          </h5>
+                          <p className="card-text">{business.address}</p>
+                          <a
+                            href={`/business/${business._id}`}
+                            className="btn "
+                          >
+                            Check it out
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          </div>
+          {/* Rated Card Section */}
 
-           {/* Rated Card Section */}
-
-           <div id="pop-title">
+          <div id="pop-title">
             <h3>Highest Safestance Rated Locations</h3>
             <hr></hr>
           </div>
 
           <div className="row" id="pop-row">
             <div className="card-deck flex-nowrap hoverable " id="pop-cards">
-              {this.state.business.map((business) => (
+              {/* {this.state.business.map((business) => ( */}
+                 {this.state.business.filter(business => business.saferating === "gold").map(business => (
                 <div
                   className="card view overlay zoom "
                   id="card"
                   key={business._id}
                 >
-                  <img
-                    className="card-img-top img-fluid"
-                    src={
-                      business.image && business.image.length
-                        ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
-                        : "https://i.ibb.co/LJT0XW5/placeholder-001.jpg"
-                    }
-                    alt="safestance-cards"
-                    id="card-image"
-                  ></img>
+                  <div>
+                    <img
+                      className="card-img-top img-fluid"
+                      src={
+                        business.image && business.image.length
+                          ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${business.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
+                          : "https://i.ibb.co/LJT0XW5/placeholder-001.jpg"
+                      }
+                      alt="safestance-cards"
+                      id="card-image"
+                    ></img>
+                  </div>
                   <div className="card-body">
                     <a href={`/business/${business._id}`}>
                       <h5 className="card-title">{business.bizname}</h5>
@@ -166,7 +190,6 @@ class Home extends Component {
               ))}
             </div>
           </div>
-          
 
           {/* Jumbotron */}
           <div className="jumbotron" id="jumbohome">
@@ -187,10 +210,6 @@ class Home extends Component {
               <div className="col-lg-8"></div>
             </div>
           </div>
-
-         
-
-          
         </div>
       </>
     );
