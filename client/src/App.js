@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authAcations";
@@ -139,7 +139,11 @@ class App extends Component {
               <Home loadBiz = {this.loadBiz} updateSearchQuery = {this.updateSearchQuery} handleInputChange={this.props.handleInputChange}/>
             </Route>
             
-            <Route exact path="/business/:id" component={Business}/>
+            {/* <Route exact path="/business/:id">
+              <Business userID={this.state.userID}/>
+            </Route> */}
+
+            <Route path="/business/:id" component={Business} />
             {/* <Route path="/claim" component={Claim} /> */}
             <Route path="/results">
               <Results searchQuery={this.state.query} updateSearchQuery = {this.updateSearchQuery}  results={this.state.results} loadBiz={this.loadBiz} />

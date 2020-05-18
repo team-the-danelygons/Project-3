@@ -6,6 +6,10 @@ import distance from "../../../assets/images/distance.png";
 import cash from "../../../assets/images/cash.png";
 import like from "../../../assets/images/like.png";
 import dislike from "../../../assets/images/dislike.png";
+import gold from "../../../assets/images/gold.png";
+import silver from "../../../assets/images/silver.png";
+import bronze from "../../../assets/images/bronze.png";
+import claimed from "../../../assets/images/owned.png";
 // import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
 import PropTypes from "prop-types";
@@ -31,7 +35,7 @@ class Business extends Component {
       image: "",
       btnColor: "greenyellow",
       checktext: "+ CHECK-IN",
-     
+      loggedin: false,
     };
   }
 
@@ -42,10 +46,13 @@ class Business extends Component {
     console.log(user);
     console.log("The userID is", user.id);
     this.loadPage();
+    if (user.id) {
+      this.setState({ loggedin: true });
+    }
     // this.props.updateOwnerID(user.id)
   }
 
-  handleCloseModal () {
+  handleCloseModal() {
     this.setState({ showModal: false });
   }
 
@@ -65,12 +72,12 @@ class Business extends Component {
     axios({
       method: "POST",
       url: "/send",
-      data: this.state
+      data: this.state,
     }).then((response) => {
       if (response.data.status === "success") {
         this.updateBizValidation();
         alert("Message Sent.");
-     
+
         this.resetForm();
       } else if (response.data.status === "fail") {
         alert("Message failed to send.");
@@ -140,10 +147,13 @@ class Business extends Component {
 
         // grading system
         if (grade >= 90 && grade <= 100) {
+          this.updateGoldRating();
           console.log("The grade is an A");
         } else if (grade >= 80 && grade <= 89) {
+          this.updateSilverRating();
           console.log("The grade is a B");
         } else if (grade >= 70 && grade <= 79) {
+          this.updateBronzeRating();
           console.log("The grade is C");
         } else if (grade >= 60 && grade <= 69) {
           console.log("The grade is a D");
@@ -154,11 +164,53 @@ class Business extends Component {
       .catch((err) => console.log(err));
   };
 
+  updateGoldRating = () => {
+    let rating = {
+      saferating: "gold",
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, rating).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateSilverRating = () => {
+    let rating = {
+      saferating: "silver",
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, rating).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
+  updateBronzeRating = () => {
+    let rating = {
+      saferating: "bronze",
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, rating).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
+
   //  Mask Clicks
 
   handleMaskThumbUpClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
       this.updateMaskThumbsUp();
     } else {
@@ -168,7 +220,7 @@ class Business extends Component {
 
   handleMaskThumbDownClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateMaskThumbsDown();
@@ -181,7 +233,7 @@ class Business extends Component {
 
   handleSanThumbUpClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateSanThumbsUp();
@@ -192,7 +244,7 @@ class Business extends Component {
 
   handleSanThumbDownClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateSanThumbsDown();
@@ -205,7 +257,7 @@ class Business extends Component {
 
   handleDisThumbUpClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateDisThumbsUp();
@@ -216,7 +268,7 @@ class Business extends Component {
 
   handleDisThumbDownClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateDisThumbsDown();
@@ -229,7 +281,7 @@ class Business extends Component {
 
   handleCashThumbUpClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateCashThumbsUp();
@@ -240,7 +292,7 @@ class Business extends Component {
 
   handleCashThumbDownClick = (event) => {
     event.preventDefault();
-    if (this.state.loggedIn) {
+    if (this.state.loggedin === true) {
       this.loadPage();
 
       this.updateCashThumbsDown();
@@ -418,8 +470,11 @@ class Business extends Component {
   // Create check-in click variable
 
   updateBizValidation = () => {
+    const { user } = this.props.auth;
+    console.log("The userID AGAIN", user.id);
     let bizClaim = {
       bizverified: true,
+      bizownerID: user.id,
     };
 
     // run update API
@@ -477,17 +532,51 @@ class Business extends Component {
 
   render() {
     // let image = this.state.business.image[0].photo_reference
-    console.log("Image:", this.state.image);
+    const { user } = this.props.auth;
+    let ownerID = this.state.business.bizownerID;
+    let verified;
+    let star;
+    if (ownerID === user.id) {
+      // verified = <img src={owner} alt="claimed"></img>;
+      verified = (
+        <div className="row" id="owner-title">
+          <div className="col-lg-12 text center" id="biz-view">
+            <h3>Business Management View</h3>
+          </div>
+        </div>
+      );
+    } else {
+      verified = null;
+    }
+
+    if (this.state.business.saferating === "gold") {
+      star = <img src={gold} alt="claimed" id="star"></img>;
+    }
+
+    if (this.state.business.saferating === "silver") {
+      star = <img src={silver} alt="claimed" id="star"></img>;
+    }
+
+    if (this.state.business.saferating === "bronze") {
+      star = <img src={bronze} alt="claimed" id="star"></img>;
+    }
 
     return (
       <div>
         <div className="container">
+          {verified}
           {/* Jumbotron */}
           <div
             className="jumbotron"
             id="jumbo"
             style={{ backgroundImage: "url(" + this.state.image + ")" }}
-          ></div>
+          >
+            <div className="row">
+              <div className="col-lg-4"></div>
+              <div className="col-lg-4"></div>
+              <div className="col-lg-4">{star}</div>
+            </div>
+          </div>
 
           {/* Check-in button */}
           <div className="col-lg-12" id="btn-cont">
@@ -791,20 +880,29 @@ class Business extends Component {
                     </div>
                   </div>
 
-                  <div className="row">
-                    <div className="col-lg-12" id="btn-claim">
-                      <div className="text-center">
-                        <button
-                          className="btn  btn-lg btn-block"
-                          data-toggle="modal"
-                          data-target="#formModal"
-                        >
-                          Claim Business
-                        </button>
+                  {this.state.business.bizverified === false ? (
+                    <div className="row">
+                      <div className="col-lg-12" id="btn-claim">
+                        <div className="text-center">
+                          <button
+                            className="btn  btn-lg btn-block"
+                            data-toggle="modal"
+                            data-target="#formModal"
+                          >
+                            Claim Business
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
+                  ) : (
+                    <div className="row text-center">
+                      <div className="col-lg-12" id="claimed">
+                        <h5>
+                          <img src={claimed} alt="owned"></img> Business Claimed
+                        </h5>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Claim Form Modal */}
 
@@ -822,7 +920,10 @@ class Business extends Component {
                     >
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h3 className="modal-title" id="exampleModalLongTitle">
+                          <h3
+                            className="modal-title"
+                            id="exampleModalLongTitle"
+                          >
                             Take control of your business
                           </h3>
                           <br></br>
@@ -908,7 +1009,7 @@ class Business extends Component {
                             className="btn btn-md btn-block"
                             id="help-btn"
                             form="form-title"
-                         
+
                             //  onClick={this.handleSubmit}
                           >
                             Submit for review
