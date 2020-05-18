@@ -8,7 +8,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   height: 400px;
-  margin-bottom: 0px !important;
+  margin-top: 20px !important;
   box-shadow: 2px 2px 2px gray;
   border-style: solid;
   border-width: 1px;
@@ -65,7 +65,7 @@ body {
 }
 
 #list-title {
-    margin-top: 30px;
+    margin-top: 20px;
 
   margin-bottom: 30px !important;
 }
@@ -73,9 +73,9 @@ body {
 #list-box {
   overflow-y: scroll;
   white-space: nowrap;
-  max-height: 500px !important;
-  margin-top: 30px;
-  margin-bottom: 50px;
+  max-height: 530px !important;
+  margin-top: 0px;
+  margin-bottom: 0px;
   border-radius: 5px !important;
   border-color: gray !important;
   box-shadow: 1px 1px 1px 1px lightgray;

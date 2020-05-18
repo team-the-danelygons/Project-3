@@ -52,7 +52,7 @@ router.post("/register", (req, res) => {
   // @access Public
   router.post("/login", (req, res) => {
     // Form validation
-  
+    console.log("TRYING TO LOGIN", req.body)
     const { errors, isValid } = validateLoginInput(req.body);
   
     // Check validation
@@ -65,6 +65,7 @@ router.post("/register", (req, res) => {
   
     // Find user by email
     User.findOne({ email }).then(user => {
+      console.log("THE USER ID IS", user._id);
       // Check if user exists
       if (!user) {
         return res.status(404).json({ emailnotfound: "Email not found" });
@@ -90,7 +91,8 @@ router.post("/register", (req, res) => {
             (err, token) => {
               res.json({
                 success: true,
-                token: "Bearer " + token
+                token: "Bearer " + token,
+                id: user._id
               });
             }
           );

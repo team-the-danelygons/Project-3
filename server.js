@@ -1,4 +1,5 @@
 const express = require("express");
+var cors = require('cors');
 const mongoose = require("mongoose");
 const passport = require("passport");
 const path = require("path");
@@ -12,11 +13,14 @@ env({
 const client = new Client({});
 
 const nocache = require('nocache')
+
 app.use(nocache())
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
 
 
 // Serve up static assets (usually on heroku)

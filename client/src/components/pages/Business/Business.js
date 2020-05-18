@@ -8,38 +8,149 @@ import like from "../../../assets/images/like.png";
 import dislike from "../../../assets/images/dislike.png";
 // import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../../actions/authAcations";
+import axios from "axios";
 
 // Class Components
 
 class Business extends Component {
-  state = {
-    business: {},
-    inline: 0,
-    instore: 0,
-    image: "",
-    btnColor: "greenyellow",
-    checktext: "+ CHECK-IN",
-  };
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      bizname: "",
+      address: "",
+      tin: "",
+      message: "",
+      business: {},
+      inline: 0,
+      instore: 0,
+      image: "",
+      btnColor: "greenyellow",
+      checktext: "+ CHECK-IN",
+     
+    };
+  }
 
   // Mount
 
   componentDidMount() {
+    const { user } = this.props.auth;
+    console.log(user);
+    console.log(this.props.userID);
     this.loadPage();
+    // this.props.updateOwnerID(user.id)
+  }
+
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
+
+  resetForm() {
+    this.setState({
+      name: "",
+      email: "",
+      bizname: "",
+      address: "",
+      tin: "",
+      message: "",
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    axios({
+      method: "POST",
+      url: "/send",
+      data: this.state
+    }).then((response) => {
+      if (response.data.status === "success") {
+        this.updateBizValidation();
+        alert("Message Sent.");
+     
+        this.resetForm();
+      } else if (response.data.status === "fail") {
+        alert("Message failed to send.");
+      }
+    });
+  }
+
+  onNameChange(event) {
+    this.setState({ name: event.target.value });
+  }
+
+  onEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  onBizNameChange(event) {
+    this.setState({ bizname: event.target.value });
+  }
+
+  onAddressChange(event) {
+    this.setState({ address: event.target.value });
+  }
+
+  onTinChange(event) {
+    this.setState({ tin: event.target.value });
+  }
+
+  onMessageChange(event) {
+    this.setState({ message: event.target.value });
   }
 
   // Load Page data
 
   loadPage = () => {
     API.getBiz(this.props.match.params.id)
-      .then((res) =>
+      .then((res) => {
         this.setState({
           business: res.data,
           image:
             res.data.image && res.data.image.length
               ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.data.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
               : "https://i.ibb.co/6HygT0r/jumbohome.jpg",
-        })
-      )
+        });
+        console.log(this.state.loggedIn);
+        // Getting the total number of thumbs
+        let thumbs = res.data;
+        console.log(thumbs);
+        let totalMaskThumbs = thumbs.maskthumbsup + thumbs.maskthumbsdown;
+        let totalSanThumbs = thumbs.santhumbsup + thumbs.santhumbsdown;
+        let totalDisThumbs = thumbs.disthumbsup + thumbs.disthumbsdown;
+        let totalCashThumbs = thumbs.cashthumbsup + thumbs.cashthumbsdown;
+        let totalThumbs =
+          totalMaskThumbs + totalSanThumbs + totalDisThumbs + totalCashThumbs;
+        console.log("The total number of thumbs is", totalThumbs);
+
+        // Get the total number of thumbs up
+        let totalThumbsUp =
+          thumbs.maskthumbsup +
+          thumbs.santhumbsup +
+          thumbs.disthumbsup +
+          thumbs.cashthumbsup;
+        console.log("The total number of thumbs up is", totalThumbsUp);
+
+        // Get the grade
+        let grade = Math.floor((totalThumbsUp / totalThumbs) * 100);
+        console.log("The grade for this business is", grade);
+
+        // grading system
+        if (grade >= 90 && grade <= 100) {
+          console.log("The grade is an A");
+        } else if (grade >= 80 && grade <= 89) {
+          console.log("The grade is a B");
+        } else if (grade >= 70 && grade <= 79) {
+          console.log("The grade is C");
+        } else if (grade >= 60 && grade <= 69) {
+          console.log("The grade is a D");
+        } else {
+          console.log("This business has not yet been graded.");
+        }
+      })
       .catch((err) => console.log(err));
   };
 
@@ -47,64 +158,95 @@ class Business extends Component {
 
   handleMaskThumbUpClick = (event) => {
     event.preventDefault();
-    this.loadPage();
-
-    this.updateMaskThumbsUp();
+    if (this.state.loggedIn) {
+      this.loadPage();
+      this.updateMaskThumbsUp();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   handleMaskThumbDownClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateMaskThumbsDown();
+      this.updateMaskThumbsDown();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   //  Sanitizer Clicks
 
   handleSanThumbUpClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateSanThumbsUp();
+      this.updateSanThumbsUp();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   handleSanThumbDownClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateSanThumbsDown();
+      this.updateSanThumbsDown();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   //  Distance Clicks
 
   handleDisThumbUpClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateDisThumbsUp();
+      this.updateDisThumbsUp();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   handleDisThumbDownClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateDisThumbsDown();
+      this.updateDisThumbsDown();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   //  Cash Clicks
 
   handleCashThumbUpClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateCashThumbsUp();
+      this.updateCashThumbsUp();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   handleCashThumbDownClick = (event) => {
     event.preventDefault();
-    this.loadPage();
+    if (this.state.loggedIn) {
+      this.loadPage();
 
-    this.updateCashThumbsDown();
+      this.updateCashThumbsDown();
+    } else {
+      alert("You must be logged in order to use the thumbs up or down button.");
+    }
   };
 
   //Mask db update
@@ -274,6 +416,20 @@ class Business extends Component {
   };
 
   // Create check-in click variable
+
+  updateBizValidation = () => {
+    let bizClaim = {
+      bizverified: true,
+    };
+
+    // run update API
+
+    API.updateBiz(this.props.match.params.id, bizClaim).then((res) => {
+      console.log("Res Data:", res.data);
+      this.setState({ business: res.data });
+      console.log("Data saved!", res);
+    });
+  };
 
   updateLine = () => {
     let checkinline = {
@@ -638,11 +794,126 @@ class Business extends Component {
                   <div className="row">
                     <div className="col-lg-12" id="btn-claim">
                       <div className="text-center">
-                        <a href="/owner">
-                          <button className="btn  btn-lg btn-block">
-                            Claim Business
+                        <button
+                          className="btn  btn-lg btn-block"
+                          data-toggle="modal"
+                          data-target="#formModal"
+                        >
+                          Claim Business
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  {/* Claim Form Modal */}
+
+                  <div
+                    className="modal fade"
+                    id="formModal"
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h3 className="modal-title" id="exampleModalLongTitle">
+                            Take control of your business
+                          </h3>
+                          <br></br>
+
+                          <button
+                            type="button"
+                            className="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
                           </button>
-                        </a>
+                        </div>
+                        <div className="modal-body">
+                          <form
+                            className="form-example"
+                            action=""
+                            id="form-title"
+                            onSubmit={this.handleSubmit.bind(this)}
+                            method="POST"
+                          >
+                            <div className="form-group row" id="signup-form">
+                              <div className="col-sm-12">
+                                <input
+                                  type="text"
+                                  id="name"
+                                  value={this.state.name}
+                                  onChange={this.onNameChange.bind(this)}
+                                  placeholder="Your Name"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <input
+                                  type="email"
+                                  value={this.state.email}
+                                  onChange={this.onEmailChange.bind(this)}
+                                  id="email"
+                                  placeholder="Email"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <input
+                                  type="text"
+                                  value={this.state.bizname}
+                                  onChange={this.onBizNameChange.bind(this)}
+                                  id="bizname"
+                                  placeholder="Enter you business name"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <input
+                                  type="text"
+                                  value={this.state.address}
+                                  onChange={this.onAddressChange.bind(this)}
+                                  id="address"
+                                  placeholder="Enter your business address"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <input
+                                  type="text"
+                                  value={this.state.tin}
+                                  onChange={this.onTinChange.bind(this)}
+                                  id="tin"
+                                  placeholder="Enter your tax identification number"
+                                ></input>
+                              </div>
+                              <div className="col-sm-12">
+                                <textarea
+                                  value={this.state.message}
+                                  onChange={this.onMessageChange.bind(this)}
+                                  id="TITLE"
+                                  placeholder="Describe the data discrepency you'd like to flag for review..."
+                                  row="15"
+                                ></textarea>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="submit"
+                            className="btn btn-md btn-block"
+                            id="help-btn"
+                            form="form-title"
+                         
+                            //  onClick={this.handleSubmit}
+                          >
+                            Submit for review
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -656,4 +927,13 @@ class Business extends Component {
   }
 }
 
-export default Business;
+Business.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(Business);
