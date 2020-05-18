@@ -6,6 +6,8 @@ import distance from "../../../assets/images/distance.png";
 import cash from "../../../assets/images/cash.png";
 import like from "../../../assets/images/like.png";
 import dislike from "../../../assets/images/dislike.png";
+import owner from "../../../assets/images/claimed.png";
+import claimed from "../../../assets/images/owned.png"
 // import map from "../../../assets/images/map.png";
 import API from "../../../utils/API";
 import PropTypes from "prop-types";
@@ -31,7 +33,6 @@ class Business extends Component {
       image: "",
       btnColor: "greenyellow",
       checktext: "+ CHECK-IN",
-     
     };
   }
 
@@ -45,7 +46,7 @@ class Business extends Component {
     // this.props.updateOwnerID(user.id)
   }
 
-  handleCloseModal () {
+  handleCloseModal() {
     this.setState({ showModal: false });
   }
 
@@ -65,12 +66,12 @@ class Business extends Component {
     axios({
       method: "POST",
       url: "/send",
-      data: this.state
+      data: this.state,
     }).then((response) => {
       if (response.data.status === "success") {
         this.updateBizValidation();
         alert("Message Sent.");
-     
+
         this.resetForm();
       } else if (response.data.status === "fail") {
         alert("Message failed to send.");
@@ -418,8 +419,11 @@ class Business extends Component {
   // Create check-in click variable
 
   updateBizValidation = () => {
+    const { user } = this.props.auth;
+    console.log("The userID AGAIN", user.id);
     let bizClaim = {
       bizverified: true,
+      bizownerID: user.id,
     };
 
     // run update API
@@ -477,7 +481,14 @@ class Business extends Component {
 
   render() {
     // let image = this.state.business.image[0].photo_reference
-    console.log("Image:", this.state.image);
+    const { user } = this.props.auth;
+    let ownerID = this.state.business.bizownerID;
+    let verified;
+    if (ownerID === user.id) {
+      verified = <img src={owner} alt="claimed"></img>;
+    } else {
+      verified = null;
+    }
 
     return (
       <div>
@@ -487,7 +498,9 @@ class Business extends Component {
             className="jumbotron"
             id="jumbo"
             style={{ backgroundImage: "url(" + this.state.image + ")" }}
-          ></div>
+          >
+            {verified}
+          </div>
 
           {/* Check-in button */}
           <div className="col-lg-12" id="btn-cont">
@@ -791,6 +804,8 @@ class Business extends Component {
                     </div>
                   </div>
 
+                  {this.state.business.bizverified === false ? (
+
                   <div className="row">
                     <div className="col-lg-12" id="btn-claim">
                       <div className="text-center">
@@ -805,8 +820,21 @@ class Business extends Component {
                     </div>
                   </div>
 
+                  ): (
+                    <div className="row text-center">
+                       <div className="col-lg-12" id="claimed">
+<h5><img src={claimed} alt="owned"></img> Business Claimed</h5>
+</div>
+
+                    </div>
+                  )
+                
+                
+                }
 
                   {/* Claim Form Modal */}
+
+                 
 
                   <div
                     className="modal fade"
@@ -822,7 +850,10 @@ class Business extends Component {
                     >
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h3 className="modal-title" id="exampleModalLongTitle">
+                          <h3
+                            className="modal-title"
+                            id="exampleModalLongTitle"
+                          >
                             Take control of your business
                           </h3>
                           <br></br>
@@ -908,7 +939,7 @@ class Business extends Component {
                             className="btn btn-md btn-block"
                             id="help-btn"
                             form="form-title"
-                         
+
                             //  onClick={this.handleSubmit}
                           >
                             Submit for review
@@ -917,6 +948,8 @@ class Business extends Component {
                       </div>
                     </div>
                   </div>
+
+             
                 </div>
               </div>
             </div>
