@@ -633,7 +633,7 @@ class Business extends Component {
 
           <div className="row" id="like-holder">
             <div className="col-sm-3 col-md-3 col-lg-3 text-center" id="voters1">
-              <img src={mask} alt="mask" width="70" height="70" id="mask"></img>
+              <img src={mask} alt="mask" width="60" height="60" id="mask"></img>
               <div className="row">
                 <div className="col-md-3 col-sm-3" id="t-up-col"></div>
 
@@ -852,7 +852,7 @@ class Business extends Component {
           {/* Business Name and Map Holder */}
 
           <div className="row" id="info-holder">
-            <div className="col-md-8 col-lg-8">
+            <div className="col-md-8 col-lg-8" id="info-row">
               <div className="col-lg-12" id="store-title">
                 <h3>{this.state.business.bizname}</h3>
 
