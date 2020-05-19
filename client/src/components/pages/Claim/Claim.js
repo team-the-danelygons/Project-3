@@ -1,165 +1,37 @@
-// import React, { Component } from "react";
-// import "./claim.css";
-// import axios from 'axios';
+import React, { Component } from "react";
+import "./claim.css";
 
-// // import API from "../../../utils/API";
+// import API from "../../../utils/API";
 
-// class Claim extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       name: "",
-//       email: "",
-//       bizname: "",
-//       address: "",
-//       tin: "",
-//       message: "",
-//     };
-//   }
+class Claim extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
 
-//   componentDidMount() {}
+  componentDidMount() {}
 
-//   resetForm() {
-//     this.setState({
-//       name: "",
-//       email: "",
-//       bizname: "",
-//       address: "",
-//       tin: "",
-//       message: "",
-//     });
-//   }
+  render() {
+    return (
 
-//   handleSubmit(e){
-//     e.preventDefault();
-//     axios({
-//       method: "POST", 
-//       url:"/send", 
-//       data:  this.state
-//     }).then((response)=>{
-//       if (response.data.status === 'success'){
-//         alert("Message Sent."); 
-//         this.resetForm()
-//       }else if(response.data.status === 'fail'){
-//         alert("Message failed to send.")
-//       }
-//     })
-//   }
+      <>
+       <div className="container">
+       <div className="row">
+            <div className="col-lg-12" id="header-text">
+              <h2>Claim Your Businss With a Click</h2>
+              
+              <h5>
+                Simply navigate to your business page and select the "Claim Business" button to get started
+              </h5>
+              <hr></hr>
+            </div>
+          </div>
+       
+          <div className="jumbotron" id="jumbo-claim"></div>
+        </div>
+      </>
+    );
+  }
+}
 
-//   onNameChange(event) {
-//     this.setState({ name: event.target.value });
-//   }
-
-//   onEmailChange(event) {
-//     this.setState({ email: event.target.value });
-//   }
-
-//   onBizNameChange(event) {
-//     this.setState({ bizname: event.target.value });
-//   }
-
-//   onAddressChange(event) {
-//     this.setState({ address: event.target.value });
-//   }
-
-//   onTinChange(event) {
-//     this.setState({ tin: event.target.value });
-//   }
-
-//   onMessageChange(event) {
-//     this.setState({ message: event.target.value });
-//   }
-
-//   render() {
-//     return (
-//       <div id="form-back">
-//         <div className="container">
-//           <div className="row h-100 justify-content-center align-items-center text-black">
-//             <div className="col-10 col-md-8 col-lg-6" id="form-bc">
-//               <form
-//                 className="form-example"
-//                 action=""
-//                 id="form-title"
-//                 onSubmit={this.handleSubmit.bind(this)}
-//                 method="POST"
-//               >
-//                 <h1>Take control of your business</h1>
-//                 <hr></hr>
-//                 <p className="description">
-//                   Provide your business info and flag discrepencies for review
-//                 </p>
-//                 <div className="form-group row" id="signup-form">
-//                   <div className="col-sm-12">
-//                     <input
-//                       type="text"
-//                       id="name"
-//                       value={this.state.name}
-//                       onChange={this.onNameChange.bind(this)}
-//                       placeholder="Your Name"
-//                     ></input>
-//                   </div>
-//                   <div className="col-sm-12">
-//                     <input
-//                       type="email"
-//                       value={this.state.email}
-//                       onChange={this.onEmailChange.bind(this)}
-//                       id="email"
-//                       placeholder="Email"
-//                     ></input>
-//                   </div>
-//                   <div className="col-sm-12">
-//                     <input
-//                       type="text"
-//                       value={this.state.bizname}
-//                       onChange={this.onBizNameChange.bind(this)}
-//                       id="bizname"
-//                       placeholder="Enter you business name"
-//                     ></input>
-//                   </div>
-//                   <div className="col-sm-12">
-//                     <input
-//                       type="text"
-//                       value={this.state.address}
-//                       onChange={this.onAddressChange.bind(this)}
-//                       id="address"
-//                       placeholder="Enter your business address"
-//                     ></input>
-//                   </div>
-//                   <div className="col-sm-12">
-//                     <input
-//                       type="text"
-//                       value={this.state.tin}
-//                       onChange={this.onTinChange.bind(this)}
-//                       id="tin"
-//                       placeholder="Enter your tax identification number"
-//                     ></input>
-//                   </div>
-//                   <div className="col-sm-12">
-//                     <textarea
-//                       value={this.state.message}
-//                       onChange={this.onMessageChange.bind(this)}
-//                       id="TITLE"
-//                       placeholder="Describe the data discrepency you'd like to flag for review..."
-//                       row="15"
-//                     ></textarea>
-
-//                     <button
-//                       type="submit"
-//                       className="btn btn-md btn-block"
-//                       id="help-btn"
-//                       // onClick={this.handleSubmit}
-//                     >
-//                       Submit for review
-//                     </button>
-//                   </div>
-//                 </div>
-//               </form>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default Claim;
+export default Claim;
