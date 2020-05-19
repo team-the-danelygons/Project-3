@@ -40,7 +40,7 @@ body {
   overflow-x: scroll;
   white-space: nowrap;
   /* /* min-width: 1000px; */
-  max-width: 1100px;
+  max-width: 1100px !important;
   padding: 1rem;
   margin: 0px 10px 20px 10px !important;
   border-radius: 5px;
@@ -127,21 +127,52 @@ btn {
     margin: 0px;
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 768px) {
   h2 {
     font-size: 30px;
   }
 
-  h5, h3 {
+  h5, h2 {
     text-align: center;
   }
 
   #maps-holder {
     width: 100% !important;
     border-radius: 0px;
+    
   }
 
   .row {
     align-content: center;
   }
+
+  #search-bar {
+    width: 100% !important
+  }
+
+  /* form {
+    padding: 0px !important
+  } */
+
+  .jHNGjT {
+  
+    height: 300px !important;
+  
+  }
+
+  #pop-cards {
+    
+    overflow-x: auto !important;
+  white-space: nowrap !important;
+  /* /* min-width: 1000px; */
+  max-width: 500px !important;
+  padding: 1rem;
+  -webkit-overflow-scrolling: touch;
+  }
+
+  #card {
+
+  }
+
+
 }

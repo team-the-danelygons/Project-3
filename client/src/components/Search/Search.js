@@ -73,7 +73,7 @@ class Search extends Component {
     return (
       <>
         <div id="search">
-          <form className="form-inline">
+          <form className="form-inline" id="form">
             <a 
               className="nav-link"
               href="/signup"
