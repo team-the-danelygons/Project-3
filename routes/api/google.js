@@ -149,7 +149,7 @@ router.get("/:lat/:lng", (req, res) => {
         .catch(error => console.error(error));
     })
 
-    Promise.all(dbPromises).then(dbModels => res.json(dbModels))
+    Promise.all(dbPromises).then(dbModels => res.json(dbModels)) .catch(error => console.error(error));
     //return res.json("Okay so far")
   }
 })
