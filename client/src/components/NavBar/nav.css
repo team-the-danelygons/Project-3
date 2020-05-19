@@ -17,3 +17,12 @@ a:hover
 .bg-light {
   background-color: #f8f9fa !important;
 }
+
+@media only screen and ( max-width: 767px) {
+  .navbar
+{
+  display:block;
+  text-align:center;
+}
+
+}

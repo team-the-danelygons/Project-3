@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import "./search.css";
 import API from "../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authAcations";
-import Suggestions from "../Suggestions/Suggestions";
+// import Suggestions from "../Suggestions/Suggestions";
+
 
 class Search extends Component {
   state = {
@@ -92,7 +94,7 @@ class Search extends Component {
           
           </form>
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-3 "></div>
             <div className="col-lg-9 " id="suggestions">
               {this.state.results.map((id) => (
@@ -101,7 +103,7 @@ class Search extends Component {
                 </a>
               ))}
             </div>
-          </div>
+          </div> */}
          
 
         </div>

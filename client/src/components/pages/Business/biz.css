@@ -1,72 +1,66 @@
 body {
-    background-color: white !important;
+  background-color: white !important;
 }
 
 #jumbo {
-    /* background-image: url(../../../assets/images/safeway.jpg); */
-    background-size: cover;
-    background-position: center;
+  /* background-image: url(../../../assets/images/safeway.jpg); */
+  background-size: cover;
+  background-position: center;
 
-    background-repeat: no-repeat;
-    height: 400px;
-    margin-bottom: 0px !important;
-    box-shadow: 2px 2px 2px gray;
-    padding-top: 30px !important;
+  background-repeat: no-repeat;
+  height: 400px;
+  margin-bottom: 0px !important;
+  box-shadow: 2px 2px 2px gray;
+  padding-top: 30px !important;
 }
 
-
 #like-holder {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    margin-left: 1px;
-    margin-right: 1px;
-    box-shadow: 2px 2px 2px gray
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-left: 1px;
+  margin-right: 1px;
+  box-shadow: 2px 2px 2px gray;
 }
 
 #voters1 {
-    background-color: white;
-    height: 150px;
-    border-radius: 5px;
-   
-
+  background-color: white;
+  height: 150px;
+  border-radius: 5px;
 }
 
 #voters2 {
-    background-color: white;
-    height: 150px
+  background-color: white;
+  height: 150px;
 }
 
 #voters3 {
-    background-color: white;
-    height: 150px
+  background-color: white;
+  height: 150px;
 }
 
 #voters4 {
-    background-color: white;
-    height: 150px;
-    border-radius: 5px;
-    
+  background-color: white;
+  height: 150px;
+  border-radius: 5px;
 }
 
 .btn {
-    background-color: greenyellow ;
-    border: none;
-    color: black;
-    /* box-shadow: 2px 2px 2px gray; */
-    margin-top: 10px !important;
-    margin-bottom: 10px !important;
-    border-radius: 5px;
-   
-  
+  background-color: greenyellow;
+  border: none;
+  color: black;
+  /* box-shadow: 2px 2px 2px gray; */
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  border-radius: 5px;
 }
 
 #btn-cont {
-    padding: 0px !important;
+  padding: 0px !important;
 }
 
 .img {
-    position: relative;
-    top: 100px;
+  position: relative;
+  top: 100px;
 }
 
 /* #up {
@@ -78,128 +72,162 @@ body {
 } */
 
 #hand {
-    margin-top: 15px;
-    margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
-
 #distance {
-    margin-top: 15px;
-    margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 #cash {
-    margin-top: 15px;
-    margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 #mask {
-    margin-top: 15px;
-    margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 #info-holder {
-    margin-top: 10px;
-    margin-right: 1px;
+  margin-top: 10px;
+  margin-right: 1px;
 }
 
 #hours-info {
-    border: 1px solid lightgray;
-    max-width: 100%;
-    border-radius: 5px; 
-    box-shadow: 2px 2px 2px gray;
+  border: 1px solid lightgray;
+  max-width: 100%;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px gray;
 }
 
 #map {
-    max-width: 100% !important;
-    border-radius: 5px;
-    border: 1px solid lightgray;
-    box-shadow: 2px 2px 2px gray;
+  max-width: 100% !important;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  box-shadow: 2px 2px 2px gray;
 }
 
 #store-header {
-    margin-top: 1em
+  margin-top: 1em;
 }
 
-th, td {
-    padding: 7px;
-    text-align: left;
-  }
+th,
+td {
+  padding: 7px;
+  text-align: left;
+}
 
 #hours-table {
-
-    text-align: center;
-    margin-bottom: 30px;
-
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-  table {
-    border: 1px solid gray;
-    display: inline-table;
-    box-shadow: 2px 2px 2px gray;
+table {
+  border: 1px solid gray;
+  display: inline-table;
+  box-shadow: 2px 2px 2px gray;
+}
 
- 
-  }
-
-  #store-title {
-     
-      border: 1px solid lightgray;
-      border-radius: 4px;
-      height: 87px;
-   padding-top: 15px;
-   margin-bottom: 5px;
-   box-shadow: 2px 2px 2px gray;
-  }
-  
-
+#store-title {
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  height: 87px;
+  padding-top: 15px;
+  margin-bottom: 5px;
+  box-shadow: 2px 2px 2px gray;
+}
 
 #up :hover {
-cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 #map {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
 input {
-    width: 100%
-    }
-    
-    textarea {
-        width: 100%;
-        border: 1px solid lightgray
-    }
-    
-    #form-title {
-        border: 1px solid lightgray;
-        border-radius: 5px;
-        box-shadow: 2px 2px 2px gray;
-        margin-top: 10px !important;
-    }   
+  width: 100%;
+}
 
-    #biz-view {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        background-color: lightgray;
-        border-radius: 5px;
-        box-shadow: 2px 2px 2px gray;
-        padding: 3px 3px 3px 10px
-    }
+textarea {
+  width: 100%;
+  border: 1px solid lightgray;
+}
 
+#form-title {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px gray;
+  margin-top: 10px !important;
+}
 
-    #owner-title {
-        margin-left: 2px !important;
-        margin-right: 2px !important;
+#biz-view {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: lightgray;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px gray;
+  padding: 3px 3px 3px 10px;
+}
 
-    }
+#owner-title {
+  margin-left: 2px !important;
+  margin-right: 2px !important;
+}
 
-    #star {
-        float: right !important
-    }
+#star {
+  float: right !important;
+}
 
+@media only screen and ( max-width: 767px) {
 
-    @media only screen and (max-width: 600px) {
-        body {
-          background-color: lightblue;
-        }
-      }
+   
+  #voters1 {
+    width: 50%;
+  }
+
+  #voters2 {
+    width: 50%;
+  }
+
+  #voters3 {
+    width: 50%;
+  }
+
+  #voters4 {
+    width: 50%;
+  }
+
+  #t-up-col {
+    width: 25%;
+  }
+
+  #t-down-col {
+    width: 25%;
+  }
+
+  #maskup {
+      margin: 0px !important;
+  }
+
+  #info-row {
+      padding-right: 0px !important
+  }
+
+  #store-row {
+      margin: 0px !important;
+      padding-left: 0px !important
+  }
+
+  #hours-info {
+   margin-left: 15px;
+    padding: 15px 15px 15px 15px !important
+}
+
+#map {
+    height: 400px
+}
+}
