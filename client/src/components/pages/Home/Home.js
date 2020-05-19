@@ -154,7 +154,7 @@ class Home extends Component {
           </div>
 
           <div className="row" id="pop-row">
-            <div className="card-deck flex-nowrap hoverable " id="pop-cards">
+            <div className="card-deck flex-row flex-nowrap hoverable" id="pop-cards" >
               {/* {this.state.business.map((business) => ( */}
                  {this.state.business.filter(business => business.saferating === "gold").map(business => (
                 <div

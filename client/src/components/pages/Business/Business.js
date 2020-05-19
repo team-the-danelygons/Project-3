@@ -125,10 +125,14 @@ class Business extends Component {
         // Getting the total number of thumbs
         let thumbs = res.data;
         console.log(thumbs);
-        let totalMaskThumbs = thumbs.maskthumbsup + thumbs.maskthumbsdown;
-        let totalSanThumbs = thumbs.santhumbsup + thumbs.santhumbsdown;
-        let totalDisThumbs = thumbs.disthumbsup + thumbs.disthumbsdown;
-        let totalCashThumbs = thumbs.cashthumbsup + thumbs.cashthumbsdown;
+        let totalMaskThumbs =
+          thumbs.maskthumbsup.length + thumbs.maskthumbsdown.length;
+        let totalSanThumbs =
+          thumbs.santhumbsup.length + thumbs.santhumbsdown.length;
+        let totalDisThumbs =
+          thumbs.disthumbsup.length + thumbs.disthumbsdown.length;
+        let totalCashThumbs =
+          thumbs.cashthumbsup.length + thumbs.cashthumbsdown.length;
         let totalThumbs =
           totalMaskThumbs + totalSanThumbs + totalDisThumbs + totalCashThumbs;
         console.log("The total number of thumbs is", totalThumbs);
@@ -304,121 +308,155 @@ class Business extends Component {
   //Mask db update
 
   updateMaskThumbsUp = () => {
-    let maskUp = {
-      maskthumbsup: this.state.business.maskthumbsup + 1,
-    };
+    const { user } = this.props.auth;
+
+    if (this.state.business.maskthumbsup.indexOf(user.id) >= 0) {
+      return;
+    } else {
+      let maskUp = {
+        maskthumbsup: this.state.business.maskthumbsup.push(user.id),
+      };
+
+      API.updateBiz(this.props.match.params.id, maskUp).then((res) => {
+        console.log("Res Data:", res.data);
+        this.setState({ business: res.data });
+        console.log("Data saved!", res);
+      });
+    }
 
     // run update API
-
-    API.updateBiz(this.props.match.params.id, maskUp).then((res) => {
-      console.log("Res Data:", res.data);
-      this.setState({ business: res.data });
-      console.log("Data saved!", res);
-    });
   };
 
   updateMaskThumbsDown = () => {
-    let maskDown = {
-      maskthumbsdown: this.state.business.maskthumbsdown + 1,
-    };
+    const { user } = this.props.auth;
 
-    // run update API
+    if (this.state.business.maskthumbsdown.indexOf(user.id) >= 0) {
+      return;
+    } else {
+      let maskDown = {
+        maskthumbsdown: this.state.business.maskthumbsdown.push(user.id),
+      };
 
-    API.updateBiz(this.props.match.params.id, maskDown).then((res) => {
-      console.log("Res Data:", res.data);
-      this.setState({ business: res.data });
-      console.log("Data saved!", res);
-    });
+      API.updateBiz(this.props.match.params.id, maskDown).then((res) => {
+        console.log("Res Data:", res.data);
+        this.setState({ business: res.data });
+        console.log("Data saved!", res);
+      });
+    }
   };
 
   //Sanitizer db update
 
   updateSanThumbsUp = () => {
-    let sanUp = {
-      santhumbsup: this.state.business.santhumbsup + 1,
-    };
+    const { user } = this.props.auth;
 
-    // run update API
+    if (this.state.business.santhumbsup.indexOf(user.id) >= 0) {
+      return;
+    } else {
+      let sanUp = {
+        santhumbsup: this.state.business.santhumbsup.push(user.id),
+      };
 
-    API.updateBiz(this.props.match.params.id, sanUp).then((res) => {
-      console.log("Res Data:", res.data);
-      this.setState({ business: res.data });
-      console.log("Data saved!", res);
-    });
+      API.updateBiz(this.props.match.params.id, sanUp).then((res) => {
+        console.log("Res Data:", res.data);
+        this.setState({ business: res.data });
+        console.log("Data saved!", res);
+      });
+    }
   };
 
   updateSanThumbsDown = () => {
-    let sanDown = {
-      santhumbsdown: this.state.business.santhumbsdown + 1,
-    };
+    const { user } = this.props.auth;
 
-    // run update API
+    if (this.state.business.santhumbsdown.indexOf(user.id) >= 0) {
+      return;
+    } else {
+      let sanDown = {
+        santhumbsdown: this.state.business.santhumbsdown.push(user.id),
+      };
 
-    API.updateBiz(this.props.match.params.id, sanDown).then((res) => {
-      console.log("Res Data:", res.data);
-      this.setState({ business: res.data });
-      console.log("Data saved!", res);
-    });
+      API.updateBiz(this.props.match.params.id, sanDown).then((res) => {
+        console.log("Res Data:", res.data);
+        this.setState({ business: res.data });
+        console.log("Data saved!", res);
+      });
+    }
   };
 
   //Distance db update
 
   updateDisThumbsDown = () => {
-    let disDown = {
-      disthumbsdown: this.state.business.disthumbsdown + 1,
-    };
+    const { user } = this.props.auth;
 
-    // run update API
+    if (this.state.business.disthumbsdown.indexOf(user.id) >= 0) {
+      return;
+    } else {
+      let disDown = {
+        disthumbsdown: this.state.business.disthumbsdown.push(user.id),
+      };
 
-    API.updateBiz(this.props.match.params.id, disDown).then((res) => {
-      console.log("Res Data:", res.data);
-      this.setState({ business: res.data });
-      console.log("Data saved!", res);
-    });
+      API.updateBiz(this.props.match.params.id, disDown).then((res) => {
+        console.log("Res Data:", res.data);
+        this.setState({ business: res.data });
+        console.log("Data saved!", res);
+      });
+    }
   };
 
   updateDisThumbsUp = () => {
-    let disUp = {
-      disthumbsup: this.state.business.disthumbsup + 1,
-    };
+    const { user } = this.props.auth;
 
-    // run update API
+    if (this.state.business.disthumbsup.indexOf(user.id) >= 0) {
+      return;
+    } else {
+      let disUp = {
+        disthumbsup: this.state.business.disthumbsup.push(user.id),
+      };
 
-    API.updateBiz(this.props.match.params.id, disUp).then((res) => {
-      console.log("Res Data:", res.data);
-      this.setState({ business: res.data });
-      console.log("Data saved!", res);
-    });
+      API.updateBiz(this.props.match.params.id, disUp).then((res) => {
+        console.log("Res Data:", res.data);
+        this.setState({ business: res.data });
+        console.log("Data saved!", res);
+      });
+    }
   };
 
   //Cash db update
 
-  updateCashThumbsDown = () => {
-    let cashDown = {
-      cashthumbsdown: this.state.business.cashthumbsdown + 1,
-    };
+  updateCashThumbsUp = () => {
+    const { user } = this.props.auth;
 
-    // run update API
+    if (this.state.business.cashthumbsup.indexOf(user.id) >= 0) {
+      return;
+    } else {
+      let cashUp = {
+        cashthumbsup: this.state.business.cashthumbsup.push(user.id),
+      };
 
-    API.updateBiz(this.props.match.params.id, cashDown).then((res) => {
-      console.log("Res Data:", res.data);
-      this.setState({ business: res.data });
-      console.log("Data saved!", res);
-    });
+      API.updateBiz(this.props.match.params.id, cashUp).then((res) => {
+        console.log("Res Data:", res.data);
+        this.setState({ business: res.data });
+        console.log("Data saved!", res);
+      });
+    }
   };
 
-  updateCashThumbsUp = () => {
-    let cashUp = {
-      cashthumbsup: this.state.business.cashthumbsup + 1,
-    };
+  updateCashThumbsDown = () => {
+    const { user } = this.props.auth;
 
-    // run update API
+    if (this.state.business.cashthumbsdown.indexOf(user.id) >= 0) {
+      return;
+    } else {
+      let cashDown = {
+        cashthumbsdown: this.state.business.cashthumbsdown.push(user.id),
+      };
 
-    API.updateBiz(this.props.match.params.id, cashUp).then((res) => {
-      console.log("Res Data:", res.data);
-      this.setState({ business: res.data });
-      console.log("Data saved!", res);
-    });
+      API.updateBiz(this.props.match.params.id, cashDown).then((res) => {
+        console.log("Res Data:", res.data);
+        this.setState({ business: res.data });
+        console.log("Data saved!", res);
+      });
+    }
   };
 
   handleBtnClick = (event) => {
@@ -594,12 +632,12 @@ class Business extends Component {
           {/* Mask Distance Thumbs */}
 
           <div className="row" id="like-holder">
-            <div className="col-md-3 text-center" id="voters1">
-              <img src={mask} alt="mask" width="70" height="70" id="mask"></img>
+            <div className="col-sm-3 col-md-3 col-lg-3 text-center" id="voters1">
+              <img src={mask} alt="mask" width="60" height="60" id="mask"></img>
               <div className="row">
-                <div className="col-md-3"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
 
-                <div className="col-md-3 view overlay zoom">
+                <div className="col-md-3 col-sm-3 view overlay zoom" id="t-up-col">
                   <img
                     src={like}
                     alt="mask"
@@ -610,7 +648,7 @@ class Business extends Component {
                     className="img-fluid"
                   ></img>
                 </div>
-                <div className="col-md-3 view overlay zoom">
+                <div className="col-md-3 col-sm-3 view overlay zoom" id="t-down-col">
                   <img
                     src={dislike}
                     alt="mask"
@@ -621,28 +659,37 @@ class Business extends Component {
                     className="img-fluid"
                   ></img>
                 </div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
               </div>
 
               <div className="row">
-                <div className="col-md-3 text-center"></div>
-                <div className="col-md-3 text-center">
-                  <small>{this.state.business.maskthumbsup}</small>
+              <div className="col-md-3 col-sm-3" id="t-up-col"></div>
+                <div className="col-md-3 col-sm-3 text-center" id="t-up-col">
+                  <small>
+                    {this.state.business.maskthumbsup
+                      ? this.state.business.maskthumbsup.length
+                      : 0}
+                  </small>
                 </div>
-                <div className="col-md-3 text-center">
-                  <small>{this.state.business.maskthumbsdown}</small>
+                <div className="col-md-3 col-sm-3 text-center" id="t-down-col">
+                  <small>
+                    {this.state.business.maskthumbsdown
+                      ? this.state.business.maskthumbsdown.length
+                      : 0}
+                  </small>
                 </div>
-                <div className="col-md-3 text-center"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
               </div>
             </div>
 
             {/* Sanitizer render */}
 
-            <div className="col-md-3 text-center" id="voters2">
+            <div className="col-lg-3 col-md-3 col-sm-3  text-center" id="voters2">
               <img src={hand} alt="mask" width="60" height="60" id="hand"></img>
               <div className="row">
-                <div className="col-md-3"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
 
-                <div className="col-md-3 view overlay zoom">
+                <div className="col-md-3 col-sm-3 view overlay zoom" id="t-up-col">
                   <img
                     src={like}
                     alt="mask"
@@ -653,7 +700,7 @@ class Business extends Component {
                     className="img-fluid"
                   ></img>
                 </div>
-                <div className="col-md-3 view overlay zoom">
+                <div className="col-md-3 col-sm-3 view overlay zoom" id="t-down-col">
                   <img
                     src={dislike}
                     alt="mask"
@@ -665,23 +712,31 @@ class Business extends Component {
                   ></img>
                 </div>
 
-                <div className="col-md-3"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
               </div>
               <div className="row">
-                <div className="col-md-3 text-center"></div>
-                <div className="col-md-3 text-center">
-                  <small>{this.state.business.santhumbsup}</small>
+              <div className="col-md-3 col-sm-3" id="t-up-col"></div>
+                <div className="col-md-3 col-sm-3 text-center" id="t-up-col">
+                  <small>
+                    {this.state.business.santhumbsup
+                      ? this.state.business.santhumbsup.length
+                      : 0}
+                  </small>
                 </div>
-                <div className="col-md-3 text-center">
-                  <small>{this.state.business.santhumbsdown}</small>
+                <div className="col-md-3 col-sm-3 text-center" id="t-down-col">
+                  <small>
+                    {this.state.business.santhumbsdown
+                      ? this.state.business.santhumbsdown.length
+                      : 0}
+                  </small>
                 </div>
-                <div className="col-md-3 text-center"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
               </div>
             </div>
 
             {/* Distance render */}
 
-            <div className="col-md-3 text-center" id="voters3">
+            <div className="col-md-3 col-sm-3 col-lg-3  text-center" id="voters3" >
               <img
                 src={distance}
                 alt="mask"
@@ -690,9 +745,9 @@ class Business extends Component {
                 id="distance"
               ></img>
               <div className="row">
-                <div className="col-md-3"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
 
-                <div className="col-md-3 view overlay zoom">
+                <div className="col-md-3 col-sm-3 view overlay zoom" id="t-up-col">
                   <img
                     src={like}
                     alt="mask"
@@ -703,7 +758,7 @@ class Business extends Component {
                     className="img-fluid"
                   ></img>
                 </div>
-                <div className="col-md-3 view overlay zoom">
+                <div className="col-md-3 col-sm-3 view overlay zoom" id="t-down-col">
                   <img
                     src={dislike}
                     alt="mask"
@@ -715,27 +770,39 @@ class Business extends Component {
                   ></img>
                 </div>
 
-                <div className="col-md-3"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
               </div>
 
               <div className="row">
-                <div className="col-md-3 text-center"></div>
-                <div className="col-md-3 text-center">
-                  <small>{this.state.business.disthumbsup}</small>
+              <div className="col-md-3 col-sm-3" id="t-up-col"></div>
+                <div className="col-md-3 col-sm-3 text-center" id="t-up-col">
+                  <small>
+                    {this.state.business.disthumbsup
+                      ? this.state.business.disthumbsup.length
+                      : 0}
+                  </small>
                 </div>
-                <div className="col-md-3 text-center">
-                  <small>{this.state.business.disthumbsdown}</small>
+               
+                <div className="col-md-3 col-sm-3 text-center" id="t-down-col">
+                  <small>
+                    {this.state.business.disthumbsdown
+                      ? this.state.business.disthumbsdown.length
+                      : 0}
+                  </small>
                 </div>
-                <div className="col-md-3 text-center"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
+                <div className="col-md-3 col-sm-3 text-center"></div>
               </div>
             </div>
 
-            <div className="col-md-3 text-center" id="voters4">
+            {/* Cash render */}
+
+            <div className="col-md-3 col-sm-3  text-center" id="voters4">
               <img src={cash} alt="mask" width="60" height="60" id="cash"></img>
               <div className="row">
-                <div className="col-md-3"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
 
-                <div className="col-md-3 view overlay zoom">
+                <div className="col-md-3 col-sm-3 view overlay zoom" id="t-up-col">
                   <img
                     src={like}
                     alt="mask"
@@ -746,7 +813,7 @@ class Business extends Component {
                     className="img-fluid"
                   ></img>
                 </div>
-                <div className="col-md-3 view overlay zoom">
+                <div className="col-md-3 col-sm-3 view overlay zoom" id="t-down-col">
                   <img
                     src={dislike}
                     alt="mask"
@@ -758,18 +825,26 @@ class Business extends Component {
                   ></img>
                 </div>
 
-                <div className="col-md-3"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
               </div>
 
               <div className="row">
-                <div className="col-md-3 text-center"></div>
-                <div className="col-md-3 text-center">
-                  <small>{this.state.business.cashthumbsup}</small>
+              <div className="col-md-3 col-sm-3" id="t-up-col"></div>
+                <div className="col-md-3 col-sm-3 text-center" id="t-up-col">
+                  <small>
+                    {this.state.business.cashthumbsup
+                      ? this.state.business.cashthumbsup.length
+                      : 0}
+                  </small>
                 </div>
-                <div className="col-md-3 text-center">
-                  <small>{this.state.business.cashthumbsdown}</small>
+                <div className="col-md-3 col-sm-3 text-center" id="t-down-col">
+                  <small>
+                    {this.state.business.cashthumbsdown
+                      ? this.state.business.cashthumbsdown.length
+                      : 0}
+                  </small>
                 </div>
-                <div className="col-md-3 text-center"></div>
+                <div className="col-md-3 col-sm-3" id="t-up-col"></div>
               </div>
             </div>
           </div>
@@ -777,7 +852,7 @@ class Business extends Component {
           {/* Business Name and Map Holder */}
 
           <div className="row" id="info-holder">
-            <div className="col-lg-8">
+            <div className="col-md-8 col-lg-8" id="info-row">
               <div className="col-lg-12" id="store-title">
                 <h3>{this.state.business.bizname}</h3>
 
@@ -797,7 +872,7 @@ class Business extends Component {
 
             {/* Business and Line Info */}
 
-            <div className="col-lg-4" id="hours-info">
+            <div className="col-md-4 col-lg-4" id="hours-info">
               <div className="row">
                 <div className="col-lg-12 text-center" id="store-header">
                   <h3>Store Traffic</h3>
@@ -805,7 +880,7 @@ class Business extends Component {
 
                   <hr />
 
-                  <div className="row">
+                  <div className="row" >
                     <div className="col-lg-6 text-center traffic">
                       <h4>
                         In-Store: <span>{this.state.business.instore}</span>
