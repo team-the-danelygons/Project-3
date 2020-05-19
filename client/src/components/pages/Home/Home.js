@@ -107,7 +107,7 @@ class Home extends Component {
                     <div className="card-body">
                       <div className="row">
                         <div className="col-lg-3">
-                          <div>
+                         
                             <img
                               className="card-img-top img-fluid"
                               src={
@@ -123,7 +123,7 @@ class Home extends Component {
                             ) : (
                               <small></small>
                             )} */}
-                          </div>
+                        
                         </div>
 
                         <div className="col-lg-9">
