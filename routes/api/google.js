@@ -53,33 +53,33 @@ router.get("/:lat/:lng", (req, res) => {
               },
               timeout: 1000, // milliseconds
             })
-            .then((resultThree) => {
-              console.log("Gottum All!");
-
-              places = places.concat(resultThree.data.results);
-              client
-                .placesNearby({
-                  params: {
-                    location: { lat: lat, lng: lng },
-                    radius: 4000,
-                    type: "department_store",
-                    key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
-                  },
-                  timeout: 1000, // milliseconds
-                })
-                .then((resultFour) => {
-                  console.log("Four")
-                  places = places.concat(resultFour.data.results);
-                  client
-                    .placesNearby({
-                      params: {
-                        location: { lat: lat, lng: lng },
-                        radius: 4000,
-                        type: "convenience_store",
-                        key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
-                      },
-                      timeout: 1000, // milliseconds
-                    })
+            // .then((resultThree) => {
+              // console.log("Gottum All!");
+// 
+              // places = places.concat(resultThree.data.results);
+              // client
+                // .placesNearby({
+                  // params: {
+                    // location: { lat: lat, lng: lng },
+                    // radius: 4000,
+                    // type: "department_store",
+                    // key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+                  // },
+                  // timeout: 1000, // milliseconds
+                // })
+                // .then((resultFour) => {
+                  // console.log("Four")
+                  // places = places.concat(resultFour.data.results);
+                  // client
+                    // .placesNearby({
+                      // params: {
+                        // location: { lat: lat, lng: lng },
+                        // radius: 4000,
+                        // type: "convenience_store",
+                        // key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+                      // },
+                      // timeout: 1000, // milliseconds
+                    // })
                     .then((resultFive) => {
                       console.log("Four")
                       places = places.concat(resultFive.data.results);
@@ -116,8 +116,8 @@ router.get("/:lat/:lng", (req, res) => {
                 })
             })
           })
-        })
-    })
+        // })
+    // })
     .catch(err => {
       console.error(err)
       res.status(422).json(err)
