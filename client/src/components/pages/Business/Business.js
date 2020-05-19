@@ -666,15 +666,13 @@ class Business extends Component {
               <div className="col-md-3 col-sm-3" id="t-up-col"></div>
                 <div className="col-md-3 col-sm-3 text-center" id="t-up-col">
                   <small>
-                    {this.state.business.maskthumbsup
-                      ? this.state.business.maskthumbsup.length
+                    {this.state.business.maskthumbsup ? this.state.business.maskthumbsup.length
                       : 0}
                   </small>
                 </div>
                 <div className="col-md-3 col-sm-3 text-center" id="t-down-col">
                   <small>
-                    {this.state.business.maskthumbsdown
-                      ? this.state.business.maskthumbsdown.length
+                    {this.state.business.maskthumbsdown ? this.state.business.maskthumbsdown.length
                       : 0}
                   </small>
                 </div>
@@ -718,15 +716,13 @@ class Business extends Component {
               <div className="col-md-3 col-sm-3" id="t-up-col"></div>
                 <div className="col-md-3 col-sm-3 text-center" id="t-up-col">
                   <small>
-                    {this.state.business.santhumbsup
-                      ? this.state.business.santhumbsup.length
+                    {this.state.business.santhumbsup ? this.state.business.santhumbsup.length
                       : 0}
                   </small>
                 </div>
                 <div className="col-md-3 col-sm-3 text-center" id="t-down-col">
                   <small>
-                    {this.state.business.santhumbsdown
-                      ? this.state.business.santhumbsdown.length
+                    {this.state.business.santhumbsdown ? this.state.business.santhumbsdown.length
                       : 0}
                   </small>
                 </div>
@@ -777,16 +773,14 @@ class Business extends Component {
               <div className="col-md-3 col-sm-3" id="t-up-col"></div>
                 <div className="col-md-3 col-sm-3 text-center" id="t-up-col">
                   <small>
-                    {this.state.business.disthumbsup
-                      ? this.state.business.disthumbsup.length
+                    {this.state.business.disthumbsup ? this.state.business.disthumbsup.length
                       : 0}
                   </small>
                 </div>
                
                 <div className="col-md-3 col-sm-3 text-center" id="t-down-col">
                   <small>
-                    {this.state.business.disthumbsdown
-                      ? this.state.business.disthumbsdown.length
+                    {this.state.business.disthumbsdow ? this.state.business.disthumbsdown.length
                       : 0}
                   </small>
                 </div>
@@ -839,8 +833,7 @@ class Business extends Component {
                 </div>
                 <div className="col-md-3 col-sm-3 text-center" id="t-down-col">
                   <small>
-                    {this.state.business.cashthumbsdown
-                      ? this.state.business.cashthumbsdown.length
+                    {this.state.business.cashthumbsdown ? this.state.business.cashthumbsdown.length
                       : 0}
                   </small>
                 </div>
