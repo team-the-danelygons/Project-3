@@ -820,7 +820,7 @@ class Business extends Component {
           {/* Business Name and Map Holder */}
 
           <div className="row" id="info-holder">
-            <div className="col-lg-8">
+            <div className="col-md-8 col-lg-8">
               <div className="col-lg-12" id="store-title">
                 <h3>{this.state.business.bizname}</h3>
 
@@ -840,7 +840,7 @@ class Business extends Component {
 
             {/* Business and Line Info */}
 
-            <div className="col-lg-4" id="hours-info">
+            <div className="col-md-4 col-lg-4" id="hours-info">
               <div className="row">
                 <div className="col-lg-12 text-center" id="store-header">
                   <h3>Store Traffic</h3>
