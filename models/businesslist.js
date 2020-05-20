@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const businessSchema = new Schema({
-  bizownerID: {type: String, required: false},
+  bizownerID: {type: String, required: true, default: "none"},
   bizname: { type: String, required: true },
   email: { type: String, required: false },
   address: { type: String, required: true },
