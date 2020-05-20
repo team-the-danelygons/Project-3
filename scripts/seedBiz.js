@@ -6,7 +6,7 @@ const db = require("../models");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/safestance");
 
 const bizProfile = [
-  {bizownerID: "",
+  {bizownerID: "none",
     bizname: "Safeway",
     email: "joesmith@safeway.com",
     address: "1601 Coalton Rd, Superior, CO",
