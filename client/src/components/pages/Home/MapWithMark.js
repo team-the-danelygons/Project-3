@@ -132,7 +132,7 @@ loadPage = (lat, lng) => {
           <GoogleMap
             defaultZoom={12}
             defaultCenter={[lat, lng]}
-            bootstrapURLKeys={{ key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ" }}
+            bootstrapURLKeys={{ key: "AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0" }}
             onChildClick={this.onChildClickCallback}
             
           >
