@@ -118,7 +118,7 @@ class Business extends Component {
           business: res.data,
           image:
             res.data.image && res.data.image.length
-              ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.data.image[0].photo_reference}&key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ`
+              ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${res.data.image[0].photo_reference}&key=AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0`
               : "https://i.ibb.co/6HygT0r/jumbohome.jpg",
         });
         console.log(this.state.loggedIn);
@@ -849,7 +849,7 @@ class Business extends Component {
                 height={600}
                 title="myFrame"
                 frameBorder={0}
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ&q=${this.state.business.address}`}
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0&q=${this.state.business.address}`}
                 allowFullScreen
               ></iframe>
             </div>

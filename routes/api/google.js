@@ -1,7 +1,7 @@
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
 const env = require("env-variable");
 env({
-  GOOGLE_MAPS_API_KEY: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+  GOOGLE_MAPS_API_KEY: "AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0"
 });
 const router = require("express").Router();
 
