@@ -19,7 +19,7 @@ router.get("/:lat/:lng", (req, res) => {
         location: { lat: lat, lng: lng },
         radius: 4000,
         type: "store",
-        key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+        key: "AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0"
       },
       timeout: 1000, // milliseconds
     })
@@ -33,7 +33,7 @@ router.get("/:lat/:lng", (req, res) => {
             location: { lat: lat, lng: lng },
             radius: 4000,
             type: "liquor_store",
-            key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+            key: "AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0"
           },
           timeout: 1000, // milliseconds
         })
@@ -49,7 +49,7 @@ router.get("/:lat/:lng", (req, res) => {
                 location: { lat: lat, lng: lng },
                 radius: 4000,
                 type: "bar",
-                key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+                key: "AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0"
               },
               timeout: 1000, // milliseconds
             })
@@ -89,7 +89,7 @@ router.get("/:lat/:lng", (req, res) => {
                             location: { lat: lat, lng: lng },
                             radius: 4000,
                             type: "restaurant",
-                            key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+                            key: "AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0"
                           },
                           timeout: 1000, // milliseconds
                         })
@@ -102,7 +102,7 @@ router.get("/:lat/:lng", (req, res) => {
                                 location: { lat: lat, lng: lng },
                                 radius: 4000,
                                 type: "clothing_store",
-                                key: "AIzaSyD-ZEsqd3Rb5IAswQGexgebUa81e6iuDJQ"
+                                key: "AIzaSyBiSOIBbrhQrecwDybnjkZgjaBM_KBvXk0"
                               },
                               timeout: 1000, // milliseconds
                             })
