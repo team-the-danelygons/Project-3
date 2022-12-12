@@ -28,7 +28,7 @@
     "bootstrap-horizon": "^1.0.1",
     "cors": "^2.8.5",
     "env-variable": "0.0.6",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "if-env": "^1.0.4",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
